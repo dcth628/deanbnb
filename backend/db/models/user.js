@@ -82,11 +82,17 @@ module.exports = (sequelize, DataTypes) => {
     },
     firstName: {
       type: DataTypes.STRING,
+<<<<<<< HEAD
       allowNull: false
     },
     lastName: {
       type: DataTypes.STRING,
       allowNull: false
+=======
+    },
+    lastName: {
+      type: DataTypes.STRING,
+>>>>>>> 695e113cb047bd20c69b889fb1f45f14138f955a
     }
   }, {
     sequelize,
