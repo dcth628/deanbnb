@@ -6,7 +6,6 @@
   "dependencies": {
     "bcryptjs": "^2.4.3"
   },
-  "devDependencies": {},
   "scripts": {
     "install": "npm --prefix backend install backend",
     "dev:backend": "npm install --prefix backend start",
