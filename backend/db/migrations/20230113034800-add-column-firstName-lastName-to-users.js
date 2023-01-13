@@ -8,10 +8,7 @@ module.exports = {
       'firstName',
       {
         type: Sequelize.STRING(30),
-<<<<<<< HEAD
         allowNull: false
-=======
->>>>>>> 695e113cb047bd20c69b889fb1f45f14138f955a
       })
 
       await queryInterface.addColumn(
@@ -19,10 +16,7 @@ module.exports = {
         'lastName',
         {
           type: Sequelize.STRING(30),
-<<<<<<< HEAD
           allowNull: false
-=======
->>>>>>> 695e113cb047bd20c69b889fb1f45f14138f955a
         }
       )
   },
