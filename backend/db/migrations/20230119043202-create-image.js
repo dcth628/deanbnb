@@ -14,7 +14,7 @@ module.exports = {
         allowNull: false
       },
       imageType: {
-        type: Sequelize.ENUM
+        type: Sequelize.ENUM('group','event')
       },
       imageId: {
         type: Sequelize.INTEGER,
