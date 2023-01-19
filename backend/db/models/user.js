@@ -82,9 +82,11 @@ module.exports = (sequelize, DataTypes) => {
     },
     firstName: {
       type: DataTypes.STRING,
+      allowNull: false
     },
     lastName: {
       type: DataTypes.STRING,
+      allowNull: false
     }
   }, {
     sequelize,
@@ -96,13 +98,12 @@ module.exports = (sequelize, DataTypes) => {
     },
     scopes: {
       currentUser: {
-        attributes: { exclude: ['hashedPassword']
+        attributes: { exclude: ['hashedPassword']}
         },
         loginUser: {
           attributes: {}
         }
       }
-    }
   });
   return User;
 };
