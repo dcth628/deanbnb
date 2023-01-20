@@ -1,25 +1,21 @@
 'use strict';
-
+const { Review } = require('../models')
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
-    /**
-     * Add seed commands here.
-     *
-     * Example:
-     * await queryInterface.bulkInsert('People', [{
-     *   name: 'John Doe',
-     *   isBetaMember: false
-     * }], {});
-    */
+  async up(queryInterface, Sequelize) {
+    await queryInterface.bulkInsert('Reviews', [
+      {
+        review: 'This was an awesome spot!',
+        star: 5,
+        userId: 1,
+        spotId: 1,
+      }
+    ])
   },
 
-  async down (queryInterface, Sequelize) {
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     * await queryInterface.bulkDelete('People', null, {});
-     */
+  async down(queryInterface, Sequelize) {
+    await queryInterface.bulkDelete('Reviews', {
+      where: Review.findAll()
+    })
   }
 };
