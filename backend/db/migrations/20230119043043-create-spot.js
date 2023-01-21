@@ -11,7 +11,6 @@ module.exports = {
       },
       ownerId: {
         type: Sequelize.INTEGER,
-        allowNull: false,
         references: {
           model: 'Users',
           key: 'id'
@@ -20,7 +19,6 @@ module.exports = {
       address: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true
       },
       city: {
         type: Sequelize.STRING,

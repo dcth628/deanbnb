@@ -1,14 +1,26 @@
 'use strict';
 const {
-  Model
+  Model, User
 } = require('sequelize');
+const { restoreUser } = require('../../utils/auth');
+const user = require('./user');
 module.exports = (sequelize, DataTypes) => {
   class Spot extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
+   static async createspot({ownerId, address, city, state, country, lat, lng, name, description, price}) {
+    const spot = await Spot.create({
+      ownerId,
+      address,
+      city,
+      state,
+      country,
+      lat,
+      lng,
+      name,
+      description,
+      price,
+    });
+    return await Spot.scope('currentSpot').findByPk(spot.id)
+   }
     static associate(models) {
       // define association here
       Spot.belongsTo(models.User, {foreignKey: 'ownerId'})
@@ -20,7 +32,6 @@ module.exports = (sequelize, DataTypes) => {
   Spot.init({
     ownerId: {
       type: DataTypes.INTEGER,
-      allowNull: false
     },
     address: {
       type: DataTypes.STRING,
@@ -49,6 +60,9 @@ module.exports = (sequelize, DataTypes) => {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        len: [0, 50]
+      }
     },
     description: {
       type: DataTypes.STRING,
@@ -60,15 +74,23 @@ module.exports = (sequelize, DataTypes) => {
     },
     avgRating: {
       type: DataTypes.DECIMAL,
-      allowNull: false,
     },
     previewImage: {
       type: DataTypes.STRING,
-      allowNull: false,
     },
   }, {
     sequelize,
     modelName: 'Spot',
+    defaultScope: {
+      attributes: {
+        exclude: ['createdAt', 'updatedAt']
+      }
+    },
+    scopes: {
+      currentSpot: {
+        attributes: { exclude: ['avgRating', 'previewImage']}
+      }
+    }
   });
   return Spot;
 };
