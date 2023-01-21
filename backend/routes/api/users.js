@@ -48,4 +48,25 @@ router.post(
     }
 );
 
+// Get all users
+router.get(
+  '/',
+  async (req, res) => {
+    const users = await User.findAll()
+    res.json(users)
+  })
+
+// Delete a user
+router.delete(
+  '/:id',
+  async (req, res) => {
+    const user = await User.findByPk(req.params.id);
+    if (!user) {
+      res.status(404);
+      return res.json({Message: 'User not found'});
+    }
+    await user.destroy();
+    return res.json({ Message: 'User successfully deleted'})
+  })
+
 module.exports = router;

@@ -19,10 +19,10 @@ module.exports = {
       imageId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: {
-          model: ['Reviews', 'Spots'],
-          key: 'id'
-        }
+        // references: {
+        //   model: ['Reviews', 'Spots'],
+        //   key: 'id'
+        // }
 
       },
       createdAt: {

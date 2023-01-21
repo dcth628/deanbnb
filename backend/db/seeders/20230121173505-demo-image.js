@@ -1,10 +1,9 @@
 'use strict';
-const { Image } = require('../models')
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.bulkInsert('Images' [
+    await queryInterface.bulkInsert('Images', [
       {
         url: 'image url',
         imageType: 'group',
@@ -14,8 +13,6 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('Images', {
-      where: Image.findAll()
-    })
+    await queryInterface.bulkDelete('Images')
   }
 };
