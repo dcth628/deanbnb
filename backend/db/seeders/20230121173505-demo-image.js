@@ -7,7 +7,8 @@ module.exports = {
       {
         url: 'image url',
         imageType: 'group',
-        imageId: 1
+        imageId: 1,
+        preview: true
       }
     ])
   },

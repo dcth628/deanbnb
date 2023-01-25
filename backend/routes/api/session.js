@@ -1,5 +1,5 @@
 const express = require('express');
-const { setTokenCookie, restoreUser } = require('../../utils/auth');
+const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
 const { User } = require('../../db/models');
 const router = express.Router();
 const { check } = require('express-validator');
@@ -9,10 +9,10 @@ const validateLogin = [
     check('credential')
       .exists({ checkFalsy: true })
       .notEmpty()
-      .withMessage('Please provide a valid email or username.'),
+      .withMessage('Email or username is requried.'),
     check('password')
       .exists({ checkFalsy: true })
-      .withMessage('Please provide a password.'),
+      .withMessage('Password is requried.'),
     handleValidationErrors
   ];
 
@@ -42,6 +42,7 @@ router.post(
     }
 );
 
+// Log out
 router.delete(
     '/',
     (_req, res) => {
@@ -60,7 +61,7 @@ router.get(
             return res.json({
                 user: user.toSafeObject()
             });
-        } else return res.json({});
+        } else return res.json({user: null});
     }
 );
 

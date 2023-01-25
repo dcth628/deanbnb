@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     toSafeObject() {
       const { id, username, email } = this;
-      return {id, username, email };
+      return { id, username, email };
     }
     validatePassword(password) {
       return bcrypt.compareSync(password, this.hashedPassword.toString());
@@ -43,9 +43,9 @@ module.exports = (sequelize, DataTypes) => {
 
     static associate(models) {
       // define association here
-      User.hasMany(models.Booking, {foreignKey: 'UserId'})
-      User.hasMany(models.Review, {foreignKey: 'UserId'})
-      User.hasMany(models.Spot, {foreignKey: 'ownerId'})
+      User.hasMany(models.Booking, { foreignKey: 'UserId' })
+      User.hasMany(models.Review, { foreignKey: 'UserId' })
+      User.hasMany(models.Spot, { foreignKey: 'ownerId' })
     }
   }
   User.init({
@@ -94,12 +94,15 @@ module.exports = (sequelize, DataTypes) => {
     },
     scopes: {
       currentUser: {
-        attributes: { exclude: ['hashedPassword']}
-        },
-        loginUser: {
-          attributes: {}
-        }
+        attributes: { exclude: ['hashedPassword'] }
+      },
+      loginUser: {
+        attributes: { }
+      },
+      allUsers: {
+        attributes: { exclude: ['hashedPassword', 'createdAt', 'updatedAt'] }
       }
+    }
   });
   return User;
 };

@@ -4,11 +4,7 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Image extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
+
     static associate(models) {
       // define association here
       Image.belongsTo(models.Review, {foreignKey: 'imageId'})
@@ -21,11 +17,16 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     imageType: {
-      type: DataTypes.ENUM('group', 'event')
+      type: DataTypes.ENUM('Spot', 'Review')
     },
     imageId: {
       type: DataTypes.INTEGER,
       allowNull: false
+    },
+    preview: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
     }
   }, {
     sequelize,

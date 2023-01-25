@@ -14,16 +14,21 @@ module.exports = {
         allowNull: false
       },
       imageType: {
-        type: Sequelize.ENUM('group','event')
+        type: Sequelize.ENUM('Spot','Review')
       },
       imageId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         // references: {
-        //   model: ['Reviews', 'Spots'],
+        //   model: ['Reviews', 'Spots],
         //   key: 'id'
         // }
 
+      },
+      preview: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
       },
       createdAt: {
         allowNull: false,

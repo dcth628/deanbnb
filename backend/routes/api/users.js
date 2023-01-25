@@ -37,14 +37,34 @@ router.post(
       password,
       username
     } = req.body;
-    const user = await User.signup({
+    const userName = await User.findOne({where: {username: username}})
+    if (userName) {
+      const err = new Error('User with that username already exists')
+      res.status(404)
+      res.json({
+        message : "User already exists",
+        statusCode: 403,
+        errors: err.message
+      })
+    }
+    const userEmail = await User.findOne({ where : {email: email}})
+    if (userEmail) {
+      const err = new Error('User with that email already exists')
+      res.status(404)
+      res.json({
+        message: 'User already exists',
+        statueCode: 403,
+        errors: err.message
+      })
+    }
+    const newUser = await User.signup({
       firstName, lastName, email, username, password
     });
 
-    await setTokenCookie(res, user);
+    await setTokenCookie(res, newUser);
 
     return res.json({
-      user
+      newUser
     });
   }
 );
@@ -53,22 +73,22 @@ router.post(
 router.get(
   '/',
   async (req, res) => {
-    const users = await User.findAll()
+    const users = await User.scope('allUsers').findAll()
     res.json(users)
   })
 
-  // Get a user by id
-  router.get(
-    '/:id',
-    async (req, res) => {
-      const user = await User.findByPk(req.params.id);
-      if (!user) {
-        res.status(404);
-        return res.json({ Message: "User couldn't be found"})
-      }
-      res.json(user)
+// Get a user by id
+router.get(
+  '/:id',
+  async (req, res) => {
+    const user = await User.findByPk(req.params.id);
+    if (!user) {
+      res.status(404);
+      return res.json({ Message: "User couldn't be found" })
     }
-  )
+    res.json(user)
+  }
+)
 
 // Delete a user
 router.delete(
