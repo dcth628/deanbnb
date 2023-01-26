@@ -1,6 +1,6 @@
 const express = require('express')
 const { setTokenCookie, requireAuth, restoreUser } = require('../../utils/auth')
-const { Spot, User, Image, Review, Booking } = require('../../db/models');
+const { Spot, User, Image, Review, Booking, sequelize } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const e = require('express');
@@ -62,8 +62,33 @@ const validateCreatespot = [
 router.get(
     '/',
     async (req, res) => {
-        const spots = await Spot.findAll()
-        res.json({ Spots: spots })
+        let { page, size } = req.query;
+
+        page = Number(page);
+        size = Number(size);
+
+        if (Number.isNaN(page)) page = 0;
+        if (Number.isNaN(size)) size = 20
+
+        const spots = await Spot.findAll({
+            attributes: {
+                include: [
+                    [
+                        sequelize.fn('AVG', sequelize.col("Reviews.stars")),
+                        "avgRating"
+                    ],
+                ],
+            },
+            include: [
+                { model: Review, attributes: [] },
+            ],
+        },{
+            limit: size,
+            offset: size * (page - 1),
+        })
+        res.json({
+            Spots: spots, page, size
+        })
     }
 )
 
@@ -76,7 +101,23 @@ router.get(
         const spots = await Spot.findAll({
             where: {
                 ownerId: user.id
-            }
+            },
+            attributes: {
+                include: [
+                    [
+                        sequelize.fn('AVG', sequelize.col("Reviews.stars")),
+                        "avgRating"
+                    ],
+                    // [
+                    //     sequelize.fn('COALESCE', sequelize.col("Images.url")),
+                    //     "previewImage"
+                    // ]
+                ],
+            },
+            include: [
+                { model: Review, attributes: [] },
+                // { model: Image, as: "ReviewImages"}
+            ]
         })
         if (!spots.length) {
             res.status(404);
@@ -93,11 +134,25 @@ router.get(
 router.get(
     '/:spotId',
     async (req, res) => {
-        const spot = await Spot.findOne({
-            where: {
-                id: req.params.spotId
+        const spot = await Spot.findByPk(req.params.spotId, {
+            attributes: {
+                include: [
+                    [
+                        sequelize.fn('AVG', sequelize.col("Reviews.stars")),
+                        "avgRating"
+                    ],
+                    [
+                        sequelize.fn('COUNT', sequelize.col("Reviews.id")),
+                        "numReviews"
+                    ]
+                ],
+                exclude: ['previewImage']
             },
-            include: [Image, { model: User, as: "Owner" }]
+            include: [
+                { model: Image, as: "ReviewImages" },
+                { model: User, as: "Owner" },
+                { model: Review }
+            ]
         });
         if (!spot) {
             res.status(404);
@@ -319,7 +374,7 @@ router.post(
     async (req, res) => {
         const spot = await Spot.findByPk(req.params.spotId);
         const booking = await Booking.findOne({
-            where: { spotId: req.params.spotId}
+            where: { spotId: req.params.spotId }
         })
         if (!spot) {
             return res.status(404).json({
@@ -327,6 +382,7 @@ router.post(
                 statusCode: 404
             })
         }
+        console.log(booking)
         const { startDate, endDate } = req.body;
         const start = new Date(startDate);
         const end = new Date(endDate);
@@ -359,27 +415,33 @@ router.post(
 )
 
 // Delete a spot image
-router.delete(
-    '/:spotId/images/:imageId',
-    async (req, res) => {
-        const image = await Image.findByPk(req.params.imageId, {
-            include : {
-                model: Spot, where: {id : req.params.spotId}
-            }
-        });
-        if (!image) {
-            return res.status(404).json({
-                message: "Spot Image couldn't be found",
-                statusCode: 404
-            })
-        } else {
-            await image.destroy();
-            return res.status(200).json({
-                message: "Successfully deleted",
-                statusCode: 200
-            })
-        }
-    }
-)
+// router.delete(
+//     '/spot-images/:spotImageId',
+//     async (req, res) => {
+//         const image = await Image.findOne({
+//             where: {
+//                 imageId: req.params.spotImageId,
+//                 imageType: "Spot"
+//             },
+//             include: {
+//                 model: Spot, where: { id: req.params.spotImageId }
+//             }
+//         });
+//         if (!image) {
+//             return res.status(404).json({
+//                 message: "Spot Image couldn't be found",
+//                 statusCode: 404
+//             })
+//         } else {
+//             await image.destroy();
+//             return res.status(200).json({
+//                 message: "Successfully deleted",
+//                 statusCode: 200
+//             })
+//         }
+//     }
+// )
+
+
 
 module.exports = router;

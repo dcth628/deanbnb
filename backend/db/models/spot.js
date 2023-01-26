@@ -6,27 +6,33 @@ const { restoreUser } = require('../../utils/auth');
 const user = require('./user');
 module.exports = (sequelize, DataTypes) => {
   class Spot extends Model {
-   static async createspot({ownerId, address, city, state, country, lat, lng, name, description, price}) {
-    const spot = await Spot.create({
-      ownerId,
-      address,
-      city,
-      state,
-      country,
-      lat,
-      lng,
-      name,
-      description,
-      price,
-    });
-    return await Spot.scope('currentSpot').findByPk(spot.id)
-   }
+    static async createspot({ ownerId, address, city, state, country, lat, lng, name, description, price }) {
+      const spot = await Spot.create({
+        ownerId,
+        address,
+        city,
+        state,
+        country,
+        lat,
+        lng,
+        name,
+        description,
+        price,
+      });
+      return await Spot.scope('currentSpot').findByPk(spot.id)
+    }
     static associate(models) {
       // define association here
-      Spot.belongsTo(models.User, {foreignKey: 'ownerId', as: 'Owner'})
-      Spot.hasMany(models.Booking, {foreignKey: 'spotId'})
-      Spot.hasMany(models.Review, {foreignKey: 'spotId'})
-      Spot.hasMany(models.Image, {foreignKey: 'imageId', as: "ReviewImages"})
+      Spot.belongsTo(models.User, { foreignKey: 'ownerId', as: 'Owner' })
+      Spot.hasMany(models.Booking, { foreignKey: 'spotId' })
+      Spot.hasMany(models.Review, { foreignKey: 'spotId' })
+      Spot.hasMany(models.Image, {
+        foreignKey: 'imageId', as: "ReviewImages",
+        constraints: false,
+        scope: {
+          imageType: 'Spot'
+        }
+      })
     }
   }
   Spot.init({
@@ -83,7 +89,7 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'Spot',
     scopes: {
       currentSpot: {
-        attributes: { exclude: ['avgRating', 'previewImage']}
+        attributes: { exclude: ['avgRating', 'previewImage'] }
       },
     }
   });
