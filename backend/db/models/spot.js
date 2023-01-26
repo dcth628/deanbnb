@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
       Spot.belongsTo(models.User, {foreignKey: 'ownerId', as: 'Owner'})
       Spot.hasMany(models.Booking, {foreignKey: 'spotId'})
       Spot.hasMany(models.Review, {foreignKey: 'spotId'})
-      Spot.hasMany(models.Image, {foreignKey: 'imageId'})
+      Spot.hasMany(models.Image, {foreignKey: 'imageId', as: "ReviewImages"})
     }
   }
   Spot.init({
@@ -84,7 +84,7 @@ module.exports = (sequelize, DataTypes) => {
     scopes: {
       currentSpot: {
         attributes: { exclude: ['avgRating', 'previewImage']}
-      }
+      },
     }
   });
   return Spot;

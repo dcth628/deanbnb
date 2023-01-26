@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     endDate: {
       type: DataTypes.DATE,
-      type: false
+      allowNull: false
     },
     spotId: {
       type: DataTypes.INTEGER,

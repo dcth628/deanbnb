@@ -23,8 +23,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('Spots', {
-      where: Spot.findAll()
-    })
+    await queryInterface.bulkDelete('Spots')
   }
 };
