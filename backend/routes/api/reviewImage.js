@@ -10,19 +10,17 @@ const router = express.Router();
 router.delete(
     '/:reviewImageId',
     async (req, res) => {
-        const image = await Image.findOne({
-            where:{
-                imageId: req.params.reviewImageId,
-                imageType: "Review"
-            },
-            include: {
-                model: Review, where: { id: req.params.reviewImageId}
-            }
-        });
-        const review =  await Review.findByPk(req.params.reviewImageId)
-        console.log(review)
-        console.log(req.params.reviewImageId)
-        console.log(image)
+        // const image = await Image.findOne({
+        //     where:{
+        //         imageId: req.params.reviewImageId,
+        //         imageType: "Review"
+        //     },
+        //     include: {
+        //         model: Review, where: { id: req.params.reviewImageId}
+        //     }
+        // });
+        const image = await Image.findByPk(req.params.reviewImageId)
+
         if (!image) {
             return res.status(404).json({
                 message: "Review Image couldn't be found",
