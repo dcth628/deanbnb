@@ -14,7 +14,7 @@ module.exports = {
         allowNull: false
       },
       endDate: {
-        type: Sequelize.DATEONLY,
+        type: Sequelize.DATE,
         allowNull: false
       },
       spotId: {

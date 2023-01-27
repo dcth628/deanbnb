@@ -16,7 +16,7 @@ const validateCreatebooking = [
         .exists()
         .isAfter('startDate')
         .withMessage('startDate cannot be on or after endDate'),
-        handleValidationErrors
+    handleValidationErrors
 ]
 
 const validateCreatereview = [
@@ -99,7 +99,7 @@ router.get(
             //     ],
             // },{
             limit: size,
-            offset: size * (page -1 ),
+            offset: size * (page - 1),
         })
         res.json({
             Spots: spots, page, size
@@ -389,20 +389,26 @@ router.post(
     // validateCreatebooking,
     async (req, res) => {
         const { startDate, endDate } = req.body;
+
         const start = new Date(startDate);
         const end = new Date(endDate);
+        const spot = await Spot.findByPk(req.params.spotId);
+        if (!spot) {
+            return res.status(404).json({
+                message: "Spot couldn't be found",
+                statusCode: 404
+            })
+        };
 
         const booking = await Booking.findOne({
             where: {
                 spotId: req.params.spotId,
-                [Op.and]: {
-                    startDate: {
-                        [Op.lte]: endDate
-                    },
-                    endDate: {
-                        [Op.gte]: startDate
-                    },
+                startDate: {
+                    [Op.eq]: start
                 },
+                endDate: {
+                    [Op.eq]: end
+                }
             },
             include: {
                 model: Spot,
@@ -411,11 +417,15 @@ router.post(
                 }
             }
         })
+
+
         if (!booking) {
-            return res.status(404).json({
-                message: "Spot couldn't be found",
-                statusCode: 404
+            const booking = await Booking.create({
+                spotId: req.params.spotId,
+                userId: req.user.id,
+                startDate, endDate
             })
+            return res.status(201).json(booking)
         }
 
         if (start >= end) {
@@ -433,15 +443,16 @@ router.post(
                     "End date conflicts with an existing booking"
                 ]
             })
-        } else {
-            const booking = await Booking.create({
-                spotId: req.params.spotId,
-                userId: req.user.id,
-                startDate, endDate
-            })
-
-            return res.status(201).json(booking)
         }
+        // else {
+        //     const booking = await Booking.create({
+        //         spotId: req.params.spotId,
+        //         userId: req.user.id,
+        //         startDate, endDate
+        //     })
+
+        //     return res.status(201).json(booking)
+        // }
     }
 )
 
