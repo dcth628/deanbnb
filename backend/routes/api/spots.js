@@ -7,12 +7,17 @@ const { handleValidationErrors } = require('../../utils/validation');
 const e = require('express');
 const router = express.Router();
 
-// const validateCreatebooking = [
-//     check('endDate').toDate()
-//         .isBefore('startDate').toDate()
-//         .withMessage('endDate cannot be on or before startDate'),
-//         handleValidationErrors
-// ]
+const validateCreatebooking = [
+    check('endDate')
+        .exists()
+        .isBefore('startDate')
+        .withMessage('endDate cannot be on or before startDate'),
+    check('endDate')
+        .exists()
+        .isAfter('startDate')
+        .withMessage('startDate cannot be on or after endDate'),
+        handleValidationErrors
+]
 
 const validateCreatereview = [
     check('review')
@@ -70,14 +75,23 @@ router.get(
 
         if (Number.isNaN(page)) page = 0;
         if (Number.isNaN(size)) size = 20
+        console.log(page, size)
+        // const rating = await Spot.findAll({
+        //     attributes: {
+        //         include: [
+        //             [sequelize.fn('AVG',sequelize.col('Reviews.stars')),
+        //             'avgRating']
+        //         ],
+        //     },
+        //     include: [
+        //         { model: Review, attributes: [] },
+        //     ],
+        // })
 
         const spots = await Spot.findAll({
             //     attributes: {
             //         include: [
-            //             [
-            //                 sequelize.fn('AVG', sequelize.col("Reviews.stars")),
-            //                 "avgRating"
-            //             ],
+            //             [sequelize.fn('COALESCE', sequelize.fn('AVG',sequelize.col('Reviews.stars')), 0), 'avgRating']
             //         ],
             //     },
             //     include: [
@@ -85,7 +99,7 @@ router.get(
             //     ],
             // },{
             limit: size,
-            offset: size * (page - 1),
+            offset: size * (page -1 ),
         })
         res.json({
             Spots: spots, page, size
@@ -137,16 +151,16 @@ router.get(
     async (req, res) => {
         const spot = await Spot.findByPk(req.params.spotId, {
             attributes: {
-                // include: [
-                //     [
-                //         sequelize.fn('AVG', sequelize.col("Reviews.stars")),
-                //         "avgRating"
-                //     ],
-                //     [
-                //         sequelize.fn('COUNT', sequelize.col("Reviews.id")),
-                //         "numReviews"
-                //     ]
-                // ],
+                include: [
+                    [
+                        sequelize.fn('AVG', sequelize.col("Reviews.stars")),
+                        "avgRating"
+                    ],
+                    [
+                        sequelize.fn('COUNT', sequelize.col("Reviews.id")),
+                        "numReviews"
+                    ]
+                ],
                 exclude: ['previewImage']
             },
             include: [
@@ -155,7 +169,8 @@ router.get(
                 { model: Review, attributes: [] }
             ]
         });
-        if (!spot) {
+        console.log(spot)
+        if (spot.id === null) {
             res.status(404);
             return res.json({
                 message: "Spot couldn't be found",
