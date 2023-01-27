@@ -75,7 +75,7 @@ router.get(
 
         if (Number.isNaN(page)) page = 0;
         if (Number.isNaN(size)) size = 20
-        console.log(page, size)
+
         // const rating = await Spot.findAll({
         //     attributes: {
         //         include: [
@@ -169,7 +169,7 @@ router.get(
                 { model: Review, attributes: [] }
             ]
         });
-        console.log(spot)
+
         if (spot.id === null) {
             res.status(404);
             return res.json({
