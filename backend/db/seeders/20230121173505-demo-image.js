@@ -6,7 +6,7 @@ module.exports = {
     await queryInterface.bulkInsert('Images', [
       {
         url: 'image url',
-        imageType: 'group',
+        imageType: 'Review',
         imageId: 1,
         preview: true
       }

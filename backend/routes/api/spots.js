@@ -1,4 +1,5 @@
 const express = require('express')
+const { Op } = require('sequelize')
 const { setTokenCookie, requireAuth, restoreUser } = require('../../utils/auth')
 const { Spot, User, Image, Review, Booking, sequelize } = require('../../db/models');
 const { check } = require('express-validator');
@@ -71,18 +72,18 @@ router.get(
         if (Number.isNaN(size)) size = 20
 
         const spots = await Spot.findAll({
-            attributes: {
-                include: [
-                    [
-                        sequelize.fn('AVG', sequelize.col("Reviews.stars")),
-                        "avgRating"
-                    ],
-                ],
-            },
-            include: [
-                { model: Review, attributes: [] },
-            ],
-        },{
+            //     attributes: {
+            //         include: [
+            //             [
+            //                 sequelize.fn('AVG', sequelize.col("Reviews.stars")),
+            //                 "avgRating"
+            //             ],
+            //         ],
+            //     },
+            //     include: [
+            //         { model: Review, attributes: [] },
+            //     ],
+            // },{
             limit: size,
             offset: size * (page - 1),
         })
@@ -104,10 +105,10 @@ router.get(
             },
             attributes: {
                 include: [
-                    [
-                        sequelize.fn('AVG', sequelize.col("Reviews.stars")),
-                        "avgRating"
-                    ],
+                    // [
+                    //     sequelize.fn('AVG', sequelize.col("Reviews.stars")),
+                    //     "avgRating"
+                    // ],
                     // [
                     //     sequelize.fn('COALESCE', sequelize.col("Images.url")),
                     //     "previewImage"
@@ -136,22 +137,22 @@ router.get(
     async (req, res) => {
         const spot = await Spot.findByPk(req.params.spotId, {
             attributes: {
-                include: [
-                    [
-                        sequelize.fn('AVG', sequelize.col("Reviews.stars")),
-                        "avgRating"
-                    ],
-                    [
-                        sequelize.fn('COUNT', sequelize.col("Reviews.id")),
-                        "numReviews"
-                    ]
-                ],
+                // include: [
+                //     [
+                //         sequelize.fn('AVG', sequelize.col("Reviews.stars")),
+                //         "avgRating"
+                //     ],
+                //     [
+                //         sequelize.fn('COUNT', sequelize.col("Reviews.id")),
+                //         "numReviews"
+                //     ]
+                // ],
                 exclude: ['previewImage']
             },
             include: [
                 { model: Image, as: "ReviewImages" },
                 { model: User, as: "Owner" },
-                { model: Review }
+                { model: Review, attributes: [] }
             ]
         });
         if (!spot) {
@@ -161,7 +162,7 @@ router.get(
                 stateCode: 404
             })
         }
-        res.json(spot);
+        res.json({ Spot: spot });
     }
 )
 
@@ -372,20 +373,35 @@ router.post(
     '/:spotId/bookings',
     // validateCreatebooking,
     async (req, res) => {
-        const spot = await Spot.findByPk(req.params.spotId);
+        const { startDate, endDate } = req.body;
+        const start = new Date(startDate);
+        const end = new Date(endDate);
+
         const booking = await Booking.findOne({
-            where: { spotId: req.params.spotId }
+            where: {
+                spotId: req.params.spotId,
+                [Op.and]: {
+                    startDate: {
+                        [Op.lte]: endDate
+                    },
+                    endDate: {
+                        [Op.gte]: startDate
+                    },
+                },
+            },
+            include: {
+                model: Spot,
+                where: {
+                    id: req.params.spotId
+                }
+            }
         })
-        if (!spot) {
+        if (!booking) {
             return res.status(404).json({
                 message: "Spot couldn't be found",
                 statusCode: 404
             })
         }
-        console.log(booking)
-        const { startDate, endDate } = req.body;
-        const start = new Date(startDate);
-        const end = new Date(endDate);
 
         if (start >= end) {
             return res.status(400).json({

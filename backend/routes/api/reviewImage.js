@@ -19,6 +19,10 @@ router.delete(
                 model: Review, where: { id: req.params.reviewImageId}
             }
         });
+        const review =  await Review.findByPk(req.params.reviewImageId)
+        console.log(review)
+        console.log(req.params.reviewImageId)
+        console.log(image)
         if (!image) {
             return res.status(404).json({
                 message: "Review Image couldn't be found",

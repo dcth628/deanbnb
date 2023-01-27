@@ -19,6 +19,7 @@ module.exports = {
       imageId: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        onDelete: "CASCADE"
         // references: {
         //   model: ['Reviews', 'Spots],
         //   key: 'id'
