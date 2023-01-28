@@ -79,19 +79,16 @@ router.get(
         if (page < 0) page = 0;
         if (size < 0) size = 20;
 
-        // const rating = await Spot.findAll({
-        //     attributes: {
-        //         include: [
-        //             [sequelize.fn('AVG',sequelize.col('Reviews.stars')),
-        //             'avgRating']
-        //         ],
-        //     },
-        //     include: [
-        //         { model: Review, attributes: [] },
-        //     ],
-        // })
-
         const spots = await Spot.findAll({
+            //     attributes: {
+            //         include: [
+            //             [sequelize.fn('COALESCE', sequelize.fn('AVG',sequelize.col('Reviews.stars')), 0), 'avgRating']
+            //         ],
+            //     },
+            //     include: [
+            //         { model: Review, attributes: [] },
+            //     ],
+            // },{
             limit: size,
             offset: size * page
         })
