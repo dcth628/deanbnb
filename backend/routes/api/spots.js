@@ -73,11 +73,27 @@ router.get(
         page = Number(page);
         size = Number(size);
 
-        if (Number.isNaN(page)) page = 0;
+        if (Number.isNaN(page)) page = 1;
         if (Number.isNaN(size)) size = 20
 
-        if (page < 0) page = 0;
+        if (page < 0) page = 1;
         if (size < 0) size = 20;
+
+        if(page <=0 ){
+            return res.status(400).json({
+              "message": "Validation Error",
+              "statusCode": 400,
+              "errors": {
+                "page": "Page must be greater than or equal to 1"}})
+          }
+          if(size <=0 ){
+
+            return res.status(400).json({
+              "message": "Validation Error",
+              "statusCode": 400,
+              "errors": {
+                "size": "Size must be greater than or equal to 1"}})
+          }
 
         const spots = await Spot.findAll({
             //     attributes: {
