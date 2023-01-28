@@ -49,6 +49,7 @@ router.put(
         const { startDate, endDate } = req.body;
         const start = new Date(startDate);
         const end = new Date(endDate);
+
         if (start >= end) {
             return res.status(400).json({
                 message: "Validation error",
