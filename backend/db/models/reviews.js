@@ -39,6 +39,9 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Review',
+    defaultScope: {
+      attributes: { exclude: ['UserId'] }
+    },
   });
   return Review;
 };

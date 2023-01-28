@@ -171,7 +171,7 @@ router.get(
                 { model: User, as: "Owner" },
                 { model: Review, attributes: [] },
             ],
-            group: ['Spot.id']
+            group: ['Spot.id', 'ReviewImages.id']
         });
 
         if (spot.id === null) {
@@ -297,10 +297,10 @@ router.get(
             },
             include: [{
                 model: User,
-                attributes: { exclude: ['username', 'email', 'hashedPassword', 'createdAt', 'updatedAt'] }
+                attributes: { exclude: ['username', 'email', 'hashedPassword', 'createdAt', 'updatedAt','UserId'] }
             }, {
                 model: Image, as: "ReviewImages",
-                attributes: { exclude: ['imageType', 'imageId', 'preview', 'createdAt', 'updatedAt'] }
+                attributes: { exclude: ['imageType', 'imageId', 'preview', 'createdAt', 'updatedAt', 'UserId'] }
             }]
         });
         if (!spotReview.length) {
