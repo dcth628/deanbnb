@@ -76,6 +76,9 @@ router.get(
         if (Number.isNaN(page)) page = 0;
         if (Number.isNaN(size)) size = 20
 
+        if (page < 0) page = 0;
+        if (size < 0) size = 20;
+
         // const rating = await Spot.findAll({
         //     attributes: {
         //         include: [
