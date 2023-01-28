@@ -92,17 +92,8 @@ router.get(
         // })
 
         const spots = await Spot.findAll({
-            //     attributes: {
-            //         include: [
-            //             [sequelize.fn('COALESCE', sequelize.fn('AVG',sequelize.col('Reviews.stars')), 0), 'avgRating']
-            //         ],
-            //     },
-            //     include: [
-            //         { model: Review, attributes: [] },
-            //     ],
-            // },{
             limit: size,
-            offset: size * (page - 1)
+            offset: size * page
         })
         res.json({
             Spots: spots, page, size
