@@ -76,8 +76,8 @@ router.get(
         if (Number.isNaN(page)) page = 1;
         if (Number.isNaN(size)) size = 20
 
-        if (page < 0) page = 1;
-        if (size < 0) size = 20;
+        // if (page < 0) page = 1;
+        // if (size < 0) size = 20;
 
         if (page <= 0) {
             return res.status(400).json({
