@@ -301,7 +301,7 @@ router.get(
                 attributes: { exclude: ['username', 'email', 'hashedPassword', 'createdAt', 'updatedAt'] }
             }, {
                 model: Image, as: "ReviewImages",
-                attributes: { exclude: ['imageType', 'imageId', 'preview', 'createdAt', 'updatedAt', 'UserId'] }
+                attributes: { exclude: ['imageType', 'imageId', 'preview', 'createdAt', 'updatedAt'] }
             }]
         });
         if (!spotReview.length) {
