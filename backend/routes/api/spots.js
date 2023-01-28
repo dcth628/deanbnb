@@ -152,6 +152,7 @@ router.get(
 router.get(
     '/:spotId',
     async (req, res) => {
+
         const spot = await Spot.findByPk(req.params.spotId, {
             attributes: {
                 include: [
@@ -174,7 +175,7 @@ router.get(
             group: ['Spot.id', 'ReviewImages.id', 'Owner.id']
         });
 
-        if (spot.id === null) {
+        if (!spot || spot.id === null) {
             res.status(404);
             return res.json({
                 message: "Spot couldn't be found",
@@ -297,7 +298,7 @@ router.get(
             },
             include: [{
                 model: User,
-                attributes: { exclude: ['username', 'email', 'hashedPassword', 'createdAt', 'updatedAt','UserId'] }
+                attributes: { exclude: ['username', 'email', 'hashedPassword', 'createdAt', 'updatedAt'] }
             }, {
                 model: Image, as: "ReviewImages",
                 attributes: { exclude: ['imageType', 'imageId', 'preview', 'createdAt', 'updatedAt', 'UserId'] }
