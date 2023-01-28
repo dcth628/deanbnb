@@ -76,8 +76,8 @@ router.get(
         if (Number.isNaN(page)) page = 1;
         if (Number.isNaN(size)) size = 20
 
-        // if (page < 0) page = 1;
-        // if (size < 0) size = 20;
+        if (page < 0) page = 1;
+        if (size < 0) size = 20;
 
         if (page <= 0) {
             return res.status(400).json({
@@ -415,6 +415,7 @@ router.post(
 
         const start = new Date(startDate);
         const end = new Date(endDate);
+
         const spot = await Spot.findByPk(req.params.spotId);
 
 
@@ -432,16 +433,7 @@ router.post(
             })
         }
 
-        const booking = await Booking.findAll({
-            // where: {
-            //     spotId: req.params.spotId,
-            //     startDate: {
-            //         [Op.eq]: start
-            //     },
-            //     endDate: {
-            //         [Op.eq]: end
-            //     }
-            // },
+        const bookings = await Booking.findAll({
             include: {
                 model: Spot,
                 where: {
@@ -450,17 +442,33 @@ router.post(
             }
         })
 
-        const checkDate = booking.some(booking =>
+        // const flag = true;
+
+        // bookings.forEach(booking => {
+        //     if (start.getTime() <= booking.startDate.getTime() && booking.endDate.getTime() <= end.getTime()) {
+        //         flag = false;
+        //     } else if (booking.startDate.getTime() <= start.getTime() && booking.endDate.getTime() <= end.getTime()) {
+        //         flag = false;
+        //     } else if (booking.startDate.getTime() <= end.getTime() && end.getTime() <= booking.endDate.getTime()) {
+        //         flag = false;
+        //     } else if (booking.startDate.getTime() <= start.getTime() && start.getTime() <= booking.endDate.getTime()) {
+        //         flag = false;
+        //     }
+        // })
+        console.log(bookings)
+        const checkDate = bookings.some(booking =>
             start.getTime() <= booking.startDate.getTime() && booking.startDate.getTime() <= end.getTime() ||
             booking.startDate.getTime() <= start.getTime() && end.getTime() <= booking.endDate.getTime() ||
-            start.getTime() <= booking.endDate.getTime() && booking.endDate.getTime() <= end.getTime()
+            start.getTime() <= booking.endDate.getTime() && booking.endDate.getTime() <= end.getTime() ||
+            start.getTime() <= booking.startDate.getTime() && booking.endDate.getTime() <= end.getTime()
         )
+        console.log(checkDate)
 
         if (!checkDate) {
             const booking = await Booking.create({
                 spotId: req.params.spotId,
                 userId: req.user.id,
-                startDate, endDate
+                startDate, endDate,
             })
             return res.status(201).json(booking)
         } else {
