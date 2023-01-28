@@ -37,7 +37,7 @@ router.get(
             },
             include: [{
                 model: User,
-                attributes: { exclude: ['username']}
+                attributes: { exclude: ['username', 'email', 'hashedPassword', 'createdAt','updatedAt']}
             }, {
                 model: Spot,
                 attributes: { exclude: ['createdAt','updatedAt']}

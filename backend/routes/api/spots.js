@@ -79,25 +79,38 @@ router.get(
         if (page < 0) page = 1;
         if (size < 0) size = 20;
 
-        if(page <=0 ){
+        if (page <= 0) {
             return res.status(400).json({
-              "message": "Validation Error",
-              "statusCode": 400,
-              "errors": {
-                "page": "Page must be greater than or equal to 1"}})
-          }
-          if(size <=0 ){
+                "message": "Validation Error",
+                "statusCode": 400,
+                "errors": {
+                    "page": "Page must be greater than or equal to 1"
+                }
+            })
+        }
+        if (size <= 0) {
 
             return res.status(400).json({
-              "message": "Validation Error",
-              "statusCode": 400,
-              "errors": {
-                "size": "Size must be greater than or equal to 1"}})
-          }
+                "message": "Validation Error",
+                "statusCode": 400,
+                "errors": {
+                    "size": "Size must be greater than or equal to 1"
+                }
+            })
+        }
 
         const spots = await Spot.findAll({
+            //     attributes: {
+            //         include: [
+            //             [sequelize.fn('COALESCE', sequelize.fn('AVG',sequelize.col('Reviews.stars')), 0), 'avgRating']
+            //         ],
+            //     },
+            //     include: [
+            //         { model: Review, attributes: [] },
+            //     ],
+            // },{
             limit: size,
-            offset: size * page
+            offset: size * (page - 1)
         })
         res.json({
             Spots: spots, page, size
@@ -163,8 +176,14 @@ router.get(
                 exclude: ['previewImage']
             },
             include: [
-                { model: Image, as: "ReviewImages" },
-                { model: User, as: "Owner" },
+                {
+                    model: Image, as: "ReviewImages",
+                    attributes: { exclude: ['imageType', 'imageId', 'createdAt', 'updatedAt'] }
+                },
+                {
+                    model: User, as: "Owner",
+                    attributes: { exclude: ['username','email','hashedPassword', 'createdAt', 'updatedAt'] }
+                },
                 { model: Review, attributes: [] },
             ],
             group: ['Spot.id', 'ReviewImages.id', 'Owner.id']
@@ -327,7 +346,7 @@ router.post(
             where: { userId: req.user.id },
             include: [{
                 model: Spot,
-                where: {id: req.params.spotId}
+                where: { id: req.params.spotId }
             }]
         })
         if (userId) {
@@ -432,9 +451,9 @@ router.post(
         })
 
         const checkDate = booking.some(booking =>
-        start.getTime() <= booking.startDate.getTime() && booking.startDate.getTime() <= end.getTime() ||
-        booking.startDate.getTime() <= start.getTime() && end.getTime() <= booking.endDate.getTime() ||
-        start.getTime() <= booking.endDate.getTime() && booking.endDate.getTime() <= end.getTime()
+            start.getTime() <= booking.startDate.getTime() && booking.startDate.getTime() <= end.getTime() ||
+            booking.startDate.getTime() <= start.getTime() && end.getTime() <= booking.endDate.getTime() ||
+            start.getTime() <= booking.endDate.getTime() && booking.endDate.getTime() <= end.getTime()
         )
 
         if (!checkDate) {
