@@ -76,18 +76,6 @@ router.get(
         if (Number.isNaN(page)) page = 0;
         if (Number.isNaN(size)) size = 20
 
-        // const rating = await Spot.findAll({
-        //     attributes: {
-        //         include: [
-        //             [sequelize.fn('AVG',sequelize.col('Reviews.stars')),
-        //             'avgRating']
-        //         ],
-        //     },
-        //     include: [
-        //         { model: Review, attributes: [] },
-        //     ],
-        // })
-
         const spots = await Spot.findAll({
             //     attributes: {
             //         include: [
@@ -101,6 +89,39 @@ router.get(
             limit: size,
             offset: size * (page - 1),
         })
+
+        for await (let spot of spots) {
+            const previewImage = await Image.findOne({
+                where: {
+                    imageId: spot.id,
+                    preview: true,
+                    imageType: "Spot"
+                }
+            });
+            if (previewImage) {
+                spot.dataValues.previewImage = previewImage.url
+            } else {
+                spot.dataValues.previewImage = "None"
+            }
+
+            const rating = await Review.findAll({
+                where: {spotId: spot.id}
+            })
+
+            let sum = 0;
+
+            if (rating.length) {
+                rating.forEach(rating =>{
+                    sum += rating.stars
+                });
+                let avg = sum /rating.length;
+
+                spot.dataValues.avgRating = avg
+            } else {
+                spot.dataValues.avgRating = 0
+            }
+        }
+
         res.json({
             Spots: spots, page, size
         })
@@ -130,10 +151,41 @@ router.get(
                 ],
             },
             include: [
-                { model: Review, attributes: [] },
+                // { model: Review, attributes: [] },
                 // { model: Image, as: "ReviewImages"}
             ]
         })
+        for await (let spot of spots) {
+            const previewImage = await Image.findOne({
+                where: {
+                    imageId: spot.id,
+                    preview: true,
+                    imageType: "Spot"
+                }
+            });
+            if (previewImage) {
+                spot.dataValues.previewImage = previewImage.url
+            } else {
+                spot.dataValues.previewImage = "None";
+            }
+
+            const rating = await Review.findAll({
+                where: {spotId: spot.id}
+            })
+
+            let sum = 0;
+
+            if (rating.length) {
+                rating.forEach(rating =>{
+                    sum += rating.stars
+                });
+                let avg = sum /rating.length;
+
+                spot.dataValues.avgRating = avg
+            } else {
+                spot.dataValues.avgRating = 0
+            }
+        }
         if (!spots.length) {
             res.status(404);
             return res.json({
@@ -161,14 +213,46 @@ router.get(
                         "numReviews"
                     ]
                 ],
-                exclude: ['previewImage']
+                exclude: ['ReviewImages']
             },
             include: [
-                { model: Image, as: "ReviewImages" },
+                // { model: Image, as: "ReviewImages" },
                 { model: User, as: "Owner" },
                 { model: Review, attributes: [] }
             ]
         });
+
+        if (spot) {
+            const previewImage = await Image.findOne({
+                where: {
+                    imageId: req.params.spotId,
+                    preview: true,
+                    imageType: "Spot"
+                }
+            });
+            if (previewImage) {
+                spot.dataValues.previewImage = previewImage.url
+            } else {
+                spot.dataValues.previewImage = "None";
+            }
+
+            const rating = await Review.findAll({
+                where: {spotId: req.params.spotId}
+            })
+
+            let sum = 0;
+
+            if (rating.length) {
+                rating.forEach(rating =>{
+                    sum += rating.stars
+                });
+                let avg = sum /rating.length;
+
+                spot.dataValues.avgRating = avg
+            } else {
+                spot.dataValues.avgRating = 0
+            }
+        }
 
         if (spot.id === null) {
             res.status(404);
