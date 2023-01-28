@@ -169,8 +169,9 @@ router.get(
             include: [
                 { model: Image, as: "ReviewImages" },
                 { model: User, as: "Owner" },
-                { model: Review, attributes: [] }
-            ]
+                { model: Review, attributes: [] },
+            ],
+            group: ['Spot.id']
         });
 
         if (spot.id === null) {
