@@ -4,12 +4,14 @@ const { Spot, User, Image, Review, Booking, sequelize } = require('../../db/mode
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const e = require('express');
+const reviews = require('../../db/models/reviews');
 const router = express.Router();
 
 
 // Delete a spot image
 router.delete(
     '/:spotImageId',
+    requireAuth,
     async (req, res) => {
         const image = await Image.findOne({
             where: {
