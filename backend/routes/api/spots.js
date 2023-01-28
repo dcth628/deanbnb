@@ -171,7 +171,7 @@ router.get(
                 { model: User, as: "Owner" },
                 { model: Review, attributes: [] },
             ],
-            group: ['Spot.id', 'ReviewImages.id']
+            group: ['Spot.id', 'ReviewImages.id', 'Owner.id']
         });
 
         if (spot.id === null) {
