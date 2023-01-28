@@ -102,7 +102,7 @@ router.get(
             //     ],
             // },{
             limit: size,
-            offset: size * (page - 1),
+            offset: size * page
         })
         res.json({
             Spots: spots, page, size
