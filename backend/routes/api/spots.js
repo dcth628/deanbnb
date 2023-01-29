@@ -76,6 +76,26 @@ router.get(
         if (Number.isNaN(page)) page = 1;
         if (Number.isNaN(size)) size = 20
 
+        if (page <= 0) {
+            return res.status(400).json({
+                "message": "Validation Error",
+                "statusCode": 400,
+                "errors": {
+                    "page": "Page must be greater than or equal to 1"
+                }
+            })
+        }
+        if (size <= 0) {
+
+            return res.status(400).json({
+                "message": "Validation Error",
+                "statusCode": 400,
+                "errors": {
+                    "size": "Size must be greater than or equal to 1"
+                }
+            })
+        }
+
         const spots = await Spot.findAll({
             limit: size,
             offset: size * (page - 1),
@@ -90,9 +110,9 @@ router.get(
                 }
             });
             if (previewImage) {
-                spot.dataValues.previewImage = previewImage.url
+                spot.previewImage = previewImage.url
             } else {
-                spot.dataValues.previewImage = "None"
+                spot.previewImage = "None"
             }
 
             const rating = await Review.findAll({
@@ -107,9 +127,9 @@ router.get(
                 });
                 let avg = sum /rating.length;
 
-                spot.dataValues.avgRating = avg
+                spot.avgRating = avg
             } else {
-                spot.dataValues.avgRating = 0
+                spot.avgRating = 0
             }
         }
 
@@ -155,9 +175,9 @@ router.get(
                 }
             });
             if (previewImage) {
-                spot.dataValues.previewImage = previewImage.url
+                spot.previewImage = previewImage.url
             } else {
-                spot.dataValues.previewImage = "None";
+                spot.previewImage = "None";
             }
 
             const rating = await Review.findAll({
@@ -172,9 +192,9 @@ router.get(
                 });
                 let avg = sum /rating.length;
 
-                spot.dataValues.avgRating = avg
+                spot.avgRating = avg
             } else {
-                spot.dataValues.avgRating = 0
+                spot.avgRating = 0
             }
         }
         if (!spots.length) {
@@ -195,10 +215,10 @@ router.get(
         const spot = await Spot.findByPk(req.params.spotId, {
             attributes: {
                 include: [
-                    [
-                        sequelize.fn('AVG', sequelize.col("Reviews.stars")),
-                        "avgRating"
-                    ],
+                    // [
+                    //     sequelize.fn('AVG', sequelize.col("Reviews.stars")),
+                    //     "avgRating"
+                    // ],
                     [
                         sequelize.fn('COUNT', sequelize.col("Reviews.id")),
                         "numReviews"
@@ -222,9 +242,9 @@ router.get(
                 }
             });
             if (previewImage) {
-                spot.dataValues.previewImage = previewImage.url
+                spot.previewImage = previewImage.url
             } else {
-                spot.dataValues.previewImage = "None";
+                spot.previewImage = "None";
             }
 
             const rating = await Review.findAll({
@@ -239,9 +259,9 @@ router.get(
                 });
                 let avg = sum /rating.length;
 
-                spot.dataValues.avgRating = avg
+                spot.avgRating = avg
             } else {
-                spot.dataValues.avgRating = 0
+                spot.avgRating = 0
             }
         }
 

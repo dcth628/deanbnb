@@ -39,7 +39,7 @@ router.get(
 router.put(
     '/:bookingId',
     async(req, res) => {
-        const booking = await Booking.findOne(req.params.spotId);
+        const booking = await Booking.findByPk(req.params.bookingId);
         if (!booking) {
             return res.status(404).json({
                 message: "Booking couldn't be found",
