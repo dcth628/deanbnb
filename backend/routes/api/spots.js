@@ -98,7 +98,7 @@ router.get(
 
         const spots = await Spot.findAll({
             limit: size,
-            offset: size * (page - 1),
+            offset: size * (page - 1)
         })
 
         for await (let spot of spots) {
@@ -212,6 +212,7 @@ router.get(
 router.get(
     '/:spotId',
     async (req, res) => {
+
         const spot = await Spot.findByPk(req.params.spotId, {
             attributes: {
                 include: [
@@ -266,6 +267,7 @@ router.get(
         }
 
         if (spot.id === null) {
+
             res.status(404);
             return res.json({
                 message: "Spot couldn't be found",
@@ -419,7 +421,11 @@ router.post(
             })
         }
         const userId = await Review.findOne({
-            where: { userId: req.user.id }
+            where: { userId: req.user.id },
+            include: [{
+                model: Spot,
+                where: { id: req.params.spotId }
+            }]
         })
         if (userId) {
             const err = new Error('User already has a review for this spot')

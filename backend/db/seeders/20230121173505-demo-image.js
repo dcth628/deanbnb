@@ -1,9 +1,14 @@
 'use strict';
+let options = {};
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA;
+}
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.bulkInsert('Images', [
+    options.tableName = "Images"
+    await queryInterface.bulkInsert(options, [
       {
         url: 'image url',
         imageType: 'Spot',
@@ -32,6 +37,7 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('Images')
+    options.tableName = "Images"
+    await queryInterface.bulkDelete(options)
   }
 };

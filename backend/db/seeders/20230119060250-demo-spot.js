@@ -1,10 +1,14 @@
 'use strict';
 const { Spot } = require('../models')
-
+let options = {};
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA;
+}
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.bulkInsert("Spots", [
+    options.tableName = "Spots"
+    await queryInterface.bulkInsert(options , [
       {
         ownerId: 1,
         address: '123 Disney Lane',
@@ -65,6 +69,7 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('Spots')
+    options.tableName = "Spots"
+    await queryInterface.bulkDelete(options)
   }
 };
