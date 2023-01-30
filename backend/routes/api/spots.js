@@ -533,14 +533,12 @@ router.post(
         //         flag = false;
         //     }
         // })
-        console.log(bookings)
         const checkDate = bookings.some(booking =>
             start.getTime() <= booking.startDate.getTime() && booking.startDate.getTime() <= end.getTime() ||
             booking.startDate.getTime() <= start.getTime() && end.getTime() <= booking.endDate.getTime() ||
             start.getTime() <= booking.endDate.getTime() && booking.endDate.getTime() <= end.getTime() ||
             start.getTime() <= booking.startDate.getTime() && booking.endDate.getTime() <= end.getTime()
         )
-        console.log(checkDate)
 
         if (!checkDate) {
             const booking = await Booking.create({
