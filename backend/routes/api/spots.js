@@ -76,9 +76,6 @@ router.get(
         if (Number.isNaN(page)) page = 1;
         if (Number.isNaN(size)) size = 20
 
-        if (page < 0) page = 1;
-        if (size < 0) size = 20;
-
         if (page <= 0) {
             return res.status(400).json({
                 "message": "Validation Error",
@@ -100,18 +97,42 @@ router.get(
         }
 
         const spots = await Spot.findAll({
-            //     attributes: {
-            //         include: [
-            //             [sequelize.fn('COALESCE', sequelize.fn('AVG',sequelize.col('Reviews.stars')), 0), 'avgRating']
-            //         ],
-            //     },
-            //     include: [
-            //         { model: Review, attributes: [] },
-            //     ],
-            // },{
             limit: size,
             offset: size * (page - 1)
         })
+
+        for await (let spot of spots) {
+            const previewImage = await Image.findOne({
+                where: {
+                    imageId: spot.id,
+                    preview: true,
+                    imageType: "Spot"
+                }
+            });
+            if (previewImage) {
+                spot.previewImage = previewImage.url
+            } else {
+                spot.previewImage = "None"
+            }
+
+            const rating = await Review.findAll({
+                where: {spotId: spot.id}
+            })
+
+            let sum = 0;
+
+            if (rating.length) {
+                rating.forEach(rating =>{
+                    sum += rating.stars
+                });
+                let avg = sum /rating.length;
+
+                spot.avgRating = avg
+            } else {
+                spot.avgRating = 0
+            }
+        }
+
         res.json({
             Spots: spots, page, size
         })
@@ -141,10 +162,41 @@ router.get(
                 ],
             },
             include: [
-                { model: Review, attributes: [] },
+                // { model: Review, attributes: [] },
                 // { model: Image, as: "ReviewImages"}
             ]
         })
+        for await (let spot of spots) {
+            const previewImage = await Image.findOne({
+                where: {
+                    imageId: spot.id,
+                    preview: true,
+                    imageType: "Spot"
+                }
+            });
+            if (previewImage) {
+                spot.previewImage = previewImage.url
+            } else {
+                spot.previewImage = "None";
+            }
+
+            const rating = await Review.findAll({
+                where: {spotId: spot.id}
+            })
+
+            let sum = 0;
+
+            if (rating.length) {
+                rating.forEach(rating =>{
+                    sum += rating.stars
+                });
+                let avg = sum /rating.length;
+
+                spot.avgRating = avg
+            } else {
+                spot.avgRating = 0
+            }
+        }
         if (!spots.length) {
             res.status(404);
             return res.json({
@@ -164,32 +216,58 @@ router.get(
         const spot = await Spot.findByPk(req.params.spotId, {
             attributes: {
                 include: [
-                    [
-                        sequelize.fn('AVG', sequelize.col("Reviews.stars")),
-                        "avgRating"
-                    ],
+                    // [
+                    //     sequelize.fn('AVG', sequelize.col("Reviews.stars")),
+                    //     "avgRating"
+                    // ],
                     [
                         sequelize.fn('COUNT', sequelize.col("Reviews.id")),
                         "numReviews"
                     ]
                 ],
-                exclude: ['previewImage']
+                exclude: ['ReviewImages']
             },
             include: [
-                {
-                    model: Image, as: "ReviewImages",
-                    attributes: { exclude: ['imageType', 'imageId', 'createdAt', 'updatedAt'] }
-                },
-                {
-                    model: User, as: "Owner",
-                    attributes: { exclude: ['username','email','hashedPassword', 'createdAt', 'updatedAt'] }
-                },
-                { model: Review, attributes: [] },
-            ],
-            group: ['Spot.id', 'ReviewImages.id', 'Owner.id']
+                // { model: Image, as: "ReviewImages" },
+                { model: User, as: "Owner" },
+                { model: Review, attributes: [] }
+            ]
         });
 
-        if (!spot || spot.id === null) {
+        if (spot) {
+            const previewImage = await Image.findOne({
+                where: {
+                    imageId: req.params.spotId,
+                    preview: true,
+                    imageType: "Spot"
+                }
+            });
+            if (previewImage) {
+                spot.previewImage = previewImage.url
+            } else {
+                spot.previewImage = "None";
+            }
+
+            const rating = await Review.findAll({
+                where: {spotId: req.params.spotId}
+            })
+
+            let sum = 0;
+
+            if (rating.length) {
+                rating.forEach(rating =>{
+                    sum += rating.stars
+                });
+                let avg = sum /rating.length;
+
+                spot.avgRating = avg
+            } else {
+                spot.avgRating = 0
+            }
+        }
+
+        if (spot.id === null) {
+
             res.status(404);
             return res.json({
                 message: "Spot couldn't be found",

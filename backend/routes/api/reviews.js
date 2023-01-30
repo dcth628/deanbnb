@@ -37,7 +37,8 @@ router.get(
             },
             include: [{
                 model: User,
-                attributes: { exclude: ['username', 'email', 'hashedPassword', 'createdAt','updatedAt']}
+                attributes: { exclude: ['username','email','hashedPassword','createdAt','updatedAt']}
+
             }, {
                 model: Spot,
                 attributes: { exclude: ['createdAt','updatedAt']}
@@ -53,6 +54,7 @@ router.get(
                 statusCode: 404
             })
         }
+
         res.json({Reviews: reviews})
     }
 )

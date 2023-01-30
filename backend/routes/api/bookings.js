@@ -39,7 +39,7 @@ router.get(
 router.put(
     '/:bookingId',
     async(req, res) => {
-        const booking = await Booking.findOne(req.params.spotId);
+        const booking = await Booking.findByPk(req.params.bookingId);
         if (!booking) {
             return res.status(404).json({
                 message: "Booking couldn't be found",
@@ -55,11 +55,12 @@ router.put(
                 statusCode: 400,
                 error: ["endDate cannot be on or before startDate"]
             })
-        } else if ( start.getTime() <= booking.startDate.getTime() && booking.startDate.getTime() <= end.getTime() ||
+            
+        } else if (start.getTime() <= booking.startDate.getTime() && booking.startDate.getTime() <= end.getTime() ||
         booking.startDate.getTime() <= start.getTime() && end.getTime() <= booking.endDate.getTime() ||
         start.getTime() <= booking.endDate.getTime() && booking.endDate.getTime() <= end.getTime() ||
-        start.getTime() <= booking.startDate.getTime() && booking.endDate.getTime() <= end.getTime()
-        ) {
+        start.getTime() <= booking.startDate.getTime() && booking.endDate.getTime() <= end.getTime()) {
+
             return res.status(403).json({
                 message: 'Sorry, this spot is already booked for the specified dates',
                 statusCode: 403,
@@ -68,7 +69,9 @@ router.put(
                     "End date conflicts with an existing booking"
                 ]
             })
-        } else if (start.getTime() < booking.endDate.getTime() && booking.endDate.getTime() < new Date()) {
+
+        } else if (start.getTime() < booking.endDate.getTime() && booking.startDate.getTime() <= new Date().getTime()) {
+
             return res.status(403).json({
                 message: "Past bookings can't be modified",
                 statusCode: 403
