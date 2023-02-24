@@ -1,57 +1,86 @@
+.signin-form {
+    width: 980px;
+    height: 980px;
+    justify-content: center;
+    align-content: center;
+    background-color: white;
+}
 
+.username-input {
+    flex-direction: column;
+    width: 568px;
+    height: 60px;
 
+    background: rgb(255, 255, 255);
+
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 6px;
+    margin : 5px;
+}
 .username {
-    width: 178px;
-    height: 24px;
+    width: 65px;
+    height: 20px;
 
     font-family: Inter;
     font-style: normal;
     font-weight: 400;
-    font-size: 20px;
-    line-height: 24px;
-    text-align: center;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: left;
 
-    color: #000000;
+    color: rgb(157, 153, 153);
+    margin: 7px;
 }
 
+.password-input {
+    flex-direction: column;
+    width: 568px;
+    height: 55px;
+
+    background: rgb(255, 255, 255);
+
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 6px;
+    margin : 5px;
+}
 .password {
-    width: 93px;
-height: 24px;
+    width: 65px;
+    height: 20px;
 
-font-family: Inter;
-font-style: normal;
-font-weight: 400;
-font-size: 20px;
-line-height: 24px;
-text-align: left;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: left;
 
-color: #000000;
+    color: rgb(157, 153, 153);
+    margin: 7px;
 }
 
 .input {
-    width: 150px;
-    height: 40px;
-    background: #ebe7e7;
-    border-radius: 6px;
+    width: 550px;
+    height: 25px;
+    border: none;
+
+    background: rgb(255, 255, 255);
+    margin: 5px
 }
 
 .login-button {
-    width: 171px;
-height: 40 px;
+    width: 568px;
+    height: 40px;
+    background: rgb(222, 37, 97);
 
-background: #d9d9d9;
+    border-radius: 9px;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
 
-border-radius: 9px;
+    color: rgb(255, 255, 255);
+    margin: 0 0 0 5px ;
 
-width: 58px;
-height: 24px;
-
-font-family: Inter;
-font-style: normal;
-font-weight: 400;
-font-size: 10px;
-line-height: 10px;
-text-align: center;
-
-color: #020202;
 }
