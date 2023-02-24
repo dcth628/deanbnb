@@ -16,29 +16,41 @@ const Navigation = ({isLoaded}) => {
 
     let sessionLinks;
     if (sessionUser) {
-        sessionLinks = (
-            <li>
-                <ProfileButton user={sessionUser} />
-                {/* <button onClick={logout}>Log Out</button> */}
-            </li>
-        );
+      sessionLinks = (
+        <li>
+          <ProfileButton user={sessionUser} />
+        </li>
+      );
     } else {
-        sessionLinks = (
-            <li>
-                <NavLink to='/login'>Log In</NavLink>
-                <NavLink to='/signup'>Sign Up</NavLink>
-            </li>
-        );
-    };
+      sessionLinks = (
+        <li>
+          <NavLink to="/login">Log In</NavLink>
+          <NavLink to="/signup">Sign Up</NavLink>
+        </li>
+      );
+    }
 
     return (
-        <ul>
-            <li>
-                <NavLink exact to='/'>Home</NavLink>
-            </li>
-            {isLoaded && sessionLinks}
-        </ul>
+      <ul>
+        <li>
+          <NavLink exact to="/">Home</NavLink>
+        </li>
+        {isLoaded && sessionLinks}
+      </ul>
     );
+
+//       return (
+//     <ul>
+//       <li>
+//         <NavLink exact to="/">Home</NavLink>
+//       </li>
+//       {isLoaded && (
+//         <li>
+//           <ProfileButton user={sessionUser} />
+//         </li>
+//       )}
+//     </ul>
+//   );
 };
 
 export default Navigation;
