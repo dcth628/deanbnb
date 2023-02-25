@@ -1,9 +1,15 @@
+.login {
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 17px;
+    text-align: center;
+}
 .signin-form {
-    width: 980px;
-    height: 980px;
-    justify-content: center;
-    align-content: center;
-    background-color: white;
+    width: 880px;
+    height: 450px;
+    background-color: rgb(253, 253, 253);
 }
 
 .username-input {
@@ -15,7 +21,7 @@
 
     border: 1px solid rgb(0, 0, 0);
     border-radius: 6px;
-    margin : 5px;
+    margin : 10px;
 }
 .username {
     width: 65px;
@@ -41,7 +47,7 @@
 
     border: 1px solid rgb(0, 0, 0);
     border-radius: 6px;
-    margin : 5px;
+    margin : 10px;
 }
 .password {
     width: 65px;
@@ -81,6 +87,6 @@
     text-align: center;
 
     color: rgb(255, 255, 255);
-    margin: 0 0 0 5px ;
+    margin: 0 0 0 10px ;
 
 }
