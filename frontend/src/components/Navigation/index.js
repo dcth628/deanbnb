@@ -2,55 +2,101 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
-// import * as sessionActions from '../../store/session';
 import './Navigation.css';
 
-const Navigation = ({isLoaded}) => {
-    const sessionUser = useSelector(state => state.session.user);
-    // const dispatch = useDispatch();
+function Navigation({ isLoaded }){
+  const sessionUser = useSelector(state => state.session.user);
 
-    // const logout = (e) => {
-    //     e.preventDefault();
-    //     dispatch(sessionActions.logout());
-    // };
-
-    let sessionLinks;
-    if (sessionUser) {
-      sessionLinks = (
+  return (
+    <ul>
+      <li>
+        <NavLink exact to="/">Home</NavLink>
+      </li>
+      {isLoaded && (
         <li>
           <ProfileButton user={sessionUser} />
         </li>
-      );
-    } else {
-      sessionLinks = (
-        <li>
-          <NavLink to="/login">Log In</NavLink>
-          <NavLink to="/signup">Sign Up</NavLink>
-        </li>
-      );
-    }
+      )}
+    </ul>
+  );
+}
 
-    return (
-      <ul>
-        <li>
-          <NavLink exact to="/">Home</NavLink>
-        </li>
-        {isLoaded && sessionLinks}
-      </ul>
-    );
+export default Navigation;
 
-//       return (
-//     <ul>
-//       <li>
-//         <NavLink exact to="/">Home</NavLink>
-//       </li>
-//       {isLoaded && (
+// import React from 'react';
+// import { NavLink } from 'react-router-dom';
+// import { useSelector } from 'react-redux';
+// import ProfileButton from './ProfileButton';
+// import OpenModalButton from '../OpenModalButton';
+// import LoginFormModal from '../LoginFormModal/LoginFormModal';
+// // import * as sessionActions from '../../store/session';
+// import './Navigation.css';
+// import SignupFormModal from '../SignupFormModal/SignupFormModal';
+
+// const Navigation = ({isLoaded}) => {
+//     const sessionUser = useSelector(state => state.session.user);
+
+//     let sessionLinks;
+//     if (sessionUser) {
+//       sessionLinks = (
 //         <li>
 //           <ProfileButton user={sessionUser} />
 //         </li>
-//       )}
-//     </ul>
-//   );
-};
+//       );
+//     } else {
+//       sessionLinks = (
+//         <li>
+//           <OpenModalButton
+//           buttonText='Log In'
+//           modalComponent={<LoginFormModal />}
+//           />
+//           <OpenModalButton
+//           buttonText='Sign Up'
+//           modalComponent={<SignupFormModal />}
+//           />
+//         </li>
+//       );
+//     }
+//     // // const dispatch = useDispatch();
 
-export default Navigation;
+//     // // const logout = (e) => {
+//     // //     e.preventDefault();
+//     // //     dispatch(sessionActions.logout());
+//     // // };
+
+//     // let sessionLinks;
+//     // if (sessionUser) {
+//     //   sessionLinks = (
+//     //     <li>
+//     //       <ProfileButton user={sessionUser} />
+//     //     </li>
+//     //   );
+//     // } else {
+//     //   sessionLinks = (
+//     //     <li>
+//     //       <NavLink to="/login">Log In</NavLink>
+//     //       <NavLink to="/signup">Sign Up</NavLink>
+//     //     </li>
+//     //   );
+//     // }
+
+//     // return (
+//     //   <ul>
+//     //     <li>
+//     //       <NavLink exact to="/">Home</NavLink>
+//     //     </li>
+//     //     {isLoaded && sessionLinks}
+//     //   </ul>
+//     // );
+
+//     return (
+//       <ul>
+//         <li>
+//           <NavLink exact to="/">Home</NavLink>
+//         </li>
+//         {isLoaded && sessionLinks}
+//       </ul>
+//     );
+// };
+
+// export default Navigation;

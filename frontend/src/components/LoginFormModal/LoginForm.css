@@ -1,24 +1,33 @@
+.login {
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 17px;
+    text-align: center;
+    margin-top: 50px;
+}
 .signin-form {
-    width: 980px;
-    height: 980px;
-    justify-content: center;
-    align-content: center;
-    background-color: white;
+    display: flex;
+    flex-flow: column wrap;
+    width: 880px;
+    height: 450px;
+    background-color: rgb(253, 253, 253);
 }
 
 .username-input {
-    flex-direction: column;
+    display: flex;
+    flex-flow: column wrap;
     width: 568px;
-    height: 60px;
-
+    height: 70px;
     background: rgb(255, 255, 255);
-
     border: 1px solid rgb(0, 0, 0);
     border-radius: 6px;
-    margin : 5px;
+    width: 60%;
+    margin: auto;
 }
 .username {
-    width: 65px;
+    width: 500px;
     height: 20px;
 
     font-family: Inter;
@@ -29,22 +38,24 @@
     text-align: left;
 
     color: rgb(157, 153, 153);
-    margin: 7px;
+    margin: 8px 0 0 8px
 }
 
 .password-input {
-    flex-direction: column;
+    display: flex;
+    flex-flow: column wrap;
     width: 568px;
-    height: 55px;
+    height: 70px;
 
     background: rgb(255, 255, 255);
 
     border: 1px solid rgb(0, 0, 0);
     border-radius: 6px;
-    margin : 5px;
+    width: 60%;
+    margin: auto;
 }
 .password {
-    width: 65px;
+    width: 500px;
     height: 20px;
 
     font-family: Inter;
@@ -55,16 +66,18 @@
     text-align: left;
 
     color: rgb(157, 153, 153);
-    margin: 7px;
+    margin: 8px 0 0 8px
 }
 
 .input {
-    width: 550px;
+    width: 500px;
     height: 25px;
     border: none;
 
     background: rgb(255, 255, 255);
-    margin: 5px
+    margin: 5px;
+    align-items: center;
+
 }
 
 .login-button {
@@ -81,6 +94,8 @@
     text-align: center;
 
     color: rgb(255, 255, 255);
-    margin: 0 0 0 5px ;
+    justify-content: center;
+    width: 60%;
+    margin: auto;
 
 }
