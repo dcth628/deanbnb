@@ -7,6 +7,7 @@ import { BrowserRouter } from 'react-router-dom';
 import configureStore from './store';
 import { restoreCSRF, csrfFetch } from './store/csrf';
 import * as sessionActions from './store/session';
+import * as spotActions from './store/spot';
 import {ModalProvider, Modal} from './context/Modal';
 
 const store = configureStore();
@@ -14,7 +15,8 @@ const store = configureStore();
 if (process.env.NODE_ENV !== 'production') {
   restoreCSRF();
 
-  window.sessionActions = sessionActions
+  window.spotActions = spotActions;
+  window.sessionActions = sessionActions;
   window.csrfFetch = csrfFetch;
   window.store = store;
 };
