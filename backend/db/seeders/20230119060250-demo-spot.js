@@ -21,7 +21,7 @@ module.exports = {
         description: 'Place where web developers are created',
         price: 123,
         avgRating: 4.5,
-        previewImage: 'image url1'
+        previewImage: 'https://res.cloudinary.com/ddxewbhmy/image/upload/v1677360403/samples/landscapes/nature-mountains.jpg'
       },
       {
         ownerId: 2,
@@ -35,7 +35,7 @@ module.exports = {
         description: 'Place where deep dishes are created',
         price: 234,
         avgRating: 3,
-        previewImage: 'image url2'
+        previewImage: 'https://res.cloudinary.com/ddxewbhmy/image/upload/v1677360399/samples/landscapes/beach-boat.jpg'
       },
       {
         ownerId: 3,
@@ -49,7 +49,7 @@ module.exports = {
         description: 'Place where starbucks are created',
         price: 199,
         avgRating: 4,
-        previewImage: 'image url3'
+        previewImage: 'https://res.cloudinary.com/ddxewbhmy/image/upload/v1677360394/samples/animals/reindeer.jpg'
       },
       {
         ownerId: 4,
@@ -63,7 +63,7 @@ module.exports = {
         description: 'Place where hipsters are created',
         price: 199,
         avgRating: 5,
-        previewImage: 'image url4'
+        previewImage: 'https://res.cloudinary.com/ddxewbhmy/image/upload/v1677360399/samples/landscapes/architecture-signs.jpg'
       }
     ])
   },

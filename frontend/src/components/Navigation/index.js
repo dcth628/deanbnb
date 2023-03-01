@@ -1,11 +1,13 @@
-import React from 'react';
+import React, {  } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
+// import Fab from '../Fab';
 
 function Navigation({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
+  // const [showForm, setShowForm ] = useState(false);
 
   return (
     <ul>
@@ -13,9 +15,17 @@ function Navigation({ isLoaded }){
         <NavLink exact to="/">Home</NavLink>
       </li>
       {isLoaded && (
+        <>
+        <li>
+          <NavLink to='/api/spots/'>All Spots</NavLink>
+        </li>
+        <li>
+            <NavLink to='/spots/'>Create New Spot</NavLink>
+        </li>
         <li>
           <ProfileButton user={sessionUser} />
         </li>
+        </>
       )}
     </ul>
   );

@@ -111,8 +111,10 @@ router.get(
             });
             if (previewImage) {
                 spot.previewImage = previewImage.url
-            } else {
+            } else if (!previewImage && !spot.previewImage) {
                 spot.previewImage = "None"
+            } else {
+                spot.previewImage = spot.previewImage
             }
 
             const rating = await Review.findAll({
@@ -176,8 +178,10 @@ router.get(
             });
             if (previewImage) {
                 spot.previewImage = previewImage.url
+            } else if (!previewImage && !spot.previewImage) {
+                spot.previewImage = "None"
             } else {
-                spot.previewImage = "None";
+                spot.previewImage = spot.previewImage
             }
 
             const rating = await Review.findAll({
@@ -204,7 +208,7 @@ router.get(
                 stateCode: 404
             })
         }
-        res.json({ Spots: spots })
+        res.json({Spots: spots})
     }
 )
 
@@ -244,8 +248,10 @@ router.get(
             });
             if (previewImage) {
                 spot.previewImage = previewImage.url
+            } else if (!previewImage && !spot.previewImage) {
+                spot.previewImage = "None"
             } else {
-                spot.previewImage = "None";
+                spot.previewImage = spot.previewImage
             }
 
             const rating = await Review.findAll({
@@ -274,7 +280,7 @@ router.get(
                 stateCode: 404
             })
         }
-        res.json({ Spot: spot });
+        res.json( spot );
     }
 )
 
@@ -294,10 +300,11 @@ router.post(
             name,
             description,
             price,
-            ownerId = userId
+            ownerId = userId,
+            previewImage
         } = req.body;
         const spot = await Spot.createspot({
-            ownerId, address, city, state, country, lat, lng, name, description, price
+            ownerId, address, city, state, country, lat, lng, name, description, price, previewImage
         });
 
         return res.status(201).json(spot)
