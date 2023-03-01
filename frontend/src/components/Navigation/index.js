@@ -1,31 +1,61 @@
-import React, {  } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
-// import Fab from '../Fab';
+import CreateSpotForm from '../SpotCreate';
+// import Fab from '../Fab';import
+import OpenModalMenuItem from './OpenModalMenuItem';
 
-function Navigation({ isLoaded }){
+function Navigation({ isLoaded }) {
   const sessionUser = useSelector(state => state.session.user);
   // const [showForm, setShowForm ] = useState(false);
 
+  const [showMenu, setShowMenu] = useState(false);
+  const ulRef = useRef();
+
+  const openMenu = () => {
+    if (showMenu) return;
+    setShowMenu(true);
+  };
+
+  useEffect(() => {
+    if (!showMenu) return;
+
+    const closeMenu = (e) => {
+      if (!ulRef.current.contains(e.target)) {
+        setShowMenu(false);
+      }
+    };
+
+    document.addEventListener('click', closeMenu);
+
+    return () => document.removeEventListener("click", closeMenu);
+  }, [showMenu]);
+
+  const closeMenu = () => setShowMenu(false);
+
   return (
     <ul>
+      <>
       <li>
         <NavLink exact to="/">Home</NavLink>
       </li>
-      {isLoaded && (
-        <>
         <li>
           <NavLink to='/api/spots/'>All Spots</NavLink>
         </li>
-        <li>
-            <NavLink to='/spots/'>Create New Spot</NavLink>
-        </li>
+        <button>
+          <OpenModalMenuItem
+            itemText="Create New Spot"
+            onItemClick={closeMenu}
+            modalComponent={<CreateSpotForm />}
+          />
+        </button>
+      </>
+      {isLoaded && (
         <li>
           <ProfileButton user={sessionUser} />
         </li>
-        </>
       )}
     </ul>
   );

@@ -307,6 +307,8 @@ router.post(
             ownerId, address, city, state, country, lat, lng, name, description, price, previewImage
         });
 
+        spot.dataValues.previewImage = previewImage
+
         return res.status(201).json(spot)
     }
 )

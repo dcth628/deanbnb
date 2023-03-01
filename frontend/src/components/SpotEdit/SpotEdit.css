@@ -1,0 +1,7 @@
+.edit-spot-form {
+    display: flexbox;
+    flex-flow: column wrap;
+    width: 880px;
+    height: 450px;
+    background-color: rgb(253, 253, 253);
+}

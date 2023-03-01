@@ -6,7 +6,7 @@ const { restoreUser } = require('../../utils/auth');
 const user = require('./user');
 module.exports = (sequelize, DataTypes) => {
   class Spot extends Model {
-    static async createspot({ ownerId, address, city, state, country, lat, lng, name, description, price }) {
+    static async createspot({ ownerId, address, city, state, country, lat, lng, name, description, price, previewImage }) {
       const spot = await Spot.create({
         ownerId,
         address,
@@ -18,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
         name,
         description,
         price,
+        previewImage
       });
       return await Spot.scope('currentSpot').findByPk(spot.id)
     }

@@ -1,26 +1,24 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
-import { createSpot } from "../../store/spot";
-import './SpotCreate.css'
-import { useModal } from "../../context/Modal";
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { editSpot } from '../../store/spot';
+import { useHistory } from 'react-router-dom';
+import { useModal } from '../../context/Modal';
+import './SpotEdit.css'
 
-const CreateSpotForm = () => {
+const EditSpotForm = ({spot}) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const { closeModal } = useModal();
-
-    const [address, setAddress] = useState("");
-    const [city, setCity] = useState("");
-    const [state, setState] = useState("");
-    const [country, setCountry] = useState("");
-    const [lat, setLat] = useState(0);
-    const [lng, setLng] = useState(0);
-    const [name, setName] = useState("");
-    const [description, setDescription] = useState("");
-    const [price, setPrice] = useState(0);
-    const [previewImage, setPreviewImage] = useState("");
-
+    const [address, setAddress] = useState(spot.address);
+    const [city, setCity] = useState(spot.city);
+    const [state, setState] = useState(spot.state);
+    const [country, setCountry] = useState(spot.country);
+    const [lat, setLat] = useState(spot.lat);
+    const [lng, setLng] = useState(spot.lng);
+    const [name, setName] = useState(spot.name);
+    const [description, setDescription] = useState(spot.description);
+    const [price, setPrice] = useState(spot.price);
+    const [previewImage, setPreviewImage] = useState(spot.previewImage);
 
     const updateAddress = (e) => setAddress(e.target.value);
     const updateCity = (e) => setCity(e.target.value);
@@ -34,7 +32,7 @@ const CreateSpotForm = () => {
     const updatePreviewImage = (e) => setPreviewImage(e.target.value);
 
     const handleSubmit = async (e) => {
-        e.preventDefault()
+        e.preventDefault();
 
         const newSpot = {
             address,
@@ -48,11 +46,10 @@ const CreateSpotForm = () => {
             price,
             previewImage
         };
-
-        let createdSpot = await dispatch(createSpot(newSpot));
-        if (createdSpot) {
+        let updatedSpot = await dispatch(editSpot(newSpot));
+        if (updatedSpot) {
             closeModal();
-            history.push(`/api/spots/${createdSpot.id}`);
+            history.push(`/api/spots/${updatedSpot.id}`);
         }
     };
 
@@ -63,8 +60,8 @@ const CreateSpotForm = () => {
     };
 
     return (
-        <section className="new-form-holdeer">
-            <form className="create-spot-form" onSubmit={handleSubmit}>
+        <section className="edit-form-holdeer">
+            <form className="edit-spot-form" onSubmit={handleSubmit}>
                 <input
                  type="text"
                  placeholder="Address"
@@ -123,11 +120,11 @@ const CreateSpotForm = () => {
                  required
                  value={previewImage}
                  onChange={updatePreviewImage} />
-            <button type="submit">Create new Spot</button>
+            <button type="submit">Update Spot</button>
             <button type="button" onClick={handleCancelClick}>Cancel</button>
             </form>
         </section>
     )
 };
 
-export default CreateSpotForm;
+export default EditSpotForm;
