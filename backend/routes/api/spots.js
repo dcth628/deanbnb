@@ -342,7 +342,7 @@ router.delete(
 router.put(
     '/:spotId',
     async (req, res) => {
-        const { address, city, state, country, lat, lng, name, description, price } = req.body;
+        const { address, city, state, country, lat, lng, name, description, price, previewImage } = req.body;
         const spot = await Spot.scope("currentSpot").findByPk(req.params.spotId);
         if (!spot) res.status(404).json({ message: "Spot couldn't be found" });
         spot.address = address;
@@ -354,6 +354,7 @@ router.put(
         spot.name = name;
         spot.description = description;
         spot.price = price;
+        spot.previewImage = previewImage;
         await spot.save();
         res.json(spot)
     }

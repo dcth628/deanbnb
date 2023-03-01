@@ -1,13 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
 // import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Redirect, useParams, useHistory } from "react-router-dom";
 import { getSpotDetail } from "../../store/spot";
 import EditSpotForm from "../SpotEdit";
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
+import * as spotActions from '../../store/spot';
 
 const SpotDetails = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const { spotId } = useParams();
   const spots = useSelector(state => state.spot[spotId]);
   useEffect(() => {
@@ -38,6 +40,12 @@ const SpotDetails = () => {
 
   const closeMenu = () => setShowMenu(false);
 
+  const deleteSpot = async (e) => {
+    e.preventDefault();
+    await dispatch(spotActions.removeSpot(spotId));
+    await history.replace('/api/spots');
+  }
+
   return (
     <div>
       <h1>Spot Details</h1>
@@ -56,6 +64,7 @@ const SpotDetails = () => {
             modalComponent={<EditSpotForm spot={spots}/>}
           />
         </button>
+          <button onClick={deleteSpot}>Delete Spot</button>
       </ul>
     </div>
   )

@@ -35,6 +35,7 @@ const EditSpotForm = ({spot}) => {
         e.preventDefault();
 
         const newSpot = {
+            id: spot.id,
             address,
             city,
             state,
