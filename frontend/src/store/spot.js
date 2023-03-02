@@ -56,7 +56,6 @@ export const getSpotDetail = (spotId) => async dispatch => {
 
     if (response.ok) {
         const spot = await response.json();
-        console.log(spot, "123213221231231231")
         dispatch(getOne(spot));
         return spot
     }

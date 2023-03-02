@@ -109,7 +109,7 @@ router.put(
         reviews.review = review;
         reviews.stars = stars;
         reviews.userId = req.user.id;
-        review.spotId = reviews.spotId;
+        reviews.spotId = reviews.spotId;
         await reviews.save()
         res.json(reviews)
     }

@@ -46,11 +46,11 @@ const SpotDetails = () => {
     await dispatch(spotActions.removeSpot(spotId));
     await history.replace('/api/spots');
   }
-
-  console.log( spots.Reviews)
   return (
     <div>
-      <h1>Spot Details</h1>
+     {spots && (
+      <div>
+     <h1>Spot Details</h1>
       <ul>
         <h2>{spots.name}</h2>
         <p>{spots.city}, {spots.state}, {spots.country}</p>
@@ -68,6 +68,8 @@ const SpotDetails = () => {
         </button>
           <button onClick={deleteSpot}>Delete Spot</button>
       </ul>
+      </div>
+      )}
     </div>
   )
 };
