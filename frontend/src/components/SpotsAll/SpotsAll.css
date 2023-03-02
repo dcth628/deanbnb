@@ -1,0 +1,8 @@
+.spot-list {
+    display: flexbox;
+};
+
+.spot-images {
+    width: auto;
+    height: auto;
+}

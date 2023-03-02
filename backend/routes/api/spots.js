@@ -355,6 +355,7 @@ router.put(
         spot.description = description;
         spot.price = price;
         spot.previewImage = previewImage;
+        spot.dataValues.previewImage = previewImage;
         await spot.save();
         res.json(spot)
     }

@@ -57,7 +57,7 @@ const EditSpotForm = ({spot}) => {
     const handleCancelClick = (e) => {
         e.preventDefault();
         closeModal();
-        history.push('/api/spots')
+        // history.push('/api/spots')
     };
 
     return (

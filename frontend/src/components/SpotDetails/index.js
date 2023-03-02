@@ -12,6 +12,7 @@ const SpotDetails = () => {
   const history = useHistory();
   const { spotId } = useParams();
   const spots = useSelector(state => state.spot[spotId]);
+
   useEffect(() => {
     dispatch(getSpotDetail(spotId))
   }, [dispatch, spotId])
@@ -55,7 +56,7 @@ const SpotDetails = () => {
         <img src={spots.previewImage} alt={spots.previewImage} />
         <p>{spots.description}</p>
         <p>${spots.price} night</p>
-        <p>{spots.avgRating}</p>
+        <p>Rating {spots.avgRating}</p>
         <p>{spots.numReviews} Reviews</p>
         <button>
           <OpenModalMenuItem

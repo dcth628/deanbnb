@@ -79,7 +79,6 @@ export const editSpot = spot => async dispatch => {
             previewImage
         })
     });
-    console.log(response, '123121321321212123312')
 
     if (response.ok) {
         const spot = await response.json();
