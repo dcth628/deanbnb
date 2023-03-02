@@ -111,8 +111,10 @@ router.get(
             });
             if (previewImage) {
                 spot.previewImage = previewImage.url
-            } else {
+            } else if (!previewImage && !spot.previewImage) {
                 spot.previewImage = "None"
+            } else {
+                spot.previewImage = spot.previewImage
             }
 
             const rating = await Review.findAll({
@@ -176,8 +178,10 @@ router.get(
             });
             if (previewImage) {
                 spot.previewImage = previewImage.url
+            } else if (!previewImage && !spot.previewImage) {
+                spot.previewImage = "None"
             } else {
-                spot.previewImage = "None";
+                spot.previewImage = spot.previewImage
             }
 
             const rating = await Review.findAll({
@@ -204,7 +208,7 @@ router.get(
                 stateCode: 404
             })
         }
-        res.json({ Spots: spots })
+        res.json({Spots: spots})
     }
 )
 
@@ -230,7 +234,7 @@ router.get(
             include: [
                 // { model: Image, as: "ReviewImages" },
                 { model: User, as: "Owner" },
-                { model: Review, attributes: [] }
+                { model: Review,  }
             ]
         });
 
@@ -244,8 +248,10 @@ router.get(
             });
             if (previewImage) {
                 spot.previewImage = previewImage.url
+            } else if (!previewImage && !spot.previewImage) {
+                spot.previewImage = "None"
             } else {
-                spot.previewImage = "None";
+                spot.previewImage = spot.previewImage
             }
 
             const rating = await Review.findAll({
@@ -274,7 +280,7 @@ router.get(
                 stateCode: 404
             })
         }
-        res.json({ Spot: spot });
+        res.json( spot );
     }
 )
 
@@ -294,11 +300,14 @@ router.post(
             name,
             description,
             price,
-            ownerId = userId
+            ownerId = userId,
+            previewImage
         } = req.body;
         const spot = await Spot.createspot({
-            ownerId, address, city, state, country, lat, lng, name, description, price
+            ownerId, address, city, state, country, lat, lng, name, description, price, previewImage
         });
+
+        spot.dataValues.previewImage = previewImage
 
         return res.status(201).json(spot)
     }
@@ -333,7 +342,7 @@ router.delete(
 router.put(
     '/:spotId',
     async (req, res) => {
-        const { address, city, state, country, lat, lng, name, description, price } = req.body;
+        const { address, city, state, country, lat, lng, name, description, price, previewImage } = req.body;
         const spot = await Spot.scope("currentSpot").findByPk(req.params.spotId);
         if (!spot) res.status(404).json({ message: "Spot couldn't be found" });
         spot.address = address;
@@ -345,6 +354,8 @@ router.put(
         spot.name = name;
         spot.description = description;
         spot.price = price;
+        spot.previewImage = previewImage;
+        spot.dataValues.previewImage = previewImage;
         await spot.save();
         res.json(spot)
     }
