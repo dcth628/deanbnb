@@ -34,6 +34,12 @@ module.exports = {
         stars: 3.5,
         userId: 4,
         spotId: 4,
+      },
+      {
+        review: 'This was a just okay spot!',
+        stars: 3.5,
+        userId: 4,
+        spotId: 1,
       }
     ])
   },

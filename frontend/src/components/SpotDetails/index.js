@@ -11,7 +11,7 @@ const SpotDetails = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { spotId } = useParams();
-  const spots = useSelector(state => state.spot[spotId]);
+  const spots = useSelector(state => state?.spot[spotId]);
 
   useEffect(() => {
     dispatch(getSpotDetail(spotId))
@@ -47,6 +47,7 @@ const SpotDetails = () => {
     await history.replace('/api/spots');
   }
 
+  console.log( spots.Reviews)
   return (
     <div>
       <h1>Spot Details</h1>

@@ -2,7 +2,13 @@
     display: flexbox;
 };
 
+.spot-tile {
+    width: 680 px;
+    height: 680 px;
+    border: 5px black
+};
+
 .spot-images {
-    width: auto;
-    height: auto;
+    width: 500px;
+    height: 500px;
 }
