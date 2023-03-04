@@ -6,6 +6,8 @@ import { getSpotDetail } from "../../store/spot";
 import EditSpotForm from "../SpotEdit";
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import * as spotActions from '../../store/spot';
+import AllReviews from "../ReviewBySpotId";
+import CreateReviewFrom from "../ReviewCreate";
 
 const SpotDetails = () => {
   const dispatch = useDispatch();
@@ -15,7 +17,7 @@ const SpotDetails = () => {
 
   useEffect(() => {
     dispatch(getSpotDetail(spotId))
-  }, [dispatch, spotId])
+  }, [dispatch, spotId]);
 
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
@@ -51,14 +53,23 @@ const SpotDetails = () => {
      {spots && (
       <div>
      <h1>Spot Details</h1>
-      <ul>
+      <ul key={spots.id}>
         <h2>{spots.name}</h2>
         <p>{spots.city}, {spots.state}, {spots.country}</p>
         <img src={spots.previewImage} alt={spots.previewImage} />
         <p>{spots.description}</p>
         <p>${spots.price} night</p>
-        <p>Rating {spots.avgRating}</p>
-        <p>{spots.numReviews} Reviews</p>
+        {
+        spots.avgRating ?
+        <p> Rating: {spots.avgRating} </p> :
+        <p>NEW!</p>
+        }
+        {
+        spots.numReviews ?
+        <p> {spots.numReviews} Reviews</p> :
+        <p> Leave a review?</p>
+        }
+        {/* <p>Hosted by {spots.Owner.firstName} {spots.Owner.lastName}</p> */}
         <button>
           <OpenModalMenuItem
             itemText="Edit Spot"
@@ -67,7 +78,17 @@ const SpotDetails = () => {
           />
         </button>
           <button onClick={deleteSpot}>Delete Spot</button>
+          <button>
+          <OpenModalMenuItem
+            itemText="Post YOur Review"
+            onItemClick={closeMenu}
+            modalComponent={<CreateReviewFrom spotId={spotId}/>}
+          />
+        </button>
       </ul>
+      <div>
+        <AllReviews spots={spots} />
+      </div>
       </div>
       )}
     </div>

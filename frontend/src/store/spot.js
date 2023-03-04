@@ -143,13 +143,14 @@ const spotReducer = (state = initialState, action) => {
             delete newState[action.spotId];
             return newState;
         case CREATE_SPOT:
+
             if (!state[action.spot.id]) {
-                const newState = {
+                const createdState = {
                     ...state,
                     [action.spot.id]: action.spot
                 };
                 // console.log(action.spot, "122123121321213121231211321")
-                return newState
+                return createdState
             }
             return newState
         case GETONE_SPOT:

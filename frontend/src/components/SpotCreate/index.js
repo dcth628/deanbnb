@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { createSpot } from "../../store/spot";
@@ -63,7 +63,7 @@ const CreateSpotForm = () => {
     };
 
     return (
-        <section className="new-form-holdeer">
+        <section className="new-spot-form-holder">
             <form className="create-spot-form" onSubmit={handleSubmit}>
                 <input
                  type="text"

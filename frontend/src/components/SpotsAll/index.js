@@ -16,20 +16,21 @@ const AllSpots = () => {
         <div className="spot-list">
             <NavLink exact to="/">Home</NavLink>
             <h1>Spot List</h1>
-            <ul >
+            <li>
                 {Object.values(spots).map(({id, name, description, price, previewImage, city, state, avgRating}) => (
-                    <div className="spot-tile" key={id}>
                         <NavLink to={`/api/spots/${id}`}>
+                    <div className="spot-tile" key={id}>
 
                         <img className='spot-images' src={previewImage} alt={previewImage}/>
-                        </NavLink>
-                        <NavLink to={`/api/spots/${id}`}>{name} : {description}</NavLink>
-                        <p>{avgRating}</p>
+                        <p>{name}</p>
+                        <p>{description}</p>
+                        <p>{avgRating ? avgRating : "NEW!"}</p>
+                        <p>Price: ${price} night</p>
                         <p>{city}, {state}</p>
-                        <p> Price: ${price} night</p>
                     </div>
+                        </NavLink>
                 ))}
-            </ul>
+            </li>
             <Switch>
                 <Route path='/api/spots/:spotId'>
                     <SpotDetails spots={spots}/>
