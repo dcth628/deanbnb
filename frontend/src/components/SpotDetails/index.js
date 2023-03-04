@@ -69,7 +69,7 @@ const SpotDetails = () => {
         <p> {spots.numReviews} Reviews</p> :
         <p> Leave a review?</p>
         }
-        {/* <p>Hosted by {spots.Owner.firstName} {spots.Owner.lastName}</p> */}
+       {spots.Owner && <p>Hosted by {spots.Owner.firstName} {spots.Owner.lastName}</p>}
         <button>
           <OpenModalMenuItem
             itemText="Edit Spot"

@@ -73,7 +73,6 @@ export const editReview = reviews => async dispatch => {
 };
 
 export const createReview = (reviews) => async dispatch => {
-    // console.log(reviews, "1111111111111")
     const { review, stars, spotId} = reviews;
 
     const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
@@ -94,7 +93,6 @@ export const removeReview = (reviewId) => async dispatch => {
         method: 'DELETE'
     });
 
-
     if (response.ok) {
         const review = await response.json();
         dispatch(remove(review));
@@ -111,14 +109,11 @@ const reviewReducer = (state = initialState, action) => {
             action.reviews.Reviews.forEach((review) => {
                 allReviews[review.id] = review
             })
-            // console.log(allReviews, "22222222222")
             return { ...allReviews };
         case Edit_REVIEW:
-            // console.log(action, '11111111111111111')
             const updateState = { ...state, [action.review.id]: action.review}
             return updateState
         case CREATE_REVIEW:
-            // console.log(action, '11111111111111111')
             if (!state[action.review.id]) {
             const createdState = {
                 ...state,
@@ -129,7 +124,7 @@ const reviewReducer = (state = initialState, action) => {
             return {...state};
         case REMOVE_REVIEW:
             const newState = {...state};
-            delete newState[action.reviewId];
+            delete newState[action.reviewId.id];
             return newState
         default:
             return state

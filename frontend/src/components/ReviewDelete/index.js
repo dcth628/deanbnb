@@ -10,8 +10,8 @@ const DeleteReview = ({reviewId, spotId}) => {
 
     const deletedReview = async (e) => {
         e.preventDefault();
-        await dispatch(removeReview(reviewId));
-        await history.replace(`/api/spots/${spotId}`)
+        dispatch(removeReview(reviewId));
+        // await history.replace(`/api/spots/${spotId}`)
     };
 
     return (

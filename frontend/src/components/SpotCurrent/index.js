@@ -6,7 +6,6 @@ import { getCurrentSpot } from "../../store/spot";
 const CurrentSpot = () => {
     const dispatch = useDispatch();
     const spots = useSelector((state) => state?.spot)
-    console.log(spots, "11111111111111111111")
 
     useEffect(() => {
         dispatch(getCurrentSpot())

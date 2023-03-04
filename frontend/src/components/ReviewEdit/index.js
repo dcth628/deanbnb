@@ -12,7 +12,7 @@ const EditReviewForm = ({reviews}) => {
     const {closeModal } = useModal();
     // const { reviewId } = useParams();
 
-    console.log(reviews, "333333333333333")
+    reviews = reviews[0];
     let test = useSelector(state => {
         return Object.values(state.spot).map(spot => spot.id)})
 

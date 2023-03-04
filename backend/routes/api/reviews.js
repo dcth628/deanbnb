@@ -135,10 +135,7 @@ router.delete(
             })
         }
         await review.destroy();
-        return res.status(200).json({
-            message : 'Successfully deleted',
-            statusCode: 200
-        })
+        return res.status(200).json(review)
     }
 )
 

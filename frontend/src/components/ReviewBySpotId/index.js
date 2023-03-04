@@ -14,8 +14,6 @@ const AllReviews = ({ spots }) => {
     const history = useHistory();
     const { spotId } = useParams();
     let reviews = useSelector(state => Object.values(state.review));
-    // let reviewId = useSelector(state => console.log(state.review));
-    // console.log(reviews,"reviews object under all reviews")
 
     const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();

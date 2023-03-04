@@ -26,6 +26,9 @@ function App() {
           <Route exact path="/api/spots">
             <AllSpots />
           </Route>
+          <Route exact path='/api/spots/current'>
+            <CurrentSpot />
+          </Route>
           <Route path='/api/spots/:spotId'>
             <SpotDetails />
           </Route>
@@ -41,9 +44,7 @@ function App() {
           <Route path='/:spotId/reviews'>
             <CreateReviewFrom />
           </Route>
-          <Route path='/api/spots/current'>
-            <CurrentSpot />
-          </Route>
+
         </Switch>
       )}
     </>

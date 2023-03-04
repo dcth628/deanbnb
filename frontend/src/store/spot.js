@@ -127,7 +127,6 @@ const spotReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_SPOT:
             const allSpots = {};
-            // console.log(action.list.Spots.length, "122123121321213121231211321")
                 action.list.Spots.forEach(spot => {
                     allSpots[spot.id] = spot
                 });
@@ -148,12 +147,10 @@ const spotReducer = (state = initialState, action) => {
                     ...state,
                     [action.spot.id]: action.spot
                 };
-                // console.log(action.spot, "122123121321213121231211321")
                 return createdState
             }
             return newState
         case GETONE_SPOT:
-            // console.log(action.spot, '11222221313132132')
             return { [action.spot.id]: action.spot }
         default:
             return state;
