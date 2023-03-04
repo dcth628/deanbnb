@@ -1,22 +1,23 @@
 import React, {useEffect} from "react";
-import { NavLink, Switch, Route } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllSpots } from "../../store/spot";
-import SpotDetails from "../SpotDetails";
-import './SpotsAll.css'
+import { getCurrentSpot } from "../../store/spot";
 
-const AllSpots = () => {
+const CurrentSpot = () => {
     const dispatch = useDispatch();
-    const spots = useSelector((state) => state.spot)
+    const spots = useSelector((state) => state?.spot)
+    console.log(spots, "11111111111111111111")
+
     useEffect(() => {
-        dispatch(getAllSpots())
+        dispatch(getCurrentSpot())
     }, [dispatch]);
 
     return (
-        <div className="spot-list">
-            <NavLink exact to="/">Home</NavLink>
-            <h1>Spot List</h1>
+        <div className="current-spot-list">
+            <h1>Manage Your Spots</h1>
             <li>
+                {spots && (
+                    <div>
                 {Object.values(spots).map(({id, name, description, price, previewImage, city, state, avgRating}) => (
                         <NavLink to={`/api/spots/${id}`}>
                     <div className="spot-tile" key={id}>
@@ -30,14 +31,11 @@ const AllSpots = () => {
                     </div>
                         </NavLink>
                 ))}
+                </div>
+                )}
             </li>
-            {/* <Switch>
-                <Route path='/api/spots/:spotId'>
-                    <SpotDetails spots={spots}/>
-                </Route>
-            </Switch> */}
         </div>
     )
 };
 
-export default AllSpots;
+export default CurrentSpot;

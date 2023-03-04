@@ -43,7 +43,6 @@ export const getAllSpots = () => async dispatch => {
 
 export const getCurrentSpot = () => async dispatch => {
     const response = await csrfFetch(`/api/spots/current`);
-
     if (response.ok) {
         const spot = await response.json();
         dispatch(load(spot));

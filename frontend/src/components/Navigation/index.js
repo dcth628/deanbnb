@@ -44,6 +44,9 @@ function Navigation({ isLoaded }) {
         <li>
           <NavLink to='/api/spots/'>All Spots</NavLink>
         </li>
+        <li>
+          <NavLink to='/api/spots/current'>Manage Your Spots</NavLink>
+        </li>
         <button>
           <OpenModalMenuItem
             itemText="Create New Spot"
