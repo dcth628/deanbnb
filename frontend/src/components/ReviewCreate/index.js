@@ -3,6 +3,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { createReview } from "../../store/review";
 import { useModal } from "../../context/Modal";
 import { useDispatch } from "react-redux";
+import { getSpotDetail } from "../../store/spot";
 
 const CreateReviewFrom = ({spotId}) => {
     const dispatch = useDispatch();
@@ -10,7 +11,7 @@ const CreateReviewFrom = ({spotId}) => {
     const { closeModal } = useModal();
 
     const [review, setReview] = useState("");
-    const [stars, setStars] = useState(0);
+    const [stars, setStars] = useState("");
 
     const updateReview = (e) => setReview(e.target.value);
     const updateStars = (e) => setStars(e.target.value);
@@ -25,11 +26,14 @@ const CreateReviewFrom = ({spotId}) => {
         };
 
         let createdReview = await dispatch(createReview(newReview));
+        console.log(createdReview.spotId,"1111111111111")
         if (createdReview) {
             closeModal();
-            // history.push(`/api/spots/${createdReview.spotId}`);
-        }
+            history.push(`/spots/${createdReview.spotId}`);
+        };
+        dispatch(getSpotDetail(spotId))
     };
+
 
     const handleCancelClick = (e) => {
         e.preventDefault();

@@ -3,6 +3,7 @@ import * as reviewActions from '../../store/review';
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { removeReview } from "../../store/review";
+import { getSpotDetail } from '../../store/spot';
 
 const DeleteReview = ({reviewId, spotId}) => {
     const dispatch = useDispatch();
@@ -10,7 +11,9 @@ const DeleteReview = ({reviewId, spotId}) => {
 
     const deletedReview = async (e) => {
         e.preventDefault();
-        dispatch(removeReview(reviewId));
+        await dispatch(removeReview(reviewId));
+        await dispatch(getSpotDetail(spotId));
+
         // await history.replace(`/api/spots/${spotId}`)
     };
 

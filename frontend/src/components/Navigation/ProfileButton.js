@@ -4,6 +4,7 @@ import * as sessionActions from '../../store/session';
 import OpenModalMenuItem from './OpenModalMenuItem';
 import LoginFormModal from '../LoginFormModal/LoginFormModal';
 import SignupFormModal from '../SignupFormModal/SignupFormModal';
+import DemoUserLogIn from "../DemoUser";
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -66,6 +67,7 @@ function ProfileButton({ user }) {
               onItemClick={closeMenu}
               modalComponent={<SignupFormModal />}
             />
+            <DemoUserLogIn />
           </>
         )}
       </ul>

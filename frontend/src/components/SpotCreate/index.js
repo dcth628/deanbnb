@@ -52,14 +52,14 @@ const CreateSpotForm = () => {
         let createdSpot = await dispatch(createSpot(newSpot));
         if (createdSpot) {
             closeModal();
-            history.push(`/api/spots/${createdSpot.id}`);
+            history.push(`/spots/${createdSpot.id}`);
         }
     };
 
     const handleCancelClick = (e) => {
         e.preventDefault();
         closeModal();
-        history.push('/api/spots')
+        history.push('/spots')
     };
 
     return (

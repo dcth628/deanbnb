@@ -42,10 +42,10 @@ function Navigation({ isLoaded }) {
         <NavLink exact to="/">Home</NavLink>
       </li>
         <li>
-          <NavLink to='/api/spots/'>All Spots</NavLink>
+          <NavLink to='/spots/'>All Spots</NavLink>
         </li>
         <li>
-          <NavLink to='/api/spots/current'>Manage Your Spots</NavLink>
+          <NavLink to='/spots/current'>Manage Your Spots</NavLink>
         </li>
         <button>
           <OpenModalMenuItem

@@ -46,7 +46,7 @@ const SpotDetails = () => {
   const deleteSpot = async (e) => {
     e.preventDefault();
     await dispatch(spotActions.removeSpot(spotId));
-    await history.replace('/api/spots');
+    await history.replace('/spots');
   }
   return (
     <div>
@@ -59,12 +59,12 @@ const SpotDetails = () => {
         <img src={spots.previewImage} alt={spots.previewImage} />
         <p>{spots.description}</p>
         <p>${spots.price} night</p>
-        {
+        {spots.avgRating &&
         spots.avgRating ?
         <p> Rating: {spots.avgRating} </p> :
         <p>NEW!</p>
         }
-        {
+        {spots.numReviews &&
         spots.numReviews ?
         <p> {spots.numReviews} Reviews</p> :
         <p> Leave a review?</p>

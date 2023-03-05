@@ -23,22 +23,22 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
-          <Route exact path="/api/spots">
+          <Route exact path="/spots">
             <AllSpots />
           </Route>
-          <Route exact path='/api/spots/current'>
+          <Route exact path='/spots/current'>
             <CurrentSpot />
           </Route>
-          <Route path='/api/spots/:spotId'>
+          <Route path='/spots/:spotId'>
             <SpotDetails />
           </Route>
-          <Route  path='/spots'>
+          <Route  path='/spots/new'>
             <CreateSpotForm />
           </Route>
-          <Route  path='/spots/:spotId'>
+          <Route  path='/spots/:spotId/edit'>
             <EditSpotForm />
           </Route>
-          <Route  path='/api/reviews/:reviewId'>
+          <Route  path='/reviews/:reviewId/edit'>
             <EditReviewForm />
           </Route>
           <Route path='/:spotId/reviews'>

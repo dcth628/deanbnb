@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { editSpot } from '../../store/spot';
+import { editSpot, getSpotDetail } from '../../store/spot';
 import { useHistory } from 'react-router-dom';
 import { useModal } from '../../context/Modal';
 import './SpotEdit.css'
@@ -50,8 +50,9 @@ const EditSpotForm = ({spot}) => {
         let updatedSpot = await dispatch(editSpot(newSpot));
         if (updatedSpot) {
             closeModal();
-            history.push(`/api/spots/${updatedSpot.id}`);
+            // history.push(`/api/spots/${updatedSpot.id}`);
         }
+        dispatch(getSpotDetail(spot.id))
     };
 
     const handleCancelClick = (e) => {

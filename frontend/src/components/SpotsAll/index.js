@@ -18,7 +18,7 @@ const AllSpots = () => {
             <h1>Spot List</h1>
             <li>
                 {Object.values(spots).map(({id, name, description, price, previewImage, city, state, avgRating}) => (
-                        <NavLink to={`/api/spots/${id}`}>
+                        <NavLink to={`/spots/${id}`}>
                     <div className="spot-tile" key={id}>
 
                         <img className='spot-images' src={previewImage} alt={previewImage}/>
