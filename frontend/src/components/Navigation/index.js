@@ -39,14 +39,9 @@ function Navigation({ isLoaded }) {
     <ul>
       <>
       <li>
-        <NavLink exact to="/">Home</NavLink>
+        <NavLink exact to="/spots">Home</NavLink>
       </li>
-        <li>
-          <NavLink to='/spots/'>All Spots</NavLink>
-        </li>
-        <li>
-          <NavLink to='/spots/current'>Manage Your Spots</NavLink>
-        </li>
+      <li>
         <button>
           <OpenModalMenuItem
             itemText="Create New Spot"
@@ -54,6 +49,7 @@ function Navigation({ isLoaded }) {
             modalComponent={<CreateSpotForm />}
           />
         </button>
+      </li>
       </>
       {isLoaded && (
         <li>

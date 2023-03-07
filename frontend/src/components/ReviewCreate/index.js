@@ -26,7 +26,6 @@ const CreateReviewFrom = ({spotId}) => {
         };
 
         let createdReview = await dispatch(createReview(newReview));
-        console.log(createdReview.spotId,"1111111111111")
         if (createdReview) {
             closeModal();
             history.push(`/spots/${createdReview.spotId}`);

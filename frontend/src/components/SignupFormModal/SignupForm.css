@@ -1,0 +1,12 @@
+.sign-up-page {
+    display: flex;
+    flex-flow: column wrap;
+    width: auto;
+    height: 400px;
+    background-color: rgb(253, 253, 253);
+}
+
+.sign-up-form {
+    display: flexbox;
+    flex-direction: column wrap;
+}

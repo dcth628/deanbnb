@@ -25,7 +25,7 @@ const LoginFormModal = () => {
     return (
         <>
             <form
-                className="signin-form"
+                className="login-form"
                 onSubmit={handleSubmit}>
                 <h1 className='login'>Log In</h1>
                 <ul>

@@ -7,27 +7,27 @@
     text-align: center;
     margin-top: 50px;
 }
-.signin-form {
+.lgoin-form {
     display: flexbox;
-    flex-flow: column wrap;
-    width: 880px;
-    height: 450px;
+    flex-direction: column;
+    width: 500px;
+    height: 300px;
     background-color: rgb(253, 253, 253);
 }
 
 .username-input {
     display: flex;
     flex-flow: column wrap;
-    width: 568px;
+    width: auto;
     height: 70px;
     background: rgb(255, 255, 255);
     border: 1px solid rgb(0, 0, 0);
     border-radius: 6px;
     width: 60%;
-    margin:auto;
+    margin: auto;
 }
 .username {
-    width: 500px;
+    width: auto;
     height: 20px;
 
     font-family: Inter;
@@ -38,13 +38,13 @@
     text-align: left;
 
     color: rgb(157, 153, 153);
-    margin: 8px 0 0 8px
+    margin: 8px 0 0 8px;
 }
 
 .password-input {
     display: flex;
     flex-flow: column wrap;
-    width: 568px;
+    width: auto;
     height: 70px;
 
     background: rgb(255, 255, 255);
@@ -53,9 +53,10 @@
     border-radius: 6px;
     width: 60%;
     margin: auto;
+    margin-top: 10px
 }
 .password {
-    width: 500px;
+    width: auto;
     height: 20px;
 
     font-family: Inter;
@@ -66,21 +67,23 @@
     text-align: left;
 
     color: rgb(157, 153, 153);
-    margin: 8px 0 0 8px
+    margin: 8px 0 0 8px;
 }
 
 .input {
-    width: 500px;
+
+    justify-content: center;
+    width: 90%;
     height: 25px;
     border: none;
 
     background: rgb(255, 255, 255);
-    margin: 5px;
-    align-items: center;
-
 }
 
 .login-button {
+
+    display: flex;
+  flex-flow: row wrap;
     width: 568px;
     height: 40px;
     background: rgb(222, 37, 97);
@@ -94,8 +97,8 @@
     text-align: center;
 
     color: rgb(255, 255, 255);
-    justify-content: center;
     width: 60%;
     margin: auto;
+    margin-top:20px;
 
 }

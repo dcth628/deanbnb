@@ -52,7 +52,7 @@ const EditSpotForm = ({spot}) => {
             closeModal();
             // history.push(`/api/spots/${updatedSpot.id}`);
         }
-        dispatch(getSpotDetail(spot.id))
+        await dispatch(getSpotDetail(spot.id))
     };
 
     const handleCancelClick = (e) => {

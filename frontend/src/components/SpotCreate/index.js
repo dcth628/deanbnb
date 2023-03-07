@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import { createSpot } from "../../store/spot";
 import './SpotCreate.css'
 import { useModal } from "../../context/Modal";
+import * as reviewActions from '../../store/review'
 
 const CreateSpotForm = () => {
     const dispatch = useDispatch();
@@ -51,6 +52,7 @@ const CreateSpotForm = () => {
 
         let createdSpot = await dispatch(createSpot(newSpot));
         if (createdSpot) {
+            dispatch(reviewActions.getAllReviews(createdSpot.id))
             closeModal();
             history.push(`/spots/${createdSpot.id}`);
         }
