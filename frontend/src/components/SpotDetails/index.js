@@ -15,9 +15,10 @@ const SpotDetails = () => {
   const history = useHistory();
   const { spotId } = useParams();
   const spots = useSelector(state => state?.spot[spotId]);
-  // console.log(spots.ownerId, 'this is the spot object')
   const sessionUser = useSelector(state => state?.session.user);
-  // console.log(sessionUser.id, "this is the session User" )
+  // const userSpots = Object.values(spots).filter(spot => spot.ownerId === sessionUser.id);
+  console.log(spots, "this is spot object")
+
 
   useEffect(() => {
     dispatch(getSpotDetail(spotId))
@@ -56,6 +57,11 @@ const SpotDetails = () => {
             <h2>{spots.name}</h2>
             <p>{spots.city}, {spots.state}, {spots.country}</p>
             <img src={spots.previewImage} alt={spots.previewImage} />
+            {
+              spots.SpotImages && spots.SpotImages.map((image) => {
+                return <img src={image.url} alt={image} />
+              })
+            }
             <p>{spots.description}</p>
             <p>${spots.price} night</p>
             {spots.avgRating &&
@@ -69,7 +75,7 @@ const SpotDetails = () => {
               <p> Leave a review?</p>
             }
             {spots.Owner && <p>Hosted by {spots.Owner.firstName} {spots.Owner.lastName}</p>}
-            { spots && spots.ownerId === sessionUser.id ?
+            { sessionUser && sessionUser.id === spots.ownerId ?
             <button>
               <OpenModalMenuItem
                 itemText="Edit Spot"
@@ -84,7 +90,7 @@ const SpotDetails = () => {
               <OpenModalMenuItem
                 itemText="Post YOur Review"
                 onItemClick={closeMenu}
-                modalComponent={<CreateReviewFrom spotId={spotId} />}
+                modalComponent={<CreateReviewFrom spotId={spotId} disabled={false} />}
               />
             </button>
           </ul>

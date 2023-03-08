@@ -3,19 +3,23 @@ import * as sessionActions from '../../store/session';
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import './LoginForm.css'
+import { useHistory } from "react-router-dom";
 
 const LoginFormModal = () => {
     const dispatch = useDispatch();
+    const history = useHistory();
     const [credential, setCredential] = useState('');
     const [password, setPasswrod] = useState('');
     const [errors, setErrors] = useState([]);
     const { closeModal } = useModal();
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
         setErrors([]);
         return dispatch(sessionActions.login({ credential, password }))
             .then(closeModal)
+            .then(history.push('/spots'))
             .catch(async (res) => {
                 const data = await res.json();
                 if (data && data.errors) setErrors(data.errors);

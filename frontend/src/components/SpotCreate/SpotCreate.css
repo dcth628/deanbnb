@@ -1,7 +1,16 @@
 .create-spot-form {
-    display: flexbox;
-    flex-flow: column wrap;
-    width: 880px;
-    height: 450px;
+    display: flex;
+    flex-flow: column ;
+    width: 450px;
+    height: 800px;
     background-color: rgb(253, 253, 253);
+}
+
+.address {
+    align-items: center;
+    justify-items: center;
+}
+
+.city {
+    flex-direction: column;
 }

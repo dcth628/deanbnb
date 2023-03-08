@@ -7,13 +7,13 @@ import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import { useModal } from "../../context/Modal";
 import EditSpotForm from "../SpotEdit";
 
+
 const CurrentSpot = () => {
     const dispatch = useDispatch();
     const spots = useSelector((state) => state?.spot);
     const sessionUser = useSelector(state => state?.session.user);
-    console.log(spots, 'this is spots user id');
-    console.log(sessionUser.id , 'this is session user id')
     const { closeModal } = useModal();
+    const userSpots = Object.values(spots).filter(spot => spot.ownerId === sessionUser.id)
 
     useEffect(() => {
         dispatch(getCurrentSpot())
@@ -47,10 +47,10 @@ const CurrentSpot = () => {
     return (
         <div className="current-spot-list">
             <ul>
-                {Object.values(spots).length > 0 ? (
+                {userSpots.length > 0 ? (
                     <div>
                         <h1>Manage Your Spots</h1>
-                        {Object.values(spots).map(({ id, name, description, price, previewImage, city, state, avgRating, ownerId }) => (
+                        {userSpots.map(({ id, name, description, price, previewImage, city, state, avgRating }) => (
                             <>
                                 <NavLink to={`/spots/${id}`}>
                                     <div className="spot-tile" key={id}>

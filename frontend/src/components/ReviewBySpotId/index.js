@@ -1,30 +1,31 @@
 import React, { useEffect, useState } from "react";
-import { NavLink, Switch, Route, useParams, useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllReviews } from "../../store/review";
 import EditReviewForm from "../ReviewEdit";
 import { useRef } from "react";
 import OpenModalMenuItem from '../Navigation/OpenModalMenuItem';
-import * as reviewActions from '../../store/review';
+// import * as reviewActions from '../../store/review';
 import  DeleteReview  from "../ConfirmDeleteReviewModal";
 
 
 const AllReviews = ({ spots }) => {
     const dispatch = useDispatch();
-    const history = useHistory();
+    // const history = useHistory();
     const { spotId } = useParams();
     let reviews = useSelector(state => Object.values(state.review));
+    reviews = reviews.filter(review => review.spotId === spots.id)
     const sessionUser = useSelector(state => state?.session.user);
     // console.log(sessionUser , 'this is the session user')
-    // console.log(reviews, 'this is the reviews object')
+    console.log(reviews, 'this is the reviews object')
 
     const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
 
-  const openMenu = () => {
-    if (showMenu) return;
-    setShowMenu(true);
-  };
+  // const openMenu = () => {
+  //   if (showMenu) return;
+  //   setShowMenu(true);
+  // };
 
   useEffect(() => {
     if (!showMenu) return;
@@ -46,16 +47,17 @@ const AllReviews = ({ spots }) => {
         dispatch(getAllReviews(spotId))
     }, [dispatch, spotId]);
 
-
     return (
         <div>
             {reviews && (reviews ?
                 <div>
                     {reviews.map(review =>
+
                         <div key={review.id}>
                             <p>{review.review}</p>
                             <p>{review.stars}</p>
-                            { review && review.userId === sessionUser.id ?
+                            <p>{review.createdAt.split("-")[1]} / {review.createdAt.split("-")[0]}</p>
+                            { sessionUser && sessionUser.id === review.userId ?
                             <div>
                             <button>
                                 <OpenModalMenuItem

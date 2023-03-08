@@ -234,7 +234,7 @@ router.get(
             include: [
                 // { model: Image, as: "ReviewImages" },
                 { model: User, as: "Owner" },
-                { model: Review,  }
+                { model: Review, attributes: [] }
             ]
         });
 
@@ -242,12 +242,22 @@ router.get(
             const previewImage = await Image.findOne({
                 where: {
                     imageId: req.params.spotId,
-                    preview: true,
+                    // preview: true,
                     imageType: "Spot"
                 }
             });
+
+
+            spot.dataValues.SpotImages = []
+            const allImages = await Image.findAll({
+                where: {imageId: req.params.spotId}
+            })
+            spot.dataValues.SpotImages = [...allImages]
+
+
             if (previewImage) {
                 spot.previewImage = previewImage.url
+                // spot.dataValues.SpotImages.push(previewImage.url)
             } else if (!previewImage && !spot.previewImage) {
                 spot.previewImage = "None"
             } else {
@@ -282,7 +292,7 @@ router.get(
         }
         res.json( spot );
     }
-)
+);
 
 // Create a spot
 router.post(
@@ -333,7 +343,7 @@ router.delete(
         }
 
         await spot.destroy();
-        return res.status(200).json({ message: 'Spot successfully deleted' })
+        return res.status(200).json(spot)
     }
 
 )
