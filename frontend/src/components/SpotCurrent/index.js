@@ -47,7 +47,7 @@ const CurrentSpot = () => {
     return (
         <div className="current-spot-list">
             <ul>
-                {userSpots.length > 0 ? (
+                {userSpots && userSpots.length > 0 ? (
                     <div>
                         <h1>Manage Your Spots</h1>
                         {userSpots.map(({ id, name, description, price, previewImage, city, state, avgRating }) => (

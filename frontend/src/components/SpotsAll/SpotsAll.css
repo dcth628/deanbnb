@@ -4,20 +4,37 @@
     width: 450px;
     height: 450px;
     border: 5px solid black;
-    margin: 20px;
+    margin: 60px;
 
 
 }
 .spot-box {
+    width: 100%;
     display:flex ;
-    flex-direction: row wrap;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 .spot-images {
     width: 450px;
-    height: auto;
+    height: 450px;
 }
 
-.heart-allspots {
-    color: red;
-    justify-content: flex-end;
+.star-allspots {
+    color: rgb(255, 0, 0);
+}
+
+.first-line {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top:10px;
+    align-items: center;
+}
+.spot-list {
+    width: 100%;
+}
+
+.spot-list-title {
+    display:flex;
+    justify-content: center;
 }

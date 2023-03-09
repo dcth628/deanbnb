@@ -17,7 +17,7 @@ const AllSpots = () => {
         <div className="spot-list">
             <NavLink exact to="/spots">Home</NavLink>
             <div>
-            <h1>Spot List</h1>
+            <h1 className="spot-list-title">Spot List</h1>
             </div>
             <ul className="spot-box" >
                 {Object.values(spots).map(({id, name, description, price, previewImage, city, state, avgRating}) => (
@@ -26,12 +26,14 @@ const AllSpots = () => {
                         <div >
                         <img className='spot-images' src={previewImage} alt={previewImage}/>
                         </div>
+                        <div class="first-line">
                         <div>
                         <p className="spot-city">{city}, {state}</p>
                         </div>
 
                         <div>
-                        <i className={avgRating ? "fa fa-heart heart-allspots" : "no-rating"}>{avgRating ? avgRating : "NEW!"}</i>
+                        <i className={avgRating ? "fa fa-star star-allspots" : "no-rating"}>{ }{ }{avgRating ? avgRating : "NEW!"}</i>
+                        </div>
                         </div>
                         <div>
                         <p className="spot-price">Price: ${price} night</p>

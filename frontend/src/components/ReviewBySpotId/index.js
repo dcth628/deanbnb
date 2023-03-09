@@ -51,13 +51,13 @@ const AllReviews = ({ spots }) => {
 
     return (
         <div>
-            {reviews && (reviews ?
+            {reviews && (reviews.length > 0 ?
                 <div>
                     {reviews.map(review =>
 
                         <div key={review.id}>
                             <p>{review.review}</p>
-                            <i className="fa fa-heart review-spotId"> {review.stars}</i>
+                            <i className="fa fa-star review-spotId">{review.stars}</i>
                             <p>{new Date(review.createdAt).toDateString().split(" ")[1]} {new Date(review.createdAt).toDateString().split(" ")[3]}</p>
                             { sessionUser && sessionUser.id === review.userId ?
                             <div>
@@ -83,7 +83,7 @@ const AllReviews = ({ spots }) => {
                     )}
                 </div>
              :
-            <h1>NEW!!</h1>
+            <h3>Be the first to leave a review!</h3>
             )}
         </div>
     )

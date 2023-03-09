@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import * as seesionActions from '../../store/session';
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { getCurrentSpot } from "../../store/spot";
 
 const DemoUserLogIn = () => {
     const dispatch = useDispatch();
@@ -13,6 +14,7 @@ const DemoUserLogIn = () => {
         e.preventDefault();
         return dispatch(seesionActions.login({credential, password}))
         .then(history.push('/spots'))
+        .then(dispatch(getCurrentSpot()))
     };
 
     return (
