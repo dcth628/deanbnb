@@ -82,8 +82,8 @@ const CreateSpotForm = () => {
         <section className="new-spot-form-holder">
             <form className="create-spot-form" onSubmit={handleSubmit}>
                 <div className="form-list">
-                    <div className="address">
-                        <div>Address</div>
+                    <div>
+                        <div className="address">Address</div>
                         <div>
                             <input
                                 type="text"

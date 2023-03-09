@@ -90,7 +90,7 @@ const SpotDetails = () => {
               <OpenModalMenuItem
                 itemText="Post YOur Review"
                 onItemClick={closeMenu}
-                modalComponent={<CreateReviewFrom spotId={spotId} disabled={false} />}
+                modalComponent={<CreateReviewFrom spotId={spotId} />}
               />
             </button>
           </ul>

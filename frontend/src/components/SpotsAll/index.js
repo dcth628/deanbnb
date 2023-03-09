@@ -8,6 +8,7 @@ import './SpotsAll.css'
 const AllSpots = () => {
     const dispatch = useDispatch();
     const spots = useSelector((state) => state.spot)
+    console.log(spots, 'this is spots object in all spots list')
     useEffect(() => {
         dispatch(getAllSpots())
     }, [dispatch]);
@@ -15,18 +16,26 @@ const AllSpots = () => {
     return (
         <div className="spot-list">
             <NavLink exact to="/spots">Home</NavLink>
+            <div>
             <h1>Spot List</h1>
-            <ul>
+            </div>
+            <ul className="spot-box" >
                 {Object.values(spots).map(({id, name, description, price, previewImage, city, state, avgRating}) => (
                         <NavLink to={`/spots/${id}`}>
                     <div className="spot-tile" key={id}>
-
+                        <div >
                         <img className='spot-images' src={previewImage} alt={previewImage}/>
-                        <p>{name}</p>
-                        <p>{description}</p>
-                        <p>{avgRating ? avgRating : "NEW!"}</p>
-                        <p>Price: ${price} night</p>
-                        <p>{city}, {state}</p>
+                        </div>
+                        <div>
+                        <p className="spot-city">{city}, {state}</p>
+                        </div>
+
+                        <div>
+                        <i className={avgRating ? "fa fa-heart heart-allspots" : "no-rating"}>{avgRating ? avgRating : "NEW!"}</i>
+                        </div>
+                        <div>
+                        <p className="spot-price">Price: ${price} night</p>
+                        </div>
                     </div>
                         </NavLink>
                 ))}

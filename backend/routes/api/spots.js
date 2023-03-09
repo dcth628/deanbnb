@@ -109,7 +109,7 @@ router.get(
                     imageType: "Spot"
                 }
             });
-            if (previewImage) {
+            if (previewImage && !spot.previewImage) {
                 spot.previewImage = previewImage.url
             } else if (!previewImage && !spot.previewImage) {
                 spot.previewImage = "None"
@@ -176,7 +176,7 @@ router.get(
                     imageType: "Spot"
                 }
             });
-            if (previewImage) {
+            if (previewImage && !spot.previewImage) {
                 spot.previewImage = previewImage.url
             } else if (!previewImage && !spot.previewImage) {
                 spot.previewImage = "None"
@@ -242,7 +242,7 @@ router.get(
             const previewImage = await Image.findOne({
                 where: {
                     imageId: req.params.spotId,
-                    // preview: true,
+                    preview: true,
                     imageType: "Spot"
                 }
             });
@@ -250,12 +250,15 @@ router.get(
 
             spot.dataValues.SpotImages = []
             const allImages = await Image.findAll({
-                where: {imageId: req.params.spotId}
+                where: {
+                    imageId: req.params.spotId,
+                    imageType: "Spot"
+                }
             })
             spot.dataValues.SpotImages = [...allImages]
 
 
-            if (previewImage) {
+            if (previewImage && !spot.previewImage) {
                 spot.previewImage = previewImage.url
                 // spot.dataValues.SpotImages.push(previewImage.url)
             } else if (!previewImage && !spot.previewImage) {

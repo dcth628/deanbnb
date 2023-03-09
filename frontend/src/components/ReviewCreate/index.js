@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import { createReview } from "../../store/review";
+import { createReview, getAllReviews } from "../../store/review";
 import { useModal } from "../../context/Modal";
 import { useDispatch } from "react-redux";
 import { getSpotDetail } from "../../store/spot";
 import './ReviewCreate.css'
 
-const CreateReviewFrom = ({ spotId , disabled}) => {
+const CreateReviewFrom = ({ spotId }) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const { closeModal } = useModal();
 
     const [review, setReview] = useState("");
-    const [stars, setStars] = useState("");
+    const [stars, setStars] = useState(0);
 
     const updateReview = (e) => setReview(e.target.value);
     const updateStars = (e) => setStars(e.target.value);
@@ -31,7 +31,8 @@ const CreateReviewFrom = ({ spotId , disabled}) => {
             closeModal();
             history.push(`/spots/${spotId}`);
         };
-       dispatch(getSpotDetail(spotId))
+        dispatch(getSpotDetail(spotId));
+       dispatch(getAllReviews(spotId));
     };
 
     const onChange = (e) => {
@@ -55,16 +56,15 @@ const CreateReviewFrom = ({ spotId , disabled}) => {
                     required
                     value={review}
                     onChange={updateReview} />
-                <input
+                {/* <input
                     type="number"
                     placeholder="stars"
-                    disabled={disabled}
                     required
                     value={stars}
-                    onChange={updateStars} />
+                    onChange={updateStars} /> */}
 
-                {/* <div className="rating-input">
-                    <div onMouseEnter={disabled === false ? () => setStars(1) : () => setStars(stars)}
+                <div className="rating-input">
+                    <div onMouseEnter={() => setStars(1)}
                         onMouseLeave={() => setStars(stars)}
                         className={
                             stars >= 1
@@ -75,10 +75,10 @@ const CreateReviewFrom = ({ spotId , disabled}) => {
                     >
                     <i className="fa fa-heart"></i>
                     </div>
-                    <div onMouseEnter={disabled === false ? () => setStars(2) : () => setStars(stars)}
+                    <div onMouseEnter={() => setStars(2)}
                         onMouseLeave={() => setStars(stars)}
                         className={
-                            stars >= 1
+                            stars >= 2
                                 ? "filled"
                                 : "empty"
                         }
@@ -86,10 +86,10 @@ const CreateReviewFrom = ({ spotId , disabled}) => {
                     >
                     <i className="fa fa-heart"></i>
                     </div>
-                    <div onMouseEnter={disabled === false ? () => setStars(3) : () => setStars(stars)}
+                    <div onMouseEnter={() => setStars(3)}
                         onMouseLeave={() => setStars(stars)}
                         className={
-                            stars >= 1
+                            stars >= 3
                                 ? "filled"
                                 : "empty"
                         }
@@ -97,10 +97,10 @@ const CreateReviewFrom = ({ spotId , disabled}) => {
                     >
                     <i className="fa fa-heart"></i>
                     </div>
-                    <div onMouseEnter={disabled === false ? () => setStars(4) : () => setStars(stars)}
+                    <div onMouseEnter={() => setStars(4)}
                         onMouseLeave={() => setStars(stars)}
                         className={
-                            stars >= 1
+                            stars >= 4
                                 ? "filled"
                                 : "empty"
                         }
@@ -108,10 +108,10 @@ const CreateReviewFrom = ({ spotId , disabled}) => {
                     >
                     <i className="fa fa-heart"></i>
                     </div>
-                    <div onMouseEnter={disabled === false ? () => setStars(5) : () => setStars(stars)}
+                    <div onMouseEnter={() => setStars(5)}
                         onMouseLeave={() => setStars(stars)}
                         className={
-                            stars >= 1
+                            stars >= 5
                                 ? "filled"
                                 : "empty"
                         }
@@ -119,7 +119,7 @@ const CreateReviewFrom = ({ spotId , disabled}) => {
                     >
                     <i className="fa fa-heart"></i>
                     </div>
-                </div> */}
+                </div>
                 <button type="submit">Create new Review</button>
                 <button type="button" onClick={handleCancelClick}>Cancel</button>
             </form>

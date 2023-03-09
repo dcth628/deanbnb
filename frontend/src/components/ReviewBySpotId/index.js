@@ -7,6 +7,7 @@ import { useRef } from "react";
 import OpenModalMenuItem from '../Navigation/OpenModalMenuItem';
 // import * as reviewActions from '../../store/review';
 import  DeleteReview  from "../ConfirmDeleteReviewModal";
+import './ReviewBySpotId.css';
 
 
 const AllReviews = ({ spots }) => {
@@ -17,15 +18,15 @@ const AllReviews = ({ spots }) => {
     reviews = reviews.filter(review => review.spotId === spots.id)
     const sessionUser = useSelector(state => state?.session.user);
     // console.log(sessionUser , 'this is the session user')
-    console.log(reviews, 'this is the reviews object')
+    // console.log(reviews, 'this is the reviews object')
 
     const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
 
-  // const openMenu = () => {
-  //   if (showMenu) return;
-  //   setShowMenu(true);
-  // };
+  const openMenu = () => {
+    if (showMenu) return;
+    setShowMenu(true);
+  };
 
   useEffect(() => {
     if (!showMenu) return;
@@ -47,6 +48,7 @@ const AllReviews = ({ spots }) => {
         dispatch(getAllReviews(spotId))
     }, [dispatch, spotId]);
 
+
     return (
         <div>
             {reviews && (reviews ?
@@ -55,8 +57,8 @@ const AllReviews = ({ spots }) => {
 
                         <div key={review.id}>
                             <p>{review.review}</p>
-                            <p>{review.stars}</p>
-                            <p>{review.createdAt.split("-")[1]} / {review.createdAt.split("-")[0]}</p>
+                            <i className="fa fa-heart review-spotId"> {review.stars}</i>
+                            <p>{new Date(review.createdAt).toDateString().split(" ")[1]} {new Date(review.createdAt).toDateString().split(" ")[3]}</p>
                             { sessionUser && sessionUser.id === review.userId ?
                             <div>
                             <button>
