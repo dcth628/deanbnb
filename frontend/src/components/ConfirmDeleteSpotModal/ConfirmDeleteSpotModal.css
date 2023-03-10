@@ -1,0 +1,41 @@
+.delete-form {
+    width: 400px;
+    height: 260px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.delete-title {
+    font-family: Inter;
+    font-style: bold;
+    font-weight: 400;
+    font-size: 30px;
+    text-align: center;
+
+}
+
+.delete-button {
+    height: 40px;
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 6px;
+    width: 80%;
+    margin: 10px auto 20px auto ;
+    background: rgb(222, 37, 97);
+
+    border-radius: 9px;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    text-align: center;
+    color: white;
+}
+
+.delete-confirm {
+    margin: 10px 10px;
+    text-align: center;
+    font-family: Inter;
+    font-weight: 400;
+
+}

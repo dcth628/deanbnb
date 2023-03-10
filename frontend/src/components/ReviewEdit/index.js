@@ -55,9 +55,10 @@ const EditReviewForm = ({reviews}) => {
 
     return (
         <section className="edit-review-form-holder">
-            <h1>Edit Review</h1>
             <form className="edit-review-form" onSubmit={handleSubmit}>
+            <h1 className="review-title">Edit your review</h1>
                 <input
+                className="review-input"
                 type='text'
                 placeholder="Please write a review"
                 required
@@ -126,9 +127,10 @@ const EditReviewForm = ({reviews}) => {
                     >
                     <i className="fa fa-heart"></i>
                     </div>
+                    Stars
                 </div>
-                <button type="submit">Update Review</button>
-                <button type="button" onClick={handleCancelClick}>Cancel</button>
+                <button className="review-button" type="submit">Update Review</button>
+                <button className="review-button" type="button" onClick={handleCancelClick}>Cancel</button>
             </form>
         </section>
     )

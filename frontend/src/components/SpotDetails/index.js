@@ -8,7 +8,6 @@ import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import * as spotActions from '../../store/spot';
 import AllReviews from "../ReviewBySpotId";
 import CreateReviewFrom from "../ReviewCreate";
-import ConfirmDeleteSpotModal from "../ComfirmDeleteSpotModal";
 import './SpotDetails.css';
 
 const SpotDetails = () => {
@@ -54,15 +53,15 @@ const SpotDetails = () => {
   return (
     <div>
       {!sessionUser && spots ? (
-        <div>
-          <h1>Spot Details</h1>
+        <div className="spot-detail">
+          <h1 className="spot-detail-title">Spot Details</h1>
           <ul key={spots.id}>
             <h2>{spots.name}</h2>
             <p>{spots.city}, {spots.state}, {spots.country}</p>
             <img className="previewImage" src={spots.previewImage} alt={spots.previewImage} />
             {
               spots.SpotImages && spots.SpotImages.map((image) => {
-                return <img src={image.url} alt={image} />
+                return <img className="spotImage" src={image.url} alt={image} />
               })
             }
             <p>{spots.description}</p>
@@ -77,12 +76,25 @@ const SpotDetails = () => {
               <p> {spots.numReviews} Reviews</p> :
               <p> Leave a review?</p>
             }
+            {spots.Owner && <p>Hosted by {spots.Owner.firstName} {spots.Owner.lastName}</p>}
           </ul>
+          <div className="spotdetail-review">
+            {spots.avgRating &&
+              spots.avgRating ?
+              <i className="fa fa-star spotdetail-rating-bottom"> {spots.avgRating} </i> :
+              <div lassName="spotdetail-rating-bottom">NEW!</div>
+            }
+            {spots.numReviews &&
+              spots.numReviews ?
+              <div className="spotdetail-review-bottom"> {spots.numReviews} Reviews</div> :
+              <div className="spotdetail-review-bottom"> Leave a review?</div>
+            }
+          </div>
         </div>
       )
         :
         (spots && (
-          <div>
+          <div className="spot-detail">
             <h1 className="spot-detail-title">Spot Details</h1>
             <ul key={spots.id}>
               <h2>{spots.name}</h2>
@@ -106,6 +118,7 @@ const SpotDetails = () => {
                 <p> Leave a review?</p>
               }
               {spots.Owner && <p>Hosted by {spots.Owner.firstName} {spots.Owner.lastName}</p>}
+
               {sessionUser && sessionUser.id === spots.ownerId ?
                 <button>
                   <OpenModalMenuItem
@@ -129,7 +142,19 @@ const SpotDetails = () => {
                 </button>
               }
             </ul>
-            <div>
+                            <div className="spotdetail-review">
+                {spots.avgRating &&
+                  spots.avgRating ?
+                  <i className="fa fa-star spotdetail-rating-bottom"> {spots.avgRating} </i> :
+                  <div lassName="spotdetail-rating-bottom">NEW!</div>
+                }
+                {spots.numReviews &&
+                  spots.numReviews ?
+                  <div className="spotdetail-review-bottom"> {spots.numReviews} Reviews</div> :
+                  <div className="spotdetail-review-bottom"> Leave a review?</div>
+                }
+              </div>
+            <div className="reivew-list">
               <AllReviews spots={spots} />
             </div>
           </div>

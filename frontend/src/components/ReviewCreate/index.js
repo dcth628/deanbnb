@@ -50,9 +50,11 @@ const CreateReviewFrom = ({ spotId }) => {
     return (
         <section className="new-review-form-holder">
             <form className="create-review-form" onSubmit={handleSubmit}>
+                <h1 className="review-title">How was your stay?</h1>
                 <input
+                className="review-input"
                     type="text"
-                    placeholder="Write a review"
+                    placeholder="Please write a review"
                     required
                     value={review}
                     onChange={updateReview} />
@@ -119,9 +121,10 @@ const CreateReviewFrom = ({ spotId }) => {
                     >
                     <i className="fa fa-heart"></i>
                     </div>
+                    Stars
                 </div>
-                <button type="submit">Create new Review</button>
-                <button type="button" onClick={handleCancelClick}>Cancel</button>
+                <button className="review-button" type="submit">Create new Review</button>
+                <button className="review-button" type="button" onClick={handleCancelClick}>Cancel</button>
             </form>
         </section>
     )

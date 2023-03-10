@@ -7,8 +7,51 @@
 
 }
 
+.create-review-form {
+    display: flex;
+    flex-direction: column;
+    width: 460px;
+    height: 300px;
+}
+
+.review-title {
+    margin: 10px auto;
+    font-family: Inter;
+    font-size: 20px;
+}
 
 .rating-input {
     display: flex;
     margin-right: 4px;
+  }
+
+  .review-input {
+    width: 80%;
+    height: 40%;
+    margin: 10px auto;
+    vertical-align:text-top;
+  text-align: left;
+  }
+
+  .rating-input {
+    font-size: 16px;
+    margin: 10px auto;
+    font-family: Inter;
+  }
+
+  .review-button {
+    height: 40px;
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 6px;
+    width: 80%;
+    margin: 10px auto 20px auto ;
+    background: rgb(222, 37, 97);
+
+    border-radius: 9px;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    text-align: center;
+    color: white;
   }

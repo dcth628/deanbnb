@@ -35,6 +35,7 @@ export const createSpotImage = (imageArray, spotId) => async dispatch => {
     })
 };
 
+
 const initialState = {};
 
 const imageReducer = (state = initialState, action) => {

@@ -9,7 +9,10 @@
 }
 
 
-.rating-input {
+
+.edit-review-form {
     display: flex;
-    /* margin-right: 10px; */
-  }
+    flex-direction: column;
+    width: 460px;
+    height: 300px;
+}

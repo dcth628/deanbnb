@@ -177,19 +177,16 @@ const CreateSpotForm = () => {
                         <input className="create-spot-input-pic"
                             type="text"
                             placeholder="Url 1 "
-                            required
                             value={url1}
                             onChange={updatedUrl1} />
                         <input className="create-spot-input-pic"
                             type="text"
                             placeholder="Url 2 "
-                            required
                             value={url2}
                             onChange={updatedUrl2} />
                         <input className="create-spot-input-pic"
                             type="text"
                             placeholder="Url 3 "
-                            required
                             value={url3}
                             onChange={updatedUrl3} />
 

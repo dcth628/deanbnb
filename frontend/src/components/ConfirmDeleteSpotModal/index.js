@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useModal } from "../../context/Modal";
 import * as spotActions from '../../store/spot';
+import './ConfirmDeleteSpotModal.css'
 
 
 const ConfirmDeleteSpotModal = ({ spotId }) => {
@@ -20,10 +21,12 @@ const ConfirmDeleteSpotModal = ({ spotId }) => {
 
   return (
     <>
-      <h1>Confirm Delete</h1>
-      <label>Are you sure you want to delete this spot?</label>
-      <button onClick={deleteSpot}>Yes (Delete Spot)</button>
-      <button onClick={closeModal}>No (keepSpot)</button>
+    <div className="delete-form">
+      <h1 className="delete-title">Confirm Delete</h1>
+      <div className="delete-confirm">Are you sure you want to remove this spot from the listing?</div>
+      <button className="delete-button" onClick={deleteSpot}>Yes (Delete Spot)</button>
+      <button className="delete-button" onClick={closeModal}>No (keepSpot)</button>
+    </div>
     </>
   )
 };

@@ -18,7 +18,7 @@ const AllReviews = ({ spots }) => {
   reviews = reviews.filter(review => review.spotId === spots.id)
   const sessionUser = useSelector(state => state?.session.user);
   // console.log(sessionUser , 'this is the session user')
-  // console.log(reviews, 'this is the reviews object')
+  console.log(reviews, 'this is the reviews object')
 
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
@@ -55,10 +55,11 @@ const AllReviews = ({ spots }) => {
         <div>
           {reviews.map(review =>
 
-            <div key={review.id}>
-              <p>{review.review}</p>
-              <i className="fa fa-star review-spotId">{review.stars}</i>
-              <p>{new Date(review.createdAt).toDateString().split(" ")[1]} {new Date(review.createdAt).toDateString().split(" ")[3]}</p>
+            <div className="review-list" key={review.id}>
+              <div className="review-firstName">{review.User.firstName}</div>
+              <div className="review-date">{new Date(review.createdAt).toDateString().split(" ")[1]} {new Date(review.createdAt).toDateString().split(" ")[3]}</div>
+              <div className="review-description">{review.review}</div>
+              <i className="fa fa-star review-star"></i>{review.stars}
               {sessionUser && sessionUser.id === review.userId ?
                 <div>
                   <button>
@@ -83,7 +84,13 @@ const AllReviews = ({ spots }) => {
           )}
         </div>
         :
-        <h3>Be the first to leave a review!</h3>
+        <>
+        <div className="no-review-star-line">
+
+        <i className="fa fa-star no-review-star"> </i> <div className="no-review-new">NEW!</div>
+        </div>
+        <div className="no-review">Be the first to leave a review!</div>
+        </>
       )}
     </div>
   )

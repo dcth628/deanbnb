@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getCurrentSpot } from "../../store/spot";
-import ConfirmDeleteSpotModal from "../ComfirmDeleteSpotModal";
+import ConfirmDeleteSpotModal from "../ConfirmDeleteSpotModal";
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import { useModal } from "../../context/Modal";
 import EditSpotForm from "../SpotEdit";
