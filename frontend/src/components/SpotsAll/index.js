@@ -15,7 +15,6 @@ const AllSpots = () => {
 
     return (
         <div className="spot-list">
-            <NavLink exact to="/spots">Home</NavLink>
             <div>
             <h1 className="spot-list-title">Spot List</h1>
             </div>
@@ -28,15 +27,16 @@ const AllSpots = () => {
                         </div>
                         <div class="first-line">
                         <div>
-                        <p className="spot-city">{city}, {state}</p>
+                        <div className="spot-city">{city}, {state}</div>
                         </div>
 
                         <div>
-                        <i className={avgRating ? "fa fa-star star-allspots" : "no-rating"}>{ }{ }{avgRating ? avgRating : "NEW!"}</i>
+                        <i className={avgRating ? "fa fa-star star-allspots" : "no-rating"}> </i>
+                        {avgRating ? avgRating : "NEW!"}
                         </div>
                         </div>
                         <div>
-                        <p className="spot-price">Price: ${price} night</p>
+                        <div className="spot-price">${price} night</div>
                         </div>
                     </div>
                         </NavLink>

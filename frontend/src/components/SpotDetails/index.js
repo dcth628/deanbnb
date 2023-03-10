@@ -17,7 +17,9 @@ const SpotDetails = () => {
   const spots = useSelector(state => state?.spot[spotId]);
   const sessionUser = useSelector(state => state?.session.user);
   // const userSpots = Object.values(spots).filter(spot => spot.ownerId === sessionUser.id);
-  console.log(spots, "this is spot object")
+  // let reviewId = spots.Reviews.filter(review => console.log(review.userId))
+  const reviews = useSelector(state => state.review);
+  const sessionUserReview =Object.values(reviews).filter(review => review.userId === sessionUser.id)
 
 
   useEffect(() => {
@@ -86,13 +88,17 @@ const SpotDetails = () => {
             :
             <></>
             }
+            { sessionUserReview.length > 0 || sessionUser.id === spots.ownerId ?
+            <></>
+            :
             <button>
               <OpenModalMenuItem
-                itemText="Post YOur Review"
+                itemText="Post Your Review"
                 onItemClick={closeMenu}
                 modalComponent={<CreateReviewFrom spotId={spotId} />}
               />
             </button>
+            }
           </ul>
           <div>
             <AllReviews spots={spots} />

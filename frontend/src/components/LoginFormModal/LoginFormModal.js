@@ -38,30 +38,32 @@ const LoginFormModal = () => {
                     )}
                 </ul>
                 <div className="username-input">
+
                     <label className="username">
                         Username or Email
+                        </label>
                         <input
-                            className='input'
+                            className='login-input'
                             type="text"
                             value={credential}
                             onChange={(e) => setCredential(e.target.value)}
                             required
                         />
-                    </label>
                 </div>
                 <div className="password-input">
                     <label className="password">
                         Passwrod
+                        </label>
                         <input
-                            className='input'
+                            className='login-input'
                             type="password"
                             value={password}
                             onChange={(e) => setPasswrod(e.target.value)}
                             required
                         />
-                    </label>
                 </div>
                 <button className="login-button" type="submit">Log In</button>
+
             </form>
         </>
 

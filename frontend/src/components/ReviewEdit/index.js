@@ -13,8 +13,9 @@ const EditReviewForm = ({reviews}) => {
     const history = useHistory();
     const {closeModal } = useModal();
     // const { reviewId } = useParams();
+    const sessionUser = useSelector(state => state?.session.user)
 
-    reviews = reviews[0];
+    reviews = reviews.filter(review => review.userId === sessionUser.id)[0]
     let spotId = useSelector(state => {
         return Object.values(state.spot).map(spot => spot.id)})
 
