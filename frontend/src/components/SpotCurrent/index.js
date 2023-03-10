@@ -92,7 +92,16 @@ const CurrentSpot = () => {
                         </ul>
                     </div>
                 ) :
-                    <h1 className="spot-list-title"> You have no spot!!</h1>
+                    <>
+                        <h1 className="spot-list-title"> You have no spot!!</h1>
+                        <button className="createspot-button-spotlist">
+                            <OpenModalMenuItem
+                                itemText="Create New Spot"
+                                onItemClick={closeMenu}
+                                modalComponent={<CreateSpotForm />}
+                            />
+                        </button>
+                    </>
                 }
             </div>
         </div>

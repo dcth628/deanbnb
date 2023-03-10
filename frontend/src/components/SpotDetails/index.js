@@ -19,7 +19,8 @@ const SpotDetails = () => {
   // const userSpots = Object.values(spots).filter(spot => spot.ownerId === sessionUser.id);
   // let reviewId = spots.Reviews.filter(review => console.log(review.userId))
   const reviews = useSelector(state => state.review);
-  const sessionUserReview = Object.values(reviews).filter(review => review.userId === sessionUser.id)
+  let sessionUserReview;
+  if (sessionUser) sessionUserReview = Object.values(reviews).filter(review => review.userId === sessionUser.id)
 
 
   useEffect(() => {

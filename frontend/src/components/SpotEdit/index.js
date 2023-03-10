@@ -21,16 +21,16 @@ const EditSpotForm = ({spot}) => {
     const [description, setDescription] = useState(spot.description);
     const [price, setPrice] = useState(spot.price);
     const [previewImage, setPreviewImage] = useState(spot.previewImage);
-    let spotImage1 = ""
-    if (spot.SpotImages.length >= 1) spotImage1 = spot.SpotImages[0].url
-    const [url1, setUrl1] = useState(spotImage1);
-    let spotImage2 = ""
-    if (spot.SpotImages.length >= 2) spotImage2 = spot.SpotImages[1].url
-    console.log(spotImage2)
-    const [url2, setUrl2] = useState(spotImage2);
-    let spotImage3 = ""
-    if (spot.SpotImages.length >=3 ) spotImage3 = spot.SpotImages[2].url
-    const [url3, setUrl3] = useState(spotImage3);
+    // let spotImage1 = ""
+    // if (spot.SpotImages.length >= 1) spotImage1 = spot.SpotImages[0].url
+    // const [url1, setUrl1] = useState(spotImage1);
+    // let spotImage2 = ""
+    // if (spot.SpotImages.length >= 2) spotImage2 = spot.SpotImages[1].url
+    // console.log(spotImage2)
+    // const [url2, setUrl2] = useState(spotImage2);
+    // let spotImage3 = ""
+    // if (spot.SpotImages.length >=3 ) spotImage3 = spot.SpotImages[2].url
+    // const [url3, setUrl3] = useState(spotImage3);
 
     const updateAddress = (e) => setAddress(e.target.value);
     const updateCity = (e) => setCity(e.target.value);
@@ -42,9 +42,9 @@ const EditSpotForm = ({spot}) => {
     const updateDescription = (e) => setDescription(e.target.value);
     const updatePrice = (e) => setPrice(e.target.value);
     const updatePreviewImage = (e) => setPreviewImage(e.target.value);
-    const updatedUrl1 = (e) => setUrl1(e.target.value);
-    const updatedUrl2 = (e) => setUrl2(e.target.value);
-    const updatedUrl3 = (e) => setUrl3(e.target.value);
+    // const updatedUrl1 = (e) => setUrl1(e.target.value);
+    // const updatedUrl2 = (e) => setUrl2(e.target.value);
+    // const updatedUrl3 = (e) => setUrl3(e.target.value);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -62,13 +62,12 @@ const EditSpotForm = ({spot}) => {
             price,
             previewImage
         };
-        const newImage = [
-            url1,
-            url2,
-            url3,
-        ];
+        // const newImage = [
+        //     url1,
+        //     url2,
+        //     url3,
+        // ];
         let updatedSpot = await dispatch(editSpot(newSpot));
-        await dispatch(createSpotImage(newImage, updatedSpot.id));
         if (updatedSpot) {
             dispatch(reviewActions.getAllReviews(updatedSpot.id))
             closeModal();
@@ -176,24 +175,6 @@ const EditSpotForm = ({spot}) => {
                             required
                             value={previewImage}
                             onChange={updatePreviewImage} />
-                    </div>
-                    <div className="createspot-box">
-                        <div className="createspot-text"> Boost your spot!</div>
-                        <input className="create-spot-input-pic"
-                            type="text"
-                            placeholder="Url 1 "
-                            value={url1}
-                            onChange={updatedUrl1} />
-                        <input className="create-spot-input-pic"
-                            type="text"
-                            placeholder="Url 2 "
-                            value={url2}
-                            onChange={updatedUrl2} />
-                        <input className="create-spot-input-pic"
-                            type="text"
-                            placeholder="Url 3 "
-                            value={url3}
-                            onChange={updatedUrl3} />
                     </div>
 
                     <button className="createspot-button" type="submit">Update Your Spot</button>
