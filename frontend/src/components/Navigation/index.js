@@ -38,23 +38,23 @@ function Navigation({ isLoaded }) {
   return (
     <ul>
       <>
-      <li>
+      <div>
         <NavLink exact to="/spots">Home</NavLink>
-      </li>
-      <li>
-        <button>
+      </div>
+      <div>
+        <div>
           <OpenModalMenuItem
             itemText="Create New Spot"
             onItemClick={closeMenu}
             modalComponent={<CreateSpotForm />}
           />
-        </button>
-      </li>
+        </div>
+      </div>
       </>
       {isLoaded && (
-        <li>
+        <div>
           <ProfileButton user={sessionUser} />
-        </li>
+        </div>
       )}
     </ul>
   );

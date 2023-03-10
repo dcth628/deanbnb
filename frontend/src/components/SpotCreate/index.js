@@ -82,156 +82,122 @@ const CreateSpotForm = () => {
         <section className="new-spot-form-holder">
             <form className="create-spot-form" onSubmit={handleSubmit}>
                 <div className="form-list">
-                    <div className="address">
-                        <div>Address</div>
-                        <div>
-                            <input
-                                type="text"
-                                placeholder="Address"
-                                required
-                                value={address}
-                                onChange={updateAddress} />
-                        </div>
+                    <h1 className="create-spot-title">Create a new Spot</h1>
+                    <div className="createspot-box">
+                        <div className="createspot-text">Address</div>
+                        <input className="create-spot-input"
+                            type="text"
+                            placeholder="Address"
+                            required
+                            value={address}
+                            onChange={updateAddress} />
                     </div>
-                    <div>
-                        City
-                    </div>
-                    <div>
-
-                        <input className="city"
+                    <div className="createspot-box">
+                        <div className="createspot-text">City</div>
+                        <input className="create-spot-input"
                             type="text"
                             placeholder="City"
                             required
                             value={city}
                             onChange={updateCity} />
                     </div>
-                    <div>
-                        State
-                    </div>
-
-                    <div>
-                        <input className="state"
+                    <div className="createspot-box">
+                        <div className="createspot-text">State</div>
+                        <input className="create-spot-input"
                             type="text"
                             placeholder="State"
                             required
                             value={state}
                             onChange={updateState} />
                     </div>
-                    <div>
-                        Country
-                    </div>
-                    <div>
-
-                        <input className="country"
+                    <div className="createspot-box">
+                        <div className="createspot-text">Country</div>
+                        <input className="create-spot-input"
                             type="text"
                             placeholder="Country"
                             required
                             value={country}
                             onChange={updateCountry} />
                     </div>
-                    <div>
-                        Latitude
-                    </div>
-                    <div>
-
-                        <input className="lat"
+                    <div className="createspot-box">
+                        <div className="createspot-text">Latitude</div>
+                        <input className="create-spot-input"
                             type="number"
                             placeholder="Latitude"
                             value={lat}
                             onChange={updateLat} />
                     </div>
-                    <div>
-                        longitude
-                    </div>
-                    <div>
-
-                        <input className="lng"
+                    <div className="createspot-box">
+                        <div className="createspot-text">longitude</div>
+                        <input className="create-spot-input"
                             type="number"
                             placeholder="longitude"
                             value={lng}
                             onChange={updateLng} />
                     </div>
-                    <div>
-                        Name
-                    </div>
-                    <div>
+                    <div className="createspot-box">
+                        <div className="createspot-text">Name</div>
 
-                        <input className="name"
+                        <input className="create-spot-input"
                             type="text"
                             placeholder="Name"
                             required
                             value={name}
                             onChange={updateName} />
                     </div>
-                    <div>
-                        Description
-                    </div>
-                    <div>
-
-                        <input className="description"
+                    <div className="createspot-box">
+                        <div className="createspot-text">Description</div>
+                        <input className="create-spot-input-description"
                             type="text"
                             placeholder="Description"
                             required
                             value={description}
                             onChange={updateDescription} />
                     </div>
-                    <div>
-                        Price
-                    </div>
-                    <div>
-
-                        <input className="price"
+                    <div className="createspot-box">
+                        <div className="createspot-text">Price</div>
+                        <input className="create-spot-input"
                             type="number"
                             placeholder="Price"
                             required
                             value={price}
                             onChange={updatePrice} />
                     </div>
-                    <div>
-                        Images
-                    </div>
-                    <div>
-
-                        <input className="previewimage"
+                    <div className="createspot-box">
+                        <div className="createspot-text">Images</div>
+                        <input className="create-spot-input"
                             type="text"
                             placeholder="PreviewImage "
                             required
                             value={previewImage}
                             onChange={updatePreviewImage} />
                     </div>
-                    <div>
-                        Boost your spot!
-                    </div>
-                    <div>
-
-                        <input
+                    <div className="createspot-box">
+                        <div className="createspot-text"> Boost your spot!</div>
+                        <input className="create-spot-input-pic"
                             type="text"
                             placeholder="Url 1 "
                             required
                             value={url1}
                             onChange={updatedUrl1} />
-                    </div>
-                    <div>
-
-                        <input
+                        <input className="create-spot-input-pic"
                             type="text"
                             placeholder="Url 2 "
                             required
                             value={url2}
                             onChange={updatedUrl2} />
-                    </div>
-                    <div>
-
-                        <input
+                        <input className="create-spot-input-pic"
                             type="text"
                             placeholder="Url 3 "
                             required
                             value={url3}
                             onChange={updatedUrl3} />
+
                     </div>
+
+                    <button className="createspot-button" type="submit">Create new Spot</button>
+                    <button className="createspot-button" type="button" onClick={handleCancelClick}>Cancel</button>
                 </div>
-                <button type="submit">Create new Spot</button>
-                <button type="button" onClick={handleCancelClick}>Cancel</button>
             </form>
         </section>
     )

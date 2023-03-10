@@ -37,31 +37,24 @@ const LoginFormModal = () => {
                         <li key={idx}>{error}</li>
                     )}
                 </ul>
-                <div className="username-input">
-
-                    <label className="username">
-                        Username or Email
-                        </label>
                         <input
                             className='login-input'
+                            placeholder="Username or Email"
                             type="text"
                             value={credential}
                             onChange={(e) => setCredential(e.target.value)}
                             required
                         />
-                </div>
-                <div className="password-input">
-                    <label className="password">
-                        Passwrod
-                        </label>
+
                         <input
                             className='login-input'
+                            placeholder="Password"
                             type="password"
                             value={password}
                             onChange={(e) => setPasswrod(e.target.value)}
                             required
                         />
-                </div>
+
                 <button className="login-button" type="submit">Log In</button>
 
             </form>

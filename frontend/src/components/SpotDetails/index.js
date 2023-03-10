@@ -9,6 +9,7 @@ import * as spotActions from '../../store/spot';
 import AllReviews from "../ReviewBySpotId";
 import CreateReviewFrom from "../ReviewCreate";
 import ConfirmDeleteSpotModal from "../ComfirmDeleteSpotModal";
+import './SpotDetails.css';
 
 const SpotDetails = () => {
   const dispatch = useDispatch();
@@ -19,7 +20,7 @@ const SpotDetails = () => {
   // const userSpots = Object.values(spots).filter(spot => spot.ownerId === sessionUser.id);
   // let reviewId = spots.Reviews.filter(review => console.log(review.userId))
   const reviews = useSelector(state => state.review);
-  const sessionUserReview =Object.values(reviews).filter(review => review.userId === sessionUser.id)
+  const sessionUserReview = Object.values(reviews).filter(review => review.userId === sessionUser.id)
 
 
   useEffect(() => {
@@ -52,13 +53,13 @@ const SpotDetails = () => {
 
   return (
     <div>
-      {spots && (
+      {!sessionUser && spots ? (
         <div>
           <h1>Spot Details</h1>
           <ul key={spots.id}>
             <h2>{spots.name}</h2>
             <p>{spots.city}, {spots.state}, {spots.country}</p>
-            <img src={spots.previewImage} alt={spots.previewImage} />
+            <img className="previewImage" src={spots.previewImage} alt={spots.previewImage} />
             {
               spots.SpotImages && spots.SpotImages.map((image) => {
                 return <img src={image.url} alt={image} />
@@ -76,35 +77,63 @@ const SpotDetails = () => {
               <p> {spots.numReviews} Reviews</p> :
               <p> Leave a review?</p>
             }
-            {spots.Owner && <p>Hosted by {spots.Owner.firstName} {spots.Owner.lastName}</p>}
-            { sessionUser && sessionUser.id === spots.ownerId ?
-            <button>
-              <OpenModalMenuItem
-                itemText="Edit Spot"
-                onItemClick={closeMenu}
-                modalComponent={<EditSpotForm spot={spots} />}
-              />
-            </button>
-            :
-            <></>
-            }
-            { sessionUserReview.length > 0 || sessionUser.id === spots.ownerId ?
-            <></>
-            :
-            <button>
-              <OpenModalMenuItem
-                itemText="Post Your Review"
-                onItemClick={closeMenu}
-                modalComponent={<CreateReviewFrom spotId={spotId} />}
-              />
-            </button>
-            }
           </ul>
-          <div>
-            <AllReviews spots={spots} />
-          </div>
         </div>
-      )}
+      )
+        :
+        (spots && (
+          <div>
+            <h1 className="spot-detail-title">Spot Details</h1>
+            <ul key={spots.id}>
+              <h2>{spots.name}</h2>
+              <p>{spots.city}, {spots.state}, {spots.country}</p>
+              <img className="previewImage" src={spots.previewImage} alt={spots.previewImage} />
+              {
+                spots.SpotImages && spots.SpotImages.map((image) => {
+                  return <img className="spotImage" src={image.url} alt={image.id} />
+                })
+              }
+              <p>{spots.description}</p>
+              <p>${spots.price} night</p>
+              {spots.avgRating &&
+                spots.avgRating ?
+                <p> Rating: {spots.avgRating} </p> :
+                <p>NEW!</p>
+              }
+              {spots.numReviews &&
+                spots.numReviews ?
+                <p> {spots.numReviews} Reviews</p> :
+                <p> Leave a review?</p>
+              }
+              {spots.Owner && <p>Hosted by {spots.Owner.firstName} {spots.Owner.lastName}</p>}
+              {sessionUser && sessionUser.id === spots.ownerId ?
+                <button>
+                  <OpenModalMenuItem
+                    itemText="Edit Spot"
+                    onItemClick={closeMenu}
+                    modalComponent={<EditSpotForm spot={spots} />}
+                  />
+                </button>
+                :
+                <></>
+              }
+              {sessionUserReview.length > 0 || sessionUser.id === spots.ownerId ?
+                <></>
+                :
+                <button>
+                  <OpenModalMenuItem
+                    itemText="Post Your Review"
+                    onItemClick={closeMenu}
+                    modalComponent={<CreateReviewFrom spotId={spotId} />}
+                  />
+                </button>
+              }
+            </ul>
+            <div>
+              <AllReviews spots={spots} />
+            </div>
+          </div>
+        ))}
     </div>
   )
 };

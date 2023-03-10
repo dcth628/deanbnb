@@ -36,78 +36,65 @@ function SignupFormModal() {
         <ul>
           {errors.map((error, idx) => <li key={idx}>{error}</li>)}
         </ul>
-        <div className="signup-input-box">
-        <label className="signup-form-text">
-          Email
-          </label>
+
           <input
           className='signup-input'
+          placeholder="Email"
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-        </div>
-        <div className="signup-input-box">
-        <label className="signup-form-text">
-          Username
-          </label>
+
+
           <input
           className='signup-input'
+          placeholder="Username"
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
           />
-        </div>
-        <div className="signup-input-box">
-        <label className="signup-form-text">
-          First Name
-          </label>
+
+
           <input
           className='signup-input'
+          placeholder="First Name"
             type="text"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
             required
             />
-        </div>
-        <div className="signup-input-box">
-        <label className="signup-form-text">
-          Last Name
-          </label>
+
+
           <input
           className='signup-input'
+          placeholder="Last Name"
             type="text"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
             required
           />
-        </div>
-        <div className="signup-input-box">
-        <label className="signup-form-text">
-          Password
-          </label>
+
+
           <input
           className='signup-input'
+          placeholder="Password"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-        </div>
-        <div className="signup-input-box">
-        <label className="signup-form-text">
-          Confirm Password
-          </label>
+
           <input
           className='signup-input'
+          placeholder="Confirm Password"
             type="password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
           />
-        </div>
+
         <button className="signup-button" type="submit">Sign Up</button>
       </form>
     </div>

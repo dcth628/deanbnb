@@ -6,6 +6,8 @@ import ConfirmDeleteSpotModal from "../ComfirmDeleteSpotModal";
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import { useModal } from "../../context/Modal";
 import EditSpotForm from "../SpotEdit";
+import CreateSpotForm from "../SpotCreate";
+import './SpotCurrent.css'
 
 
 const CurrentSpot = () => {
@@ -46,38 +48,53 @@ const CurrentSpot = () => {
 
     return (
         <div className="current-spot-list">
-            <ul>
+            <div>
                 {userSpots && userSpots.length > 0 ? (
                     <div>
-                        <h1>Manage Your Spots</h1>
-                        {userSpots.map(({ id, name, description, price, previewImage, city, state, avgRating }) => (
-                            <>
-                                <NavLink to={`/spots/${id}`}>
-                                    <div className="spot-tile" key={id}>
-
-                                        <img className='spot-images' src={previewImage} alt={previewImage} />
-                                        <p>{name}</p>
-                                        <p>{description}</p>
-                                        <p>{avgRating ? avgRating : "NEW!"}</p>
-                                        <p>Price: ${price} night</p>
-                                        <p>{city}, {state}</p>
-                                    </div>
-                                </NavLink>
-                                <button>
-                                    <OpenModalMenuItem
-                                        itemText="Delete Spot"
-                                        onItemClick={closeMenu}
-                                        modalComponent={<ConfirmDeleteSpotModal spotId={id} />}
-                                    />
-                                </button>
-                            </>
-                        )
-                        )}
+                        <h1 className="spot-list-title">Manage Your Spots</h1>
+                        <button className="createspot-button-spotlist">
+                            <OpenModalMenuItem
+                                itemText="Create New Spot"
+                                onItemClick={closeMenu}
+                                modalComponent={<CreateSpotForm />}
+                            />
+                        </button>
+                        <ul className="spot-box">
+                            {userSpots.map(({ id, name, description, price, previewImage, city, state, avgRating }) => (
+                                <div>
+                                    <NavLink to={`/spots/${id}`}>
+                                        <div className="spot-tile" key={id}>
+                                            <div>
+                                                <img className='spot-images' src={previewImage} alt={previewImage} />
+                                            </div>
+                                            <div className="first-line">
+                                                <div className="spot-city">{city}, {state}</div>
+                                                <div>
+                                                    <i className={avgRating ? "fa fa-star star-allspots" : "no-rating"}> </i>
+                                                    {avgRating ? avgRating : "NEW!"}
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div className="spot-price">${price} night</div>
+                                            </div>
+                                        </div>
+                                    </NavLink>
+                                    <button className="delete-spot-button">
+                                        <OpenModalMenuItem
+                                            itemText="Delete Spot"
+                                            onItemClick={closeMenu}
+                                            modalComponent={<ConfirmDeleteSpotModal spotId={id} />}
+                                        />
+                                    </button>
+                                </div>
+                            )
+                            )}
+                        </ul>
                     </div>
                 ) :
-                <h1> You have no spot!!</h1>
+                    <h1 className="spot-list-title"> You have no spot!!</h1>
                 }
-            </ul>
+            </div>
         </div>
     )
 };

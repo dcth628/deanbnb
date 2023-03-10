@@ -14,7 +14,7 @@
     width: 600px;
     height: auto;
 }
-
+/*
 .signup-form-text {
     width: auto;
     height: 20px;
@@ -40,16 +40,20 @@
     border-radius: 6px;
     width: 80%;
     margin: 0 auto 10px auto;
-}
+} */
 
 .signup-input {
 
-    margin: 0 10px;
-    width: auto;
-    height: 25px;
-    border: none;
+    justify-content: center;
+    align-items: center;
 
-    background: rgb(255, 255, 255);
+    font-size: 15px;
+    height: 40px;
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 6px;
+    width: 80%;
+    margin: 10px auto;
+    padding-left: 10px;
 }
 
 .signup-button {
@@ -57,7 +61,7 @@
     height: 40px;
     border: 1px solid rgb(0, 0, 0);
     border-radius: 6px;
-    width: 80%;
+    width: 494px;
     margin: 0 auto ;
     background: rgb(222, 37, 97);
 
@@ -69,4 +73,5 @@
     text-align: center;
     color: white;
     margin-bottom: 40px;
+    margin-top: 20px;
 }

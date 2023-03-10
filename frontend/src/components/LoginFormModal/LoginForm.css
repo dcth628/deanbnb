@@ -4,6 +4,7 @@
     font-weight: 400;
     font-size: 20px;
     text-align: center;
+    margin:40px 0 0 0 ;
 }
 .login-form {
     display: flex;
@@ -13,7 +14,7 @@
 
 }
 
-.username-input {
+/* .username-input {
     display: flex;
     flex-direction: column;
     height: 70px;
@@ -38,9 +39,9 @@
     padding-left: 10px;
     padding-top: 6px;
     margin-bottom: 4px;
-}
+} */
 
-.password-input {
+/* .password-input {
     display: flex;
     flex-direction: column;
     height: 70px;
@@ -48,8 +49,8 @@
     border-radius: 6px;
     width: 80%;
     margin: 0 auto 10px auto;
-}
-.password {
+} */
+/* .password {
     width: auto;
     height: 20px;
 
@@ -64,24 +65,29 @@
     padding-left: 10px;
     padding-top: 6px;
     margin-bottom: 4px;
-}
+} */
+
 
 .login-input {
+    justify-content: center;
+    align-items: center;
 
-    margin: 0 10px;
-    width: auto;
-    height: 25px;
-    border: none;
-
-    background: rgb(255, 255, 255);
+    font-size: 15px;
+    height: 40px;
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 6px;
+    width: 80%;
+    margin: 10px auto;
+    padding-left: 10px;
 }
+
 
 .login-button {
 
     height: 40px;
     border: 1px solid rgb(0, 0, 0);
     border-radius: 6px;
-    width: 80%;
+    width: 494px;
     margin: 0 auto ;
     background: rgb(222, 37, 97);
 
@@ -92,4 +98,5 @@
     font-size: 14px;
     text-align: center;
     color: white;
+    margin-top: 20px;
 }

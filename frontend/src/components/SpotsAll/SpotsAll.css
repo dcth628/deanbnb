@@ -8,8 +8,6 @@
     border: 5px solid rgb(255, 255, 255);
     border-radius: 5px ;
     margin: 10px;
-    text-decoration: none;
-
 }
 .spot-box {
     width: 100%;
@@ -52,7 +50,7 @@
 
 .spot-list-title {
     display:flex;
-    justify-content: center;
+    margin-left: 3%;
 }
 
 a {

@@ -1,0 +1,14 @@
+.previewImage {
+    width: 500px;
+    height: 500px
+}
+
+.spotImage {
+    width:300px;
+    height: 300px;
+}
+
+.spot-detail-title {
+    display:flex;
+    margin-left: 3%;
+}
