@@ -1,33 +1,31 @@
 .login {
     font-family: Inter;
-    font-style: normal;
+    font-style: bold;
     font-weight: 400;
     font-size: 20px;
-    line-height: 17px;
     text-align: center;
-    margin-top: 50px;
+    margin:40px 0 0 0 ;
 }
-.signin-form {
-    display: flexbox;
-    flex-flow: column wrap;
-    width: 880px;
-    height: 450px;
-    background-color: rgb(253, 253, 253);
+.login-form {
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+    height: 350px;
+
 }
 
-.username-input {
+/* .username-input {
     display: flex;
-    flex-flow: column wrap;
-    width: 568px;
+    flex-direction: column;
     height: 70px;
-    background: rgb(255, 255, 255);
     border: 1px solid rgb(0, 0, 0);
     border-radius: 6px;
-    width: 60%;
-    margin:auto;
+    width: 80%;
+    margin: 0 auto 10px auto;
+
 }
 .username {
-    width: 500px;
+    width: auto;
     height: 20px;
 
     font-family: Inter;
@@ -38,24 +36,22 @@
     text-align: left;
 
     color: rgb(157, 153, 153);
-    margin: 8px 0 0 8px
-}
+    padding-left: 10px;
+    padding-top: 6px;
+    margin-bottom: 4px;
+} */
 
-.password-input {
+/* .password-input {
     display: flex;
-    flex-flow: column wrap;
-    width: 568px;
+    flex-direction: column;
     height: 70px;
-
-    background: rgb(255, 255, 255);
-
     border: 1px solid rgb(0, 0, 0);
     border-radius: 6px;
-    width: 60%;
-    margin: auto;
-}
-.password {
-    width: 500px;
+    width: 80%;
+    margin: 0 auto 10px auto;
+} */
+/* .password {
+    width: auto;
     height: 20px;
 
     font-family: Inter;
@@ -66,23 +62,33 @@
     text-align: left;
 
     color: rgb(157, 153, 153);
-    margin: 8px 0 0 8px
-}
+    padding-left: 10px;
+    padding-top: 6px;
+    margin-bottom: 4px;
+} */
 
-.input {
-    width: 500px;
-    height: 25px;
-    border: none;
 
-    background: rgb(255, 255, 255);
-    margin: 5px;
+.login-input {
+    justify-content: center;
     align-items: center;
 
+    font-size: 15px;
+    height: 40px;
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 6px;
+    width: 80%;
+    margin: 10px auto;
+    padding-left: 10px;
 }
 
+
 .login-button {
-    width: 568px;
+
     height: 40px;
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 6px;
+    width: 494px;
+    margin: 0 auto ;
     background: rgb(222, 37, 97);
 
     border-radius: 9px;
@@ -90,12 +96,7 @@
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
-    line-height: 17px;
     text-align: center;
-
-    color: rgb(255, 255, 255);
-    justify-content: center;
-    width: 60%;
-    margin: auto;
-
+    color: white;
+    margin-top: 20px;
 }

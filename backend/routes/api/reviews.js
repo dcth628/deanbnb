@@ -12,7 +12,7 @@ const validateEditreview = [
     check('stars')
         .exists({ checkFalsy: true})
         .isInt({ min:0, max:5})
-        .withMessage('Stars must be an integer from 1 to 5'),
+        .withMessage('Stars must be from 1 to 5'),
     handleValidationErrors
 ]
 
@@ -99,7 +99,15 @@ router.put(
     validateEditreview,
     async (req, res) => {
         const { review, stars} = req.body;
-        const reviews= await Review.findByPk(req.params.reviewId);
+        const reviews= await Review.findByPk(req.params.reviewId
+            ,{
+             include: [{
+                model: User,
+                attributes: { exclude: ['username','email','hashedPassword','createdAt','updatedAt']}
+
+            }]
+        }
+        );
         if (!reviews) {
             res.status(404).json({
                 message: "Review couldn't be found",
@@ -135,10 +143,7 @@ router.delete(
             })
         }
         await review.destroy();
-        return res.status(200).json({
-            message : 'Successfully deleted',
-            statusCode: 200
-        })
+        return res.status(200).json(review)
     }
 )
 

@@ -6,6 +6,7 @@ import './Navigation.css';
 import CreateSpotForm from '../SpotCreate';
 // import Fab from '../Fab';import
 import OpenModalMenuItem from './OpenModalMenuItem';
+import airbnblogog from './airbnblogo.png'
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector(state => state.session.user);
@@ -36,28 +37,32 @@ function Navigation({ isLoaded }) {
   const closeMenu = () => setShowMenu(false);
 
   return (
-    <ul>
+    <div className='header'>
       <>
-      <li>
-        <NavLink exact to="/">Home</NavLink>
-      </li>
-        <li>
-          <NavLink to='/api/spots/'>All Spots</NavLink>
-        </li>
-        <button>
+
+      <div className='header-home'>
+        <a href="/"><img className='home-logo' src={airbnblogog}></img> </a>
+      </div>
+      <div className='header-create-spot'>
+        { sessionUser ?
+        <div>
           <OpenModalMenuItem
             itemText="Create New Spot"
             onItemClick={closeMenu}
             modalComponent={<CreateSpotForm />}
           />
-        </button>
+        </div>
+        :
+        <></>
+        }
+      </div>
       </>
       {isLoaded && (
-        <li>
+        <div className='header-profile-button'>
           <ProfileButton user={sessionUser} />
-        </li>
+        </div>
       )}
-    </ul>
+    </div>
   );
 }
 

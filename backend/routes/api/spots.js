@@ -24,9 +24,8 @@ const validateCreatereview = [
         .exists({ checkFalsy: true })
         .withMessage('Review text is required'),
     check('stars')
-        .exists({ checkFalsy: true })
         .isInt({ min: 0, max: 5 })
-        .withMessage('Stars must be an integer from 1 to 5'),
+        .withMessage('Stars must be from 1 to 5'),
     handleValidationErrors
 ]
 
@@ -109,7 +108,7 @@ router.get(
                     imageType: "Spot"
                 }
             });
-            if (previewImage) {
+            if (previewImage && !spot.previewImage) {
                 spot.previewImage = previewImage.url
             } else if (!previewImage && !spot.previewImage) {
                 spot.previewImage = "None"
@@ -176,7 +175,7 @@ router.get(
                     imageType: "Spot"
                 }
             });
-            if (previewImage) {
+            if (previewImage && !spot.previewImage) {
                 spot.previewImage = previewImage.url
             } else if (!previewImage && !spot.previewImage) {
                 spot.previewImage = "None"
@@ -234,7 +233,7 @@ router.get(
             include: [
                 // { model: Image, as: "ReviewImages" },
                 { model: User, as: "Owner" },
-                { model: Review,  }
+                { model: Review }
             ]
         });
 
@@ -246,8 +245,21 @@ router.get(
                     imageType: "Spot"
                 }
             });
-            if (previewImage) {
+
+
+            spot.dataValues.SpotImages = []
+            const allImages = await Image.findAll({
+                where: {
+                    imageId: req.params.spotId,
+                    imageType: "Spot"
+                }
+            })
+            spot.dataValues.SpotImages = [...allImages]
+
+
+            if (previewImage && !spot.previewImage) {
                 spot.previewImage = previewImage.url
+                // spot.dataValues.SpotImages.push(previewImage.url)
             } else if (!previewImage && !spot.previewImage) {
                 spot.previewImage = "None"
             } else {
@@ -282,7 +294,7 @@ router.get(
         }
         res.json( spot );
     }
-)
+);
 
 // Create a spot
 router.post(
@@ -333,7 +345,7 @@ router.delete(
         }
 
         await spot.destroy();
-        return res.status(200).json({ message: 'Spot successfully deleted' })
+        return res.status(200).json(spot)
     }
 
 )

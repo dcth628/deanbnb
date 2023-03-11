@@ -43,7 +43,6 @@ export const getAllSpots = () => async dispatch => {
 
 export const getCurrentSpot = () => async dispatch => {
     const response = await csrfFetch(`/api/spots/current`);
-
     if (response.ok) {
         const spot = await response.json();
         dispatch(load(spot));
@@ -62,7 +61,7 @@ export const getSpotDetail = (spotId) => async dispatch => {
 }
 
 export const editSpot = spot => async dispatch => {
-    const { address, city, state, country, lat, lng, name, description, price, previewImage } = spot;
+    const { address, city, state, country, lat, lng, name, description, price, previewImage} = spot;
     const response = await csrfFetch(`/api/spots/${spot.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
@@ -76,7 +75,7 @@ export const editSpot = spot => async dispatch => {
             name,
             description,
             price,
-            previewImage
+            previewImage,
         })
     });
 
@@ -128,7 +127,6 @@ const spotReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_SPOT:
             const allSpots = {};
-            // console.log(action.list.Spots.length, "122123121321213121231211321")
                 action.list.Spots.forEach(spot => {
                     allSpots[spot.id] = spot
                 });
@@ -140,20 +138,19 @@ const spotReducer = (state = initialState, action) => {
             return updateState
         case REMOVE_SPOT:
             const newState = { ...state };
-            delete newState[action.spotId];
+            delete newState[action.spotId.id];
             return newState;
         case CREATE_SPOT:
+
             if (!state[action.spot.id]) {
-                const newState = {
+                const createdState = {
                     ...state,
                     [action.spot.id]: action.spot
                 };
-                // console.log(action.spot, "122123121321213121231211321")
-                return newState
+                return createdState
             }
             return newState
         case GETONE_SPOT:
-            // console.log(action.spot, '11222221313132132')
             return { [action.spot.id]: action.spot }
         default:
             return state;

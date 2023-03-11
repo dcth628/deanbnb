@@ -1,0 +1,55 @@
+.review-firstName {
+    margin: 5px 0;
+    font-size: 18px;
+    font-family:'Times New Roman', Times, serif;
+}
+
+.review-date {
+    margin:5px 0;
+    font-size: 14px;
+    color: gray;
+}
+.review-description {
+    margin: 5px 0;
+    font-size: 14px;
+}
+.no-review {
+    font-size: 12px;
+    margin-bottom: 20px;
+}
+
+.no-review-star {
+    margin-right: 5px;
+    font-size: 16px;
+}
+.no-review-new {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+.no-review-star-line {
+    display: flex;
+    margin-top: 20px;
+}
+
+.review-list {
+    border: 1px solid lightpink;
+    border-radius: 10px;
+    width: 20%;
+    padding: 15px;
+}
+
+.review-star {
+    margin-right: 5px;
+    margin-bottom: 10px;
+}
+
+.review-action-button {
+    background-color: rgb(239, 104, 104);
+    border: 1px lightblue solid;
+    color: white;
+    margin-right: 10px;
+    width: 100x;
+    height: 30px;
+    border-radius: 5px;
+
+}
