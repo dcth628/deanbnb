@@ -1,0 +1,18 @@
+.rating-input .filled {
+    color: rgb(250, 4, 4);
+    margin-right: 5px;
+}
+
+.rating-input .empty {
+    color: rgb(246, 246, 184);
+    margin-right: 5px;
+}
+
+
+
+.edit-review-form {
+    display: flex;
+    flex-direction: column;
+    width: 460px;
+    height: 300px;
+}
