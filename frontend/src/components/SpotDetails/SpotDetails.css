@@ -5,14 +5,15 @@
 }
 
 .spotImage {
-    width:300px;
+    width: 300px;
     height: 300px;
     margin: 10px;
 }
 
 .spot-detail-title {
-    display:flex;
-    margin-left: 2%;
+    display: flex;
+    margin-left: 1.5%;
+    margin: 0 auto;
 }
 
 .spot-detail {
@@ -20,14 +21,23 @@
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
+    width:80%;
+    margin: 0 auto;
 }
 
 .spotdetail-review {
     display: flex;
-    margin-left:1.5%;
+    margin-left: 0;
     font-size: 18px;
 }
 
+.spot-detail-tile {
+    width: auto;
+    height: auto;
+    margin:0 0 20px 0;
+    padding: 0;
+
+}
 
 .spotdetail-review-bottom {
     margin-left: 20px;
@@ -35,4 +45,69 @@
 
 .review-list {
     margin-top: 20px;
+}
+
+.spotdetail-right-side-box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 20px 30px 0 30px;
+}
+
+.spot-price {
+    font-family: Inter;
+    font-size: 18px;
+    font-weight: bold;
+    flex-grow: 1;
+}
+
+.spot-rating.spot-review {
+    font-family: inter;
+    font-size: 14px;
+
+}
+.spot-rating {
+    margin-right: 10px;
+}
+
+.spot-rightbox {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border: 1px solid black;
+    border-radius: 10px;
+    width: 360px;
+    height: 140px;
+    margin-left: 40%;
+}
+
+.spot-info-box {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+}
+
+.spot-reserve {
+    background-color: rgb(230, 17, 17);
+    color: white;
+    width: 80%;
+    margin: 10px auto;
+    height: 40px;
+    align-items: flex-end;
+    border-radius: 5px;
+}
+
+.edit-spot-button {
+    background-color: lightcoral;
+    color: white;
+    margin-right: 10px;
+    width: auto;
+    height: 30px;
+    border-radius: 5px;
+}
+
+.spot-host {
+    font-family: inter;
+    font-size: 20px;
+    font-weight: bold;
 }

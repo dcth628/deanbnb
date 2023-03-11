@@ -1,5 +1,7 @@
 .spot-list {
     text-decoration: none;
+    width: 80%;
+    margin: 0 auto;
 }
 
 .spot-tile {
@@ -50,7 +52,7 @@
 
 .spot-list-title {
     display:flex;
-    margin-left: 3%;
+    margin-left: 1.5%;
 }
 
 a {

@@ -23,7 +23,7 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
-          <Route exact path="/spots">
+          <Route exact path="/">
             <AllSpots />
           </Route>
           <Route exact path='/spots/current'>

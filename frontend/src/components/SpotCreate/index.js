@@ -75,7 +75,7 @@ const CreateSpotForm = () => {
     const handleCancelClick = (e) => {
         e.preventDefault();
         closeModal();
-        history.push('/spots')
+        history.push('/')
     };
 
     return (
@@ -124,6 +124,8 @@ const CreateSpotForm = () => {
                         <input className="create-spot-input"
                             type="number"
                             placeholder="Latitude"
+                            step={0.01}
+                            min={0}
                             value={lat}
                             onChange={updateLat} />
                     </div>
@@ -132,6 +134,8 @@ const CreateSpotForm = () => {
                         <input className="create-spot-input"
                             type="number"
                             placeholder="longitude"
+                            step={0.01}
+                            min={0}
                             value={lng}
                             onChange={updateLng} />
                     </div>
@@ -159,6 +163,8 @@ const CreateSpotForm = () => {
                         <input className="create-spot-input"
                             type="number"
                             placeholder="Price"
+                            step={0.01}
+                            min={0}
                             required
                             value={price}
                             onChange={updatePrice} />
@@ -166,7 +172,7 @@ const CreateSpotForm = () => {
                     <div className="createspot-box">
                         <div className="createspot-text">Images</div>
                         <input className="create-spot-input"
-                            type="text"
+                            type="url"
                             placeholder="PreviewImage "
                             required
                             value={previewImage}
@@ -175,17 +181,17 @@ const CreateSpotForm = () => {
                     <div className="createspot-box">
                         <div className="createspot-text"> Boost your spot!</div>
                         <input className="create-spot-input-pic"
-                            type="text"
+                            type="url"
                             placeholder="Url 1 "
                             value={url1}
                             onChange={updatedUrl1} />
                         <input className="create-spot-input-pic"
-                            type="text"
+                            type="url"
                             placeholder="Url 2 "
                             value={url2}
                             onChange={updatedUrl2} />
                         <input className="create-spot-input-pic"
-                            type="text"
+                            type="url"
                             placeholder="Url 3 "
                             value={url3}
                             onChange={updatedUrl3} />

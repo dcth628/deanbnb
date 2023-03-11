@@ -29,6 +29,16 @@
     padding-left: 10px;
 }
 
+.create-spot-input-pic {
+    font-size: 14px;
+    height: 22px;
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 6px;
+    width: 100%;
+    margin: 10x auto;
+    padding-left: 10px;
+}
+
 .create-spot-input-description {
     font-size: 14px;
     height: 60px;
@@ -69,6 +79,6 @@
 }
 
 .createspot-box {
-    width: 100%;
+    width: 580px;
     margin: 0 auto;
 }

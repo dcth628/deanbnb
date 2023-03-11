@@ -14,14 +14,12 @@
     font-size: 14px;
 }
 .no-review {
-    margin-left: 3%;
     font-size: 12px;
     margin-bottom: 20px;
 }
 
 .no-review-star {
     margin-right: 5px;
-    margin-left: 3%;
     font-size: 16px;
 }
 .no-review-new {
@@ -34,10 +32,24 @@
 }
 
 .review-list {
-    margin-left:1.5%;
+    border: 1px solid lightpink;
+    border-radius: 10px;
+    width: 20%;
+    padding: 15px;
 }
 
 .review-star {
     margin-right: 5px;
     margin-bottom: 10px;
+}
+
+.review-action-button {
+    background-color: rgb(239, 104, 104);
+    border: 1px lightblue solid;
+    color: white;
+    margin-right: 10px;
+    width: 100x;
+    height: 30px;
+    border-radius: 5px;
+
 }

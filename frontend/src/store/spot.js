@@ -61,7 +61,7 @@ export const getSpotDetail = (spotId) => async dispatch => {
 }
 
 export const editSpot = spot => async dispatch => {
-    const { address, city, state, country, lat, lng, name, description, price, previewImage } = spot;
+    const { address, city, state, country, lat, lng, name, description, price, previewImage} = spot;
     const response = await csrfFetch(`/api/spots/${spot.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
@@ -75,7 +75,7 @@ export const editSpot = spot => async dispatch => {
             name,
             description,
             price,
-            previewImage
+            previewImage,
         })
     });
 

@@ -19,7 +19,7 @@ const LoginFormModal = () => {
         setErrors([]);
         return dispatch(sessionActions.login({ credential, password }))
             .then(closeModal)
-            .then(history.push('/spots'))
+            .then(history.push('/'))
             .catch(async (res) => {
                 const data = await res.json();
                 if (data && data.errors) setErrors(data.errors);

@@ -1,3 +1,39 @@
 .hidden {
     visibility: hidden;
 }
+
+
+.header-home {
+    grid-area: home;
+    flex-grow: 1;
+}
+.home-logo {
+    width: 50px;
+    height: 50px;
+    text-align: center;
+}
+
+.header-create-spot {
+    grid-area: manage;
+    margin-right: 20px;
+    font-family: Inter;
+}
+
+.header-profile-button {
+
+    justify-content: flex-end;
+    grid-area: profile;
+}
+
+.header {
+    width:80%;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: row;
+
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas:
+    "home . manage profile";
+    height: 60px;
+}

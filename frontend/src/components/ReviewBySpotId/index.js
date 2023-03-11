@@ -56,20 +56,20 @@ const AllReviews = ({ spots }) => {
           {reviews.map(review =>
 
             <div className="review-list" key={review.id}>
-              <div className="review-firstName">{review.User.firstName}</div>
+              <div className="review-firstName">{review.User && review.User.firstName}</div>
               <div className="review-date">{new Date(review.createdAt).toDateString().split(" ")[1]} {new Date(review.createdAt).toDateString().split(" ")[3]}</div>
               <div className="review-description">{review.review}</div>
               <i className="fa fa-star review-star"></i>{review.stars}
               {sessionUser && sessionUser.id === review.userId ?
                 <div>
-                  <button>
+                  <button className="review-action-button">
                     <OpenModalMenuItem
                       itemText="Edit Review"
                       onItemClick={closeMenu}
                       modalComponent={<EditReviewForm reviews={reviews} />}
                     />
                   </button>
-                  <button>
+                  <button className="review-action-button">
                     <OpenModalMenuItem
                       itemText="Delete Review"
                       onItemClick={closeMenu}

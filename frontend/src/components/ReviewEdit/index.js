@@ -34,6 +34,7 @@ const EditReviewForm = ({reviews}) => {
             review,
             stars
         };
+        console.log(newReview, 'this is the new review')
         let updatedReview = await dispatch(editReview(newReview));
         if (updatedReview) {
             closeModal();
@@ -71,7 +72,7 @@ const EditReviewForm = ({reviews}) => {
                 value={stars}
                 onChange={updateStars} /> */}
 
-                <div className="rating-input">
+                <div  className="rating-input">
                     <div onMouseEnter={() => setStars(1)}
                         onMouseLeave={() => setStars(stars)}
                         className={

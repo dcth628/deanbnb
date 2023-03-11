@@ -25,7 +25,7 @@ const AllSpots = () => {
                             <div >
                                 <img className='spot-images' src={previewImage} alt={previewImage} />
                             </div>
-                            <div class="first-line">
+                            <div className="first-line">
                                 <div>
                                     <div className="spot-city">{city}, {state}</div>
                                 </div>
