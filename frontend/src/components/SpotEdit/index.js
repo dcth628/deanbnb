@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { editSpot, getSpotDetail } from '../../store/spot';
-import { useHistory } from 'react-router-dom';
 import { useModal } from '../../context/Modal';
 import * as reviewActions from '../../store/review';
-import { createSpotImage } from "../../store/image";
 import './SpotEdit.css'
 
 const EditSpotForm = ({spot}) => {
     const dispatch = useDispatch();
-    const history = useHistory();
     const { closeModal } = useModal();
     const [address, setAddress] = useState(spot.address);
     const [city, setCity] = useState(spot.city);
@@ -61,11 +58,11 @@ const EditSpotForm = ({spot}) => {
             price,
             previewImage,
         };
-        const newImage = [
-            url1,
-            url2,
-            url3,
-        ];
+        // const newImage = [
+        //     url1,
+        //     url2,
+        //     url3,
+        // ];
 
         let updatedSpot = await dispatch(editSpot( newSpot, ));
         if (updatedSpot) {

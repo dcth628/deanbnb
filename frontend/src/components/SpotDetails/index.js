@@ -1,18 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
 // import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect, useParams, useHistory } from "react-router-dom";
+import {  useParams } from "react-router-dom";
 import { getSpotDetail } from "../../store/spot";
 import EditSpotForm from "../SpotEdit";
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
-import * as spotActions from '../../store/spot';
 import AllReviews from "../ReviewBySpotId";
 import CreateReviewFrom from "../ReviewCreate";
 import './SpotDetails.css';
 
 const SpotDetails = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
   const { spotId } = useParams();
   const spots = useSelector(state => state?.spot[spotId]);
   const sessionUser = useSelector(state => state?.session.user);
@@ -30,10 +28,10 @@ const SpotDetails = () => {
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
 
-  const openMenu = () => {
-    if (showMenu) return;
-    setShowMenu(true);
-  };
+  // const openMenu = () => {
+  //   if (showMenu) return;
+  //   setShowMenu(true);
+  // };
 
   useEffect(() => {
     if (!showMenu) return;
@@ -62,7 +60,7 @@ const SpotDetails = () => {
             <img className="previewImage" src={spots.previewImage} alt={spots.previewImage} />
             {
               spots.SpotImages && spots.SpotImages.map((image) => {
-                return <img className="spotImage" src={image.url} alt={image} />
+                return <img className="spotImage" src={image.url} alt={image} key={image.id} />
               })
             }
 

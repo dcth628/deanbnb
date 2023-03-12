@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { createReview, getAllReviews } from "../../store/review";
 import { useModal } from "../../context/Modal";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getSpotDetail } from "../../store/spot";
 import './ReviewCreate.css'
 
@@ -10,7 +10,7 @@ const CreateReviewFrom = ({ spotId }) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const { closeModal } = useModal();
-    const sessionUser = useSelector(state => state?.session.user)
+    // const sessionUser = useSelector(state => state?.session.user)
 
     const [review, setReview] = useState("");
     const [stars, setStars] = useState("");
@@ -18,7 +18,7 @@ const CreateReviewFrom = ({ spotId }) => {
 
 
     const updateReview = (e) => setReview(e.target.value);
-    const updateStars = (e) => setStars(e.target.value);
+    // const updateStars = (e) => setStars(e.target.value);
 
     const handleSubmit = async (e) => {
         e.preventDefault();

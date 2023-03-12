@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
 import { useModal } from "../../context/Modal";
 import * as spotActions from '../../store/spot';
 import './ConfirmDeleteSpotModal.css'
@@ -9,14 +8,13 @@ import './ConfirmDeleteSpotModal.css'
 const ConfirmDeleteSpotModal = ({ spotId }) => {
   const dispatch = useDispatch();
   const { closeModal } = useModal();
-  const history = useHistory();
+
 
   const deleteSpot = async (e) => {
     e.preventDefault();
     await dispatch(spotActions.removeSpot(spotId));
     closeModal();
     await dispatch(spotActions.getCurrentSpot());
-    // history.replace('/spots/current');
   };
 
   return (

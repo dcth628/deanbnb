@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { NavLink } from 'react-router-dom';
+// import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
@@ -15,10 +15,10 @@ function Navigation({ isLoaded }) {
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
 
-  const openMenu = () => {
-    if (showMenu) return;
-    setShowMenu(true);
-  };
+  // const openMenu = () => {
+  //   if (showMenu) return;
+  //   setShowMenu(true);
+  // };
 
   useEffect(() => {
     if (!showMenu) return;
@@ -41,7 +41,7 @@ function Navigation({ isLoaded }) {
       <>
 
       <div className='header-home'>
-        <a href="/"><img className='home-logo' src={airbnblogog}></img> </a>
+        <a href="/"><img className='home-logo' src={airbnblogog} alt={airbnblogog}></img> </a>
       </div>
       <div className='header-create-spot'>
         { sessionUser ?

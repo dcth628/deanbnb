@@ -4,8 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCurrentSpot } from "../../store/spot";
 import ConfirmDeleteSpotModal from "../ConfirmDeleteSpotModal";
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
-import { useModal } from "../../context/Modal";
-import EditSpotForm from "../SpotEdit";
 import CreateSpotForm from "../SpotCreate";
 import './SpotCurrent.css'
 
@@ -14,7 +12,6 @@ const CurrentSpot = () => {
     const dispatch = useDispatch();
     const spots = useSelector((state) => state?.spot);
     const sessionUser = useSelector(state => state?.session.user);
-    const { closeModal } = useModal();
     const userSpots = Object.values(spots).filter(spot => spot.ownerId === sessionUser.id)
 
     useEffect(() => {
@@ -25,10 +22,10 @@ const CurrentSpot = () => {
     const [showMenu, setShowMenu] = useState(false);
     const ulRef = useRef();
 
-    const openMenu = () => {
-        if (showMenu) return;
-        setShowMenu(true);
-    };
+    // const openMenu = () => {
+    //     if (showMenu) return;
+    //     setShowMenu(true);
+    // };
 
     useEffect(() => {
         if (!showMenu) return;

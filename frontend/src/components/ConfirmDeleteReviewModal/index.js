@@ -1,7 +1,5 @@
-import React, { useEffect } from 'react';
-import * as reviewActions from '../../store/review';
-import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
+import React from 'react';
+import { useDispatch  } from "react-redux";
 import { removeReview } from "../../store/review";
 import { getSpotDetail } from '../../store/spot';
 import { useModal } from '../../context/Modal';
@@ -10,7 +8,6 @@ import './ConfirmDeleteReviewModal.css'
 
 const DeleteReview = ({reviewId, spotId}) => {
     const dispatch = useDispatch();
-    const history = useHistory();
     const { closeModal } =useModal()
 
     const deletedReview = async (e) => {
@@ -18,8 +15,6 @@ const DeleteReview = ({reviewId, spotId}) => {
         await dispatch(removeReview(reviewId));
         await dispatch(getSpotDetail(spotId));
         closeModal();
-
-        // await history.replace(`/api/spots/${spotId}`)
     };
 
     return (

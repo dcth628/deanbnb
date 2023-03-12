@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { editReview } from "../../store/review";
-import { useHistory, useParams } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import { useModal } from "../../context/Modal";
 import { useSelector } from "react-redux";
 import './ReviewEdit.css'
@@ -10,9 +10,8 @@ import { getSpotDetail } from "../../store/spot";
 
 const EditReviewForm = ({reviews}) => {
     const dispatch = useDispatch();
-    const history = useHistory();
+    // const history = useHistory();
     const {closeModal } = useModal();
-    // const { reviewId } = useParams();
     const sessionUser = useSelector(state => state?.session.user)
 
     reviews = reviews.filter(review => review.userId === sessionUser.id)[0]

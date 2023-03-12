@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 import csrfFetch from "./csrf";
 
 const LOAD_REVIEW = 'review/LOAD_REVIEW';
