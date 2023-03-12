@@ -25,6 +25,8 @@ const CreateSpotForm = () => {
     const [url1, setUrl1] = useState("");
     const [url2, setUrl2] = useState("");
     const [url3, setUrl3] = useState("");
+    const [errors, setErrors ] = useState([]);
+
 
     const updateAddress = (e) => setAddress(e.target.value);
     const updateCity = (e) => setCity(e.target.value);
@@ -71,6 +73,11 @@ const CreateSpotForm = () => {
         }
     };
 
+    const onError = async (res) => {
+        const data = await res.json();
+        if (data && data.errors) setErrors(data.errors)
+    }
+
 
     const handleCancelClick = (e) => {
         e.preventDefault();
@@ -80,9 +87,14 @@ const CreateSpotForm = () => {
 
     return (
         <section className="new-spot-form-holder">
-            <form className="create-spot-form" onSubmit={handleSubmit}>
+            <form className="create-spot-form" onSubmit={(handleSubmit, onError)}>
                 <div className="form-list">
                     <h1 className="create-spot-title">Create a new Spot</h1>
+                    <ul>
+                    {errors.map((error, idx) =>
+                        <li key={idx}>{error}</li>
+                    )}
+                </ul>
                     <div className="createspot-box">
                         <div className="createspot-text">Address</div>
                         <input className="create-spot-input"
@@ -124,7 +136,7 @@ const CreateSpotForm = () => {
                         <input className="create-spot-input"
                             type="number"
                             placeholder="Latitude"
-                            step={0.01}
+                            step={0.0000001}
                             min={0}
                             value={lat}
                             onChange={updateLat} />
@@ -134,7 +146,7 @@ const CreateSpotForm = () => {
                         <input className="create-spot-input"
                             type="number"
                             placeholder="longitude"
-                            step={0.01}
+                            step={0.0000001}
                             min={0}
                             value={lng}
                             onChange={updateLng} />

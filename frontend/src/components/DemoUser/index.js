@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { getCurrentSpot } from "../../store/spot";
 import { useModal } from "../../context/Modal";
+import './DemoUser.css';
 
 const DemoUserLogIn = () => {
     const dispatch = useDispatch();
@@ -21,7 +22,7 @@ const DemoUserLogIn = () => {
     };
 
     return (
-        <button onClick={demoUserLogin}>Demo User</button>
+        <button className="demo-user-button" onClick={demoUserLogin}>Demo User</button>
     )
 };
 

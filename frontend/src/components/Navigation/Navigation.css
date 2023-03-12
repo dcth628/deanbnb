@@ -47,6 +47,69 @@
 }
 
 div.create-spot-link:hover {
-    box-shadow: inset 150px 0 0 0 #ea2f2f;
+    box-shadow: inset 150px 0 0 0  #ea2f2f;
     color: rgb(255, 255, 255);
+}
+
+.header-profile-button {
+    background-color: rgb(255, 66, 66);
+    border: none;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+}
+
+button.header-profile-button:hover {
+    background-color: white;
+    color: rgb(255, 66, 66);
+    border: 1px solid rgb(255, 66, 66);
+}
+
+.profile-dropdown {
+    font-family: Inter;
+}
+
+.profile-manage {
+    color:rgb(249, 49, 49);
+    transition: color .3s ease-in-out   , box-shadow .3s ease-in-out;
+
+}
+
+.profile-manage:hover {
+    box-shadow: inset 160px 20px 20px 0 #ea2f2f;
+    color: white;
+    border-radius: 5px;
+
+}
+
+.log-out {
+    background-color: rgb(255, 255, 255);
+    color: rgb(249, 49, 49);
+    border: 1px solid rgb(249, 49, 49);
+    border-radius: 5px;
+    height: 24px;
+
+}
+
+button.log-out:hover {
+    background-color: rgb(249, 49, 49);
+    color: white;
+}
+
+.profile-no-user {
+    margin: 5px 0;
+}
+
+.profile-action {
+    color:rgb(0, 0, 0);
+    transition: color .3s ease-in-out   , box-shadow .3s ease-in-out;
+    text-align: center;
+}
+
+.profile-action:hover {
+    background-color: #e67070;
+    color: white;
+    border: 1px solid #e67070;
+    border-radius: 5px;
 }

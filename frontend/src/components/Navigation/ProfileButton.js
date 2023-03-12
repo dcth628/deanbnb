@@ -45,7 +45,7 @@ function ProfileButton({ user }) {
 
   return (
     <>
-      <button onClick={openMenu}>
+      <button className='header-profile-button' onClick={openMenu}>
       <i className="fas fa-bars fa-user-circle"  />
       </button>
       <ul className={ulClassName} ref={ulRef}>
@@ -55,25 +55,31 @@ function ProfileButton({ user }) {
             <div>{user.firstName} {user.lastName}</div>
             <div>{user.email}</div>
             <div>
-              <NavLink to='/spots/current'>Manage Your Spots</NavLink>
+              <NavLink className="profile-manage" to='/spots/current'>Manage Your Spots</NavLink>
             </div>
             <div>
-              <button onClick={logout}>Log Out</button>
+              <button className="log-out" onClick={logout}>Log Out</button>
             </div>
           </>
         ) : (
           <>
+          <div className="profile-no-user profile-action">
             <OpenModalMenuItem
               itemText="Log In"
               onItemClick={closeMenu}
               modalComponent={<LoginFormModal />}
             />
+          </div>
+          <div className="profile-no-user profile-action">
             <OpenModalMenuItem
               itemText="Sign Up"
               onItemClick={closeMenu}
               modalComponent={<SignupFormModal />}
             />
+          </div>
+          <div className="profile-no-user">
             <DemoUserLogIn />
+          </div>
           </>
         )}
       </ul>

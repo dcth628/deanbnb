@@ -1,0 +1,13 @@
+.demo-user-button {
+    background-color: rgb(255, 255, 255);
+    color: rgb(249, 49, 49);
+    border: 1px solid rgb(249, 49, 49);
+    border-radius: 5px;
+    height: 24px;
+}
+
+.demo-user-button:hover {
+    background-color: rgb(249, 49, 49);
+    color: white;
+
+}

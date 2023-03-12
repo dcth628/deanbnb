@@ -31,6 +31,10 @@ const SpotDetails = () => {
   //   setShowMenu(true);
   // };
 
+  const windowAlert = () => {
+    alert("Feature coming soon.....")
+  };
+
   useEffect(() => {
     if (!showMenu) return;
 
@@ -84,7 +88,7 @@ const SpotDetails = () => {
                     <div className="spot-review"> Leave a review?</div>
                   }
                 </div>
-                <button className="spot-reserve">Reserve</button>
+                <button className="spot-reserve" onClick={windowAlert}>Reserve</button>
               </div>
             </div>
             <div className="reivew-list">
@@ -128,7 +132,7 @@ const SpotDetails = () => {
                       <div className="spot-review"> Leave a review?</div>
                     }
                   </div>
-                  <button className="spot-reserve">Reserve</button>
+                  <button className="spot-reserve" onClick={windowAlert}>Reserve</button>
                 </div>
               </div>
 
@@ -143,7 +147,7 @@ const SpotDetails = () => {
                 :
                 <></>
               }
-              {sessionUserReview || sessionUser.id === spots.ownerId ?
+              {sessionUserReview.legnth > 0 || sessionUser.id === spots.ownerId ?
                 <></>
                 :
                 <button className="edit-spot-button">
@@ -159,7 +163,7 @@ const SpotDetails = () => {
               {spots.avgRating &&
                 spots.avgRating ?
                 <i className="fa fa-star spotdetail-rating-bottom"> {spots.avgRating} </i> :
-                <div lassName="spotdetail-rating-bottom">NEW!</div>
+                <div className="spotdetail-rating-bottom">NEW!</div>
               }
               {spots.numReviews &&
                 spots.numReviews ?

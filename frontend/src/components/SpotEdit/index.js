@@ -18,6 +18,7 @@ const EditSpotForm = ({spot}) => {
     const [description, setDescription] = useState(spot.description);
     const [price, setPrice] = useState(spot.price);
     const [previewImage, setPreviewImage] = useState(spot.previewImage);
+    const [errors, setErrors ] = useState([]);
     // let spotImage1 = ""
     // if (spot.SpotImages.length >= 1) spotImage1 = spot.SpotImages[0].url
     // const [url1, setUrl1] = useState(spotImage1);
@@ -73,6 +74,12 @@ const EditSpotForm = ({spot}) => {
         await dispatch(getSpotDetail(spot.id))
     };
 
+    const onError = async (res) => {
+        const data = await res.json();
+        if (data && data.errors) setErrors(data.errors)
+    };
+
+
     const handleCancelClick = (e) => {
         e.preventDefault();
         closeModal();
@@ -81,9 +88,14 @@ const EditSpotForm = ({spot}) => {
 
     return (
         <section className="edit-spot-form-holdeer">
-            <form className="edit-spot-form" onSubmit={handleSubmit}>
+            <form className="edit-spot-form" onSubmit={(handleSubmit, onError)}>
             <div className="form-list">
                     <h1 className="edit-spot-title">Update your spot</h1>
+                    <ul>
+                    {errors.map((error, idx) =>
+                        <li key={idx}>{error}</li>
+                    )}
+                    </ul>
                     <div className="createspot-box">
                         <div className="createspot-text">Address</div>
                         <input className="create-spot-input"
@@ -125,7 +137,7 @@ const EditSpotForm = ({spot}) => {
                         <input className="create-spot-input"
                             type="number"
                             placeholder="Latitude"
-                            step={0.01}
+                            step={0.0000001}
                             min={0}
                             value={lat}
                             onChange={updateLat} />
@@ -135,7 +147,7 @@ const EditSpotForm = ({spot}) => {
                         <input className="create-spot-input"
                             type="number"
                             placeholder="longitude"
-                            step={0.01}
+                            step={0.0000001}
                             min={0}
                             value={lng}
                             onChange={updateLng} />
@@ -164,6 +176,7 @@ const EditSpotForm = ({spot}) => {
                         <input className="create-spot-input"
                             type="number"
                             placeholder="Price"
+                            step={0.01}
                             min={0}
                             required
                             value={price}
