@@ -18,15 +18,15 @@ const EditSpotForm = ({spot}) => {
     const [description, setDescription] = useState(spot.description);
     const [price, setPrice] = useState(spot.price);
     const [previewImage, setPreviewImage] = useState(spot.previewImage);
-    let spotImage1 = ""
-    if (spot.SpotImages.length >= 1) spotImage1 = spot.SpotImages[0].url
-    const [url1, setUrl1] = useState(spotImage1);
-    let spotImage2 = ""
-    if (spot.SpotImages.length >= 2) spotImage2 = spot.SpotImages[1].url
-    const [url2, setUrl2] = useState(spotImage2);
-    let spotImage3 = ""
-    if (spot.SpotImages.length >=3 ) spotImage3 = spot.SpotImages[2].url
-    const [url3, setUrl3] = useState(spotImage3);
+    // let spotImage1 = ""
+    // if (spot.SpotImages.length >= 1) spotImage1 = spot.SpotImages[0].url
+    // const [url1, setUrl1] = useState(spotImage1);
+    // let spotImage2 = ""
+    // if (spot.SpotImages.length >= 2) spotImage2 = spot.SpotImages[1].url
+    // const [url2, setUrl2] = useState(spotImage2);
+    // let spotImage3 = ""
+    // if (spot.SpotImages.length >=3 ) spotImage3 = spot.SpotImages[2].url
+    // const [url3, setUrl3] = useState(spotImage3);
 
     const updateAddress = (e) => setAddress(e.target.value);
     const updateCity = (e) => setCity(e.target.value);
@@ -38,9 +38,9 @@ const EditSpotForm = ({spot}) => {
     const updateDescription = (e) => setDescription(e.target.value);
     const updatePrice = (e) => setPrice(e.target.value);
     const updatePreviewImage = (e) => setPreviewImage(e.target.value);
-    const updatedUrl1 = (e) => setUrl1(e.target.value);
-    const updatedUrl2 = (e) => setUrl2(e.target.value);
-    const updatedUrl3 = (e) => setUrl3(e.target.value);
+    // const updatedUrl1 = (e) => setUrl1(e.target.value);
+    // const updatedUrl2 = (e) => setUrl2(e.target.value);
+    // const updatedUrl3 = (e) => setUrl3(e.target.value);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -178,7 +178,7 @@ const EditSpotForm = ({spot}) => {
                             value={previewImage}
                             onChange={updatePreviewImage} />
                     </div>
-                    <div className="createspot-box">
+                    {/* <div className="createspot-box">
                         <div className="createspot-text"> Boost your spot!</div>
                         <input className="create-spot-input-pic"
                             type="url"
@@ -196,7 +196,7 @@ const EditSpotForm = ({spot}) => {
                             value={url3}
                             onChange={updatedUrl3} />
 
-                    </div>
+                    </div> */}
 
                     <button className="createspot-button" type="submit">Update Your Spot</button>
                     <button className="createspot-button" type="button" onClick={handleCancelClick}>Cancel</button>
