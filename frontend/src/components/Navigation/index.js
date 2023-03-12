@@ -45,7 +45,7 @@ function Navigation({ isLoaded }) {
       </div>
       <div className='header-create-spot'>
         { sessionUser ?
-        <div>
+        <div className='create-spot-link'>
           <OpenModalMenuItem
             itemText="Create New Spot"
             onItemClick={closeMenu}

@@ -55,3 +55,7 @@
     text-align: center;
     color: white;
   }
+
+  button.review-button:hover {
+    background-color: rgb(188, 32, 81);
+  }

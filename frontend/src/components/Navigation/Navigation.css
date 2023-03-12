@@ -37,3 +37,16 @@
     "home . manage profile";
     height: 60px;
 }
+.create-spot-link {
+    box-shadow: inset 0 0 0 0 #ea2f2f;
+    color: #ea2f2f;
+    margin: 0 -.25rem;
+    padding: 0 .25rem;
+    transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
+    border-radius: 3px;
+}
+
+div.create-spot-link:hover {
+    box-shadow: inset 150px 0 0 0 #ea2f2f;
+    color: rgb(255, 255, 255);
+}

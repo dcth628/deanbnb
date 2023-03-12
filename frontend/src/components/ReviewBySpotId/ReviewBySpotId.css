@@ -53,3 +53,7 @@
     border-radius: 5px;
 
 }
+
+button.review-action-button:hover {
+    background-color: rgb(73, 194, 246);
+}

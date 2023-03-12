@@ -82,3 +82,7 @@
     width: 100%;
     margin: 0 auto;
 }
+
+button.createspot-button:hover {
+    background-color: rgb(188, 32, 81);
+}
