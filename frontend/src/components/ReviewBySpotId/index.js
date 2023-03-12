@@ -17,7 +17,6 @@ const AllReviews = ({ spots }) => {
   let reviews = useSelector(state => Object.values(state.review));
   reviews = reviews.filter(review => review.spotId === spots.id)
   const sessionUser = useSelector(state => state?.session.user);
-  // console.log(sessionUser , 'this is the session user')
 
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();

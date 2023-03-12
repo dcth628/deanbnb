@@ -14,8 +14,6 @@ const SpotDetails = () => {
   const { spotId } = useParams();
   const spots = useSelector(state => state?.spot[spotId]);
   const sessionUser = useSelector(state => state?.session.user);
-  // const userSpots = Object.values(spots).filter(spot => spot.ownerId === sessionUser.id);
-  // let reviewId = spots.Reviews.filter(review => console.log(review.userId))
   const reviews = useSelector(state => state.review);
   let sessionUserReview;
   if (sessionUser) sessionUserReview = Object.values(reviews).filter(review => review.userId === sessionUser.id)
@@ -145,7 +143,7 @@ const SpotDetails = () => {
                 :
                 <></>
               }
-              {sessionUserReview.length > 0 || sessionUser.id === spots.ownerId ?
+              {sessionUserReview || sessionUser.id === spots.ownerId ?
                 <></>
                 :
                 <button className="edit-spot-button">
