@@ -26,7 +26,6 @@ const EditSpotForm = ({spot}) => {
     const [url1, setUrl1] = useState(spotImage1);
     let spotImage2 = ""
     if (spot.SpotImages.length >= 2) spotImage2 = spot.SpotImages[1].url
-    console.log(spotImage2)
     const [url2, setUrl2] = useState(spotImage2);
     let spotImage3 = ""
     if (spot.SpotImages.length >=3 ) spotImage3 = spot.SpotImages[2].url

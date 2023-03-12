@@ -34,7 +34,6 @@ const EditReviewForm = ({reviews}) => {
             review,
             stars
         };
-        console.log(newReview, 'this is the new review')
         let updatedReview = await dispatch(editReview(newReview));
         if (updatedReview) {
             closeModal();

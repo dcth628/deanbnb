@@ -8,7 +8,6 @@ import './SpotsAll.css'
 const AllSpots = () => {
     const dispatch = useDispatch();
     const spots = useSelector((state) => state.spot)
-    console.log(spots, 'this is spots object in all spots list')
     useEffect(() => {
         dispatch(getAllSpots())
     }, [dispatch]);
