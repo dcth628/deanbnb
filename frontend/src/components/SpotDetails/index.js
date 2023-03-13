@@ -17,7 +17,6 @@ const SpotDetails = () => {
   const reviews = useSelector(state => state.review);
   let sessionUserReview;
   if (sessionUser) sessionUserReview = Object.values(reviews).filter(review => review.userId === sessionUser.id)
-  console.log(sessionUserReview , 'this is session user review')
 
 
   useEffect(() => {
