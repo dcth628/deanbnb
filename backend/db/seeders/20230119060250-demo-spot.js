@@ -18,7 +18,7 @@ module.exports = {
         lat: '37.7645358',
         lng: '-122.4730327',
         name: 'AA',
-        description: 'Place where web developers are created',
+        description: 'Place where web developers are',
         price: 123,
         avgRating: 4.5,
         previewImage: 'https://res.cloudinary.com/ddxewbhmy/image/upload/v1677360403/samples/landscapes/nature-mountains.jpg'
@@ -32,7 +32,7 @@ module.exports = {
         lat: '32.238423',
         lng: '-293.12347221',
         name: 'BB',
-        description: 'Place where deep dishes are created',
+        description: 'Place where deep dishes are',
         price: 234,
         avgRating: 3,
         previewImage: 'https://res.cloudinary.com/ddxewbhmy/image/upload/v1677360399/samples/landscapes/beach-boat.jpg'
@@ -46,7 +46,7 @@ module.exports = {
         lat: '37.7645358',
         lng: '-122.4730327',
         name: 'CC',
-        description: 'Place where starbucks are created',
+        description: 'Place where starbucks are',
         price: 199,
         avgRating: 4,
         previewImage: 'https://res.cloudinary.com/ddxewbhmy/image/upload/v1677360394/samples/animals/reindeer.jpg'
@@ -60,7 +60,7 @@ module.exports = {
         lat: '37.73345358',
         lng: '-100.4730327',
         name: 'DD',
-        description: 'Place where hipsters are created',
+        description: 'Place where hipsters are',
         price: 199,
         avgRating: 5,
         previewImage: 'https://res.cloudinary.com/ddxewbhmy/image/upload/v1677360399/samples/landscapes/architecture-signs.jpg'

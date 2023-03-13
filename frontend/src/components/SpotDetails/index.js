@@ -17,6 +17,7 @@ const SpotDetails = () => {
   const reviews = useSelector(state => state.review);
   let sessionUserReview;
   if (sessionUser) sessionUserReview = Object.values(reviews).filter(review => review.userId === sessionUser.id)
+  console.log(sessionUserReview , 'this is session user review')
 
 
   useEffect(() => {
@@ -147,7 +148,7 @@ const SpotDetails = () => {
                 :
                 <></>
               }
-              {sessionUserReview.legnth > 0 || sessionUser.id === spots.ownerId ?
+              {sessionUserReview.length > 0 || sessionUser.id === spots.ownerId ?
                 <></>
                 :
                 <button className="edit-spot-button">
