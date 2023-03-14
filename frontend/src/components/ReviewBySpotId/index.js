@@ -14,7 +14,7 @@ const AllReviews = ({ spots }) => {
   const dispatch = useDispatch();
   // const history = useHistory();
   const { spotId } = useParams();
-  let reviews = useSelector(state => Object.values(state.review));
+  let reviews = useSelector(state => Object.values(state.review)).reverse();
   reviews = reviews.filter(review => review.spotId === spots.id)
   const sessionUser = useSelector(state => state?.session.user);
 

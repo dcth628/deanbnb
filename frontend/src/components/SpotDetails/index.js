@@ -62,7 +62,7 @@ const SpotDetails = () => {
             <img className="previewImage" src={spots.previewImage} alt={spots.previewImage} />
             {
               spots.SpotImages && spots.SpotImages.map((image) => {
-                return <img className="spotImage" src={image.url} alt={image} key={image.id} />
+                return <img className="spotImage" src={image.url} alt={image} key={image.id}/>
               })
             }
 
@@ -107,7 +107,7 @@ const SpotDetails = () => {
               <img className="previewImage" src={spots.previewImage} alt={spots.previewImage} />
               {
                 spots.SpotImages && spots.SpotImages.map((image) => {
-                  return <img className="spotImage" src={image.url} alt={image.id} />
+                  return <img className="spotImage" src={image.url} alt={image.id} key={image.id} />
                 })
               }
               <div className="spot-info-box">
