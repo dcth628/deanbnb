@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 // import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {  useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { getSpotDetail } from "../../store/spot";
 import EditSpotForm from "../SpotEdit";
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
@@ -59,12 +59,19 @@ const SpotDetails = () => {
           <ul key={spots.id}>
             <h2>{spots.name}</h2>
             <p>{spots.city}, {spots.state}, {spots.country}</p>
-            <img className="previewImage" src={spots.previewImage} alt={spots.previewImage} />
-            {
-              spots.SpotImages && spots.SpotImages.map((image) => {
-                return <img className="spotImage" src={image.url} alt={image} key={image.id}/>
-              })
-            }
+
+            <div className="spotImage-div">
+
+                <img className="previewImage" src={spots.previewImage} alt={spots.previewImage} />
+
+
+
+                {
+                  spots.SpotImages && spots.SpotImages.map((image) => {
+                    return <img className="spotImage" src={image.url} alt={image} key={image.id} />
+                  })
+                }
+            </div>
 
             <div className="spot-info-box">
               <div>
@@ -94,7 +101,7 @@ const SpotDetails = () => {
             <div className="reivew-list">
               <AllReviews spots={spots} />
             </div>
-            </ul>
+          </ul>
         </div>
       )
         :

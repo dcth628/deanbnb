@@ -1,12 +1,19 @@
+.spotImage-div {
+    display: flex;
+    flex-direction: column wrap;
+
+}
+
 .previewImage {
+
     width: 500px;
     height: 500px;
     margin: 10px;
 }
 
 .spotImage {
-    width: 300px;
-    height: 300px;
+    width: 250px;
+    height: 250px;
     margin: 10px;
 }
 

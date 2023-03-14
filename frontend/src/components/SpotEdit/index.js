@@ -88,7 +88,7 @@ const EditSpotForm = ({spot}) => {
 
     return (
         <section className="edit-spot-form-holdeer">
-            <form className="edit-spot-form" onSubmit={(handleSubmit, onError)}>
+            <form className="edit-spot-form" onSubmit={handleSubmit}>
             <div className="form-list">
                     <h1 className="edit-spot-title">Update your spot</h1>
                     <ul>
