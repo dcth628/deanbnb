@@ -121,7 +121,7 @@ export const removeSpot = (spotId) => async dispatch => {
     }
 }
 
-const initialState = { }
+const initialState = { };
 
 const spotReducer = (state = initialState, action) => {
     switch (action.type) {
