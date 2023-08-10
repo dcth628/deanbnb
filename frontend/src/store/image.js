@@ -1,6 +1,6 @@
 import { csrfFetch } from "./csrf";
 
-// const LOAD_IMAGE = 'image/LOAD_IMAGE';
+const LOAD_IMAGE = 'image/LOAD_IMAGE';
 // const EDIT_IMAGE = 'image/EDIT_IMAGE';
 const CREATE_IMAGE = 'image/CREATE_IMAGE';
 
